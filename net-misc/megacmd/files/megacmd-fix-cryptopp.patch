@@ -1,0 +1,11 @@
+--- a/sdk/cmake/modules/sdklib_libraries.cmake.orig	2025-11-07 09:12:08.471134918 +0100
++++ b/sdk/cmake/modules/sdklib_libraries.cmake	2025-11-07 09:12:40.617145308 +0100
+@@ -98,7 +98,7 @@
+ 
+         find_package(PkgConfig REQUIRED) # For libraries loaded using pkg-config
+ 
+-        pkg_check_modules(cryptopp REQUIRED IMPORTED_TARGET libcrypto++)
++        pkg_check_modules(cryptopp REQUIRED IMPORTED_TARGET libcryptopp)
+         target_link_libraries(SDKlib PUBLIC PkgConfig::cryptopp) # TODO: Private for SDK core
+ 
+         pkg_check_modules(sodium REQUIRED IMPORTED_TARGET libsodium)

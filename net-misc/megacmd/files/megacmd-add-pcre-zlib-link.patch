@@ -1,0 +1,10 @@
+--- a/CMakeLists.txt	2025-11-07 09:58:11.386378883 +0100
++++ b/CMakeLists.txt	2025-11-07 09:58:57.768483513 +0100
+@@ -381,6 +381,7 @@
+ target_link_libraries(mega-cmd PUBLIC MEGA::SDKlib LMEGAcmdCommonUtils)
+ target_link_libraries(mega-cmd-updater PUBLIC MEGA::SDKlib LMEGAcmdCommonUtils)
+ target_link_libraries(LMegacmdServer PUBLIC MEGA::SDKlib LMEGAcmdCommonUtils)
++target_link_libraries(LMegacmdServer PUBLIC pcrecpp z)
+ 
+ if (ENABLE_MEGACMD_TESTS)
+   target_link_libraries(LMegacmdServer PUBLIC LMegacmdTestsCommon)

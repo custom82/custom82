@@ -1,0 +1,17 @@
+--- MEGAcmd-2.3.0_Win/build/clone_vcpkg_from_baseline.sh.orig	2025-11-07 09:29:16.738390453 +0100
++++ MEGAcmd-2.3.0_Win/build/clone_vcpkg_from_baseline.sh	2025-11-07 09:29:42.621579349 +0100
+@@ -1,13 +1 @@
+-#!/bin/bash
+-set -e
+-
+-#If a dependency required an older commit (older than baseline), set it here:
+-VCPKG_OLDEST_COMMIT=c6d3ab273572019ea0d6f6688e1163143190d326
+-
+-if [ -z ${VCPKG_OLDEST_COMMIT+x} ]; then
+-    commit=$(grep '."builtin-baseline"' vcpkg.json  | awk -F '"' '{print $(NF-1)}')
+-else
+-    commit="${VCPKG_OLDEST_COMMIT}"
+-fi
+-commit_date=$(curl -s "https://api.github.com/repos/microsoft/vcpkg/commits/$commit" | grep '"date"' |  head -n 1 | awk -F '"' '{print $(NF-1)}')
+-git clone --shallow-since $commit_date https://github.com/microsoft/vcpkg $@
++#!/bin/true

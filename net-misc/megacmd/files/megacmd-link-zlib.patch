@@ -1,0 +1,18 @@
+Add missing zlib links.
+```
+/usr/lib/gcc/x86_64-pc-linux-gnu/15/../../../../x86_64-pc-linux-gnu/bin/ld: src/MEGASync/mega/tools/gfxworker/liblibgfxworker.a(logger.cpp.o): undefined reference to symbol 'gzputs'
+```
+--- a/sdk/tools/gfxworker/CMakeLists.txt
++++ b/sdk/tools/gfxworker/CMakeLists.txt
+@@ -70,9 +70,11 @@ add_executable(gfxworker
+     src/main.cpp
+ )
+ 
++find_package(ZLIB REQUIRED)
+ target_link_libraries(gfxworker
+     PRIVATE
+     libgfxworker
++    ZLIB::ZLIB
+ )
+ 
+ # Adjust compilation flags for warnings and errors for gfxworker

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>andrea.postiglione@gmail.com</email>
+		<name>Ravencoin Gentoo Maintainers</name>
+	</maintainer>
+	<longdescription>
+		Ravencoin is a peer-to-peer blockchain, handling the efficient
+		creation and transfer of assets from one party to another.
+		
+		Features:
+		• Built-in asset layer
+		• Messaging layer
+		• Restricted assets
+		• Asset rewards
+		• Atomic swaps
+	</longdescription>
+	<upstream>
+		<remote-id type="github">RavenProject/Ravencoin</remote-id>
+	</upstream>
+	<use>
+		<flag name="asm">Enable assembly optimizations</flag>
+		<flag name="berkdb">Enable BerkeleyDB support for wallet</flag>
+		<flag name="hardening">Enable security hardening flags</flag>
+		<flag name="libevent">Use libevent for networking</flag>
+		<flag name="qrcode">Enable QR code support</flag>
+		<flag name="qt5">Build Qt GUI</flag>
+		<flag name="sqlite">Enable SQLite support (alternative to BerkeleyDB)</flag>
+		<flag name="system-leveldb">Use system leveldb instead of bundled</flag>
+		<flag name="system-univalue">Use system univalue instead of bundled</flag>
+		<flag name="test">Enable tests</flag>
+		<flag name="upnp">Enable UPnP support</flag>
+		<flag name="utils">Build command line utilities (ravend, raven-cli, raven-tx)</flag>
+		<flag name="wallet">Enable wallet functionality</flag>
+		<flag name="zmq">Enable ZeroMQ notifications</flag>
+	</use>
+</pkgmetadata>

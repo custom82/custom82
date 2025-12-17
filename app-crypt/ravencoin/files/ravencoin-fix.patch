@@ -1,0 +1,116 @@
+diff '--color=auto' -uPNr Ravencoin-4.6.1/contrib/init/ravend.service Ravencoin-4.6.1-patched/contrib/init/ravend.service
+--- Ravencoin-4.6.1/contrib/init/ravend.service	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/contrib/init/ravend.service	2025-12-04 18:08:58.549746955 +0100
+@@ -3,9 +3,6 @@
+ After=network.target
+ 
+ [Service]
+-User=raven
+-Group=raven
+-
+ Type=forking
+ PIDFile=/var/lib/ravend/ravend.pid
+ ExecStart=/usr/bin/ravend -daemon -pid=/var/lib/ravend/ravend.pid \
+diff '--color=auto' -uPNr Ravencoin-4.6.1/src/bench/bench.h Ravencoin-4.6.1-patched/src/bench/bench.h
+--- Ravencoin-4.6.1/src/bench/bench.h	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/src/bench/bench.h	2025-12-04 18:08:58.549944952 +0100
+@@ -10,6 +10,7 @@
+ #include <limits>
+ #include <map>
+ #include <string>
++#include <cstdint>
+ 
+ #include <boost/preprocessor/cat.hpp>
+ #include <boost/preprocessor/stringize.hpp>
+diff '--color=auto' -uPNr Ravencoin-4.6.1/src/net.cpp Ravencoin-4.6.1-patched/src/net.cpp
+--- Ravencoin-4.6.1/src/net.cpp	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/src/net.cpp	2025-12-04 18:08:58.550375663 +0100
+@@ -1485,7 +1485,10 @@
+     struct IGDdatas data;
+     int r;
+ 
+-    r = UPNP_GetValidIGD(devlist, &urls, &data, lanaddr, sizeof(lanaddr));
++    char extaddr[64];  // buffer per l'indirizzo esterno
++    int extaddr_len = sizeof(extaddr);  // lunghezza dell'indirizzo esterno
++
++    r = UPNP_GetValidIGD(devlist, &urls, &data, lanaddr, sizeof(lanaddr), extaddr, extaddr_len);
+     if (r == 1)
+     {
+         if (fDiscover) {
+diff '--color=auto' -uPNr Ravencoin-4.6.1/src/rpc/protocol.cpp Ravencoin-4.6.1-patched/src/rpc/protocol.cpp
+--- Ravencoin-4.6.1/src/rpc/protocol.cpp	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/src/rpc/protocol.cpp	2025-12-04 18:08:58.550829885 +0100
+@@ -75,7 +75,7 @@
+         arg += ".tmp";
+     }
+     fs::path path(arg);
+-    if (!path.is_complete()) path = GetDataDir() / path;
++    if (!path.is_absolute()) path = GetDataDir() / path;
+     return path;
+ }
+ 
+diff '--color=auto' -uPNr Ravencoin-4.6.1/src/support/lockedpool.cpp Ravencoin-4.6.1-patched/src/support/lockedpool.cpp
+--- Ravencoin-4.6.1/src/support/lockedpool.cpp	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/src/support/lockedpool.cpp	2025-12-04 18:08:58.550988354 +0100
+@@ -28,6 +28,7 @@
+ #endif
+ 
+ #include <algorithm>
++#include <stdexcept>
+ 
+ LockedPoolManager* LockedPoolManager::_instance = nullptr;
+ std::once_flag LockedPoolManager::init_flag;
+diff '--color=auto' -uPNr Ravencoin-4.6.1/src/test/cuckoocache_tests.cpp Ravencoin-4.6.1-patched/src/test/cuckoocache_tests.cpp
+--- Ravencoin-4.6.1/src/test/cuckoocache_tests.cpp	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/src/test/cuckoocache_tests.cpp	2025-12-04 18:08:58.551141677 +0100
+@@ -8,6 +8,7 @@
+ #include "test/test_raven.h"
+ #include "random.h"
+ #include <thread>
++#include <deque>
+ 
+ /** Test Suite for CuckooCache
+  *
+diff '--color=auto' -uPNr Ravencoin-4.6.1/src/util.cpp Ravencoin-4.6.1-patched/src/util.cpp
+--- Ravencoin-4.6.1/src/util.cpp	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/src/util.cpp	2025-12-04 18:08:58.551321309 +0100
+@@ -620,7 +620,7 @@
+ fs::path GetConfigFile(const std::string &confPath)
+ {
+     fs::path pathConfigFile(confPath);
+-    if (!pathConfigFile.is_complete())
++    if (!pathConfigFile.is_absolute())
+         pathConfigFile = GetDataDir(false) / pathConfigFile;
+ 
+     return pathConfigFile;
+@@ -657,7 +657,7 @@
+ fs::path GetPidFile()
+ {
+     fs::path pathPidFile(gArgs.GetArg("-pid", RAVEN_PID_FILENAME));
+-    if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
++    if (!pathPidFile.is_absolute()) pathPidFile = GetDataDir() / pathPidFile;
+     return pathPidFile;
+ }
+ 
+diff '--color=auto' -uPNr Ravencoin-4.6.1/src/wallet/db.cpp Ravencoin-4.6.1-patched/src/wallet/db.cpp
+--- Ravencoin-4.6.1/src/wallet/db.cpp	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/src/wallet/db.cpp	2025-12-04 18:08:58.551554490 +0100
+@@ -267,7 +267,8 @@
+     LogPrintf("Using wallet %s\n", walletFile);
+ 
+     // Wallet file must be a plain filename without a directory
+-    if (walletFile != fs::basename(walletFile) + fs::extension(walletFile))
++    boost::filesystem::path pathWalletFile(walletFile);
++    if (pathWalletFile != pathWalletFile.filename().stem() / pathWalletFile.filename().extension())
+     {
+         errorStr = strprintf(_("Wallet %s resides outside data directory %s"), walletFile, dataDir.string());
+         return false;
+@@ -706,7 +707,7 @@
+                     pathDest /= strFile;
+ 
+                 try {
+-                    fs::copy_file(pathSrc, pathDest, fs::copy_option::overwrite_if_exists);
++                    fs::copy_file(pathSrc, pathDest, fs::copy_options::overwrite_existing);
+                     LogPrintf("copied %s to %s\n", strFile, pathDest.string());
+                     return true;
+                 } catch (const fs::filesystem_error& e) {

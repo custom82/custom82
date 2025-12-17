@@ -1,0 +1,26 @@
+--- a/CMakeLists.txt	2025-11-28 15:21:02.358311416 +0100
++++ b/CMakeLists.txt	2025-11-28 15:23:55.035916716 +0100
+@@ -248,9 +248,20 @@
+         "find_dependency(CUDAToolkit ${CUDAToolkit_VERSION})")
+       enable_language(CUDA)
+       if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.18")
+-        # Support Maxwell, Pascal, Volta, Turing, and Ampere GPUs.
+-        set(CMAKE_CUDA_ARCHITECTURES "50;60;70;80")
+-        message("-- Setting CUDA Architecture to ${CMAKE_CUDA_ARCHITECTURES}")
++      # Support Maxwell, Pascal, Volta, Turing, and Ampere GPUs.
++      # CUDA 13.0+ has removed support for compute_50/60/70.
++      # Force only modern archs compatible with Ampere+.
++      set(CMAKE_CUDA_ARCHITECTURES "80;86;89;90;120")
++      message("-- [Gentoo] Overriding CUDA Archs for CUDA 13: ${CMAKE_CUDA_ARCHITECTURES}")
++
++      # Force NVCC to allow GCC > 14 (unsupported officially)
++      add_compile_options($<$<COMPILE_LANGUAGE:CUDA>:--allow-unsupported-compiler>)
++
++      # Avoid legacy PTX generation errors
++      set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Xptxas --disable-warnings")
++
++      # Avoid compile errors on sm_80 + CUTLASS kernels
++      set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Xcompiler -Wno-error=deprecated-declarations")
+       endif()
+       list(APPEND CERES_CUDA_LIBRARIES
+         CUDA::cublas

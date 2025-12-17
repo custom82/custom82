@@ -1,0 +1,37 @@
+diff '--color=auto' -uPNr Ravencoin-4.6.1/configure.ac Ravencoin-4.6.1-patched/configure.ac
+--- Ravencoin-4.6.1/configure.ac	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/configure.ac	2025-12-04 18:57:24.158677295 +0100
+@@ -311,6 +311,17 @@
+   [build_raven_tx=$withval],
+   [build_raven_tx=no])
+ 
++
++if test x$build_raven_tx = xyes ; then
++  if test x$enable_wallet = xno ; then
++    AC_MSG_WARN([wallet richiesto per raven-tx → forzo enable_wallet=yes])
++    enable_wallet=yes
++  fi
++  AC_DEFINE_UNQUOTED([ENABLE_WALLET],[1],[Wallet forced ON because raven-tx is enabled])
++fi
++
++AM_CONDITIONAL([ENABLE_WALLET],[test x$enable_wallet = xyes])
++
+ AC_ARG_WITH([libs],
+   [AS_HELP_STRING([--with-libs],
+   [build libraries (default=yes)])],
+diff '--color=auto' -uPNr Ravencoin-4.6.1/src/Makefile.am Ravencoin-4.6.1-patched/src/Makefile.am
+--- Ravencoin-4.6.1/src/Makefile.am	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1-patched/src/Makefile.am	2025-12-04 19:14:36.541565335 +0100
+@@ -536,7 +536,11 @@
+   $(LIBRAVEN_UTIL) \
+   $(LIBRAVEN_CONSENSUS) \
+   $(LIBRAVEN_CRYPTO) \
+-  $(LIBSECP256K1)
++  $(LIBSECP256K1) \
++  $(LIBRAVEN_WALLET) \
++  $(LIBRAVEN_SERVER) \
++  $(LIBRAVEN_CONSENSUS)
++
+ 
+ raven_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+ #

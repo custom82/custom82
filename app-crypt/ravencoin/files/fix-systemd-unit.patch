@@ -1,0 +1,12 @@
+--- Ravencoin-4.6.1/contrib/init/ravend.service	2022-08-16 18:40:20.000000000 +0200
++++ Ravencoin-4.6.1/contrib/init/ravend.service.new	2025-12-04 10:16:56.066773351 +0100
+@@ -3,9 +3,6 @@
+ After=network.target
+ 
+ [Service]
+-User=raven
+-Group=raven
+-
+ Type=forking
+ PIDFile=/var/lib/ravend/ravend.pid
+ ExecStart=/usr/bin/ravend -daemon -pid=/var/lib/ravend/ravend.pid \

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pkgmetadata xmlns="http://www.gentoo.org/xml/ns/metadata/1.0">
+
+  <maintainer type="person">
+    <email>andrea.postiglione@gmail.com</email>
+    <name>Andrea Postiglione</name>
+    <description>Primary maintainer</description>
+  </maintainer>
+
+  <upstream>
+    <remote-id type="github">custom82/pam_facial_auth</remote-id>
+  </upstream>
+
+  <use>
+    <flag name="cuda">
+      Enable CUDA support where OpenCV is built with CUDA backend.
+    </flag>
+  </use>
+
+  <longdescription>
+    PAM Facial Authentication module using OpenCV, YUNet DNN face detector
+    and SFace face recognition embeddings. Supports automatic CUDA detection,
+    multiple recognition engines, and a full PAM integration layer.
+  </longdescription>
+
+</pkgmetadata>
+

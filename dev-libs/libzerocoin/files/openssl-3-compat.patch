@@ -1,0 +1,77 @@
+--- a/src/ParamGeneration.cpp
++++ b/src/ParamGeneration.cpp
+@@ -16,7 +16,7 @@
+ 
+ #include "ParamGeneration.h"
+ #include <openssl/sha.h>
+-#include <openssl/ssl.h>
++#include <openssl/evp.h>
+ 
+ namespace libzerocoin {
+ 
+@@ -32,17 +32,24 @@
+     // Calculate SHA256 hash of auxString
+     uint8_t hash[SHA256_DIGEST_LENGTH];
+     uint32_t hashLength = SHA256_DIGEST_LENGTH;
+-    SHA256_CTX sha256;
+     
+-    SHA256_Init(&sha256);
+-    SHA256_Update(&sha256, (const uint8_t*)auxString.c_str(), auxString.length());
+-    SHA256_Final(hash, &sha256);
++    // OpenSSL 3.x compatible
++    EVP_MD_CTX* mdctx = EVP_MD_CTX_new();
++    if (mdctx == NULL) {
++        throw std::runtime_error("EVP_MD_CTX_new failed");
++    }
++    
++    if (EVP_DigestInit_ex(mdctx, EVP_sha256(), NULL) != 1 ||
++        EVP_DigestUpdate(mdctx, auxString.c_str(), auxString.length()) != 1 ||
++        EVP_DigestFinal_ex(mdctx, hash, &hashLength) != 1) {
++        EVP_MD_CTX_free(mdctx);
++        throw std::runtime_error("SHA256 calculation failed");
++    }
++    
++    EVP_MD_CTX_free(mdctx);
+     
+     // Convert hash to Bignum
+-    CBigNum bnHash;
+-    bnHash.setuint256(uint256());
+-    memcpy((void*)bnHash.begin(), hash, hashLength);
+-    
++    CBigNum bnHash = CBigNum(hash, hashLength);
+     return bnHash;
+ }
+ 
+--- a/src/sha256.cpp
++++ b/src/sha256.cpp
+@@ -16,6 +16,7 @@
+ 
+ #include "sha256.h"
+ #include <openssl/sha.h>
++#include <openssl/evp.h>
+ #include <string>
+ #include <cstring>
+ 
+@@ -26,11 +27,18 @@
+ uint256 SHA256(const std::string& str)
+ {
+     uint8_t hash[SHA256_DIGEST_LENGTH];
+-    SHA256_CTX sha256;
++    uint32_t hashLength = SHA256_DIGEST_LENGTH;
+     
+-    SHA256_Init(&sha256);
+-    SHA256_Update(&sha256, (const uint8_t*)str.c_str(), str.length());
+-    SHA256_Final(hash, &sha256);
++    EVP_MD_CTX* mdctx = EVP_MD_CTX_new();
++    if (mdctx == NULL) {
++        throw std::runtime_error("EVP_MD_CTX_new failed");
++    }
++    
++    if (EVP_DigestInit_ex(mdctx, EVP_sha256(), NULL) != 1 ||
++        EVP_DigestUpdate(mdctx, str.c_str(), str.length()) != 1 ||
++        EVP_DigestFinal_ex(mdctx, hash, &hashLength) != 1) {
++        throw std::runtime_error("SHA256 calculation failed");
++    }
+     
+     uint256 result;
+     memcpy(result.begin(), hash, SHA256_DIGEST_LENGTH);

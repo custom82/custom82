@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<longdescription>
+spotDL is a Python tool that allows you to download Spotify playlists/tracks
+from YouTube with metadata, album art, and proper formatting.
+</longdescription>
+<upstream>
+	<remote-id type="github">spotDL/spotify-downloader</remote-id>
+</upstream>
+<use>
+	<flag name="test">Enable running tests</flag>
+</use>
+</pkgmetadata>

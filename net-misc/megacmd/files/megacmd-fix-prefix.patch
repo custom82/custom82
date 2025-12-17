@@ -1,0 +1,44 @@
+--- MEGAcmd-2.3.0_Win/CMakeLists.txt.orig	2025-11-07 08:59:54.580103057 +0100
++++ MEGAcmd-2.3.0_Win/CMakeLists.txt	2025-11-07 09:01:17.710206983 +0100
+@@ -133,8 +133,6 @@
+     # If CMAKE_INSTALL_PREFIX is not set, it will set rpath to /opt/....
+     # Note: using cmake --install --prefix /some/prefix will not set rpath relative to that prefix
+     # The above can be used for building packages: in which install dir is a path construction folder that will not be there in packages
+-    set(CMAKE_INSTALL_LIBDIR "opt/megacmd/lib")
+-    set(CMAKE_INSTALL_BINDIR "usr/bin") #override default "bin"
+ 
+     if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+         message(STATUS "Overriding default CMAKE_INSTALL_PREFIX to /")
+@@ -474,13 +472,6 @@
+     else()
+         SET(vcpkg_lib_folder "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib/")
+     endif()
+-    install(DIRECTORY "${vcpkg_lib_folder}"
+-            DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-            FILES_MATCHING
+-            PATTERN "lib*.so*"
+-            PATTERN "*dylib*" #macOS
+-            PATTERN "manual-link" EXCLUDE
+-            PATTERN "pkgconfig" EXCLUDE)
+ endif() #not WIN32
+ 
+ message(STATUS "<<< Gentoo configuration >>>
+--- a/CMakeLists.txt.orig	2025-11-07 10:13:09.091588469 +0100
++++ b/CMakeLists.txt	2025-11-07 10:13:22.943231707 +0100
+@@ -456,14 +456,14 @@
+         PATTERN "win" EXCLUDE)
+ 
+     install(FILES "${CMAKE_CURRENT_LIST_DIR}/src/client/megacmd_completion.sh"
+-        DESTINATION "etc/bash_completion.d"
++        DESTINATION "/etc/bash_completion.d"
+         )
+ 
+     # generate 100-megacmd-inotify-limit.conf file and have it installed
+     execute_process(COMMAND echo "fs.inotify.max_user_watches = 524288"
+                 OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/99-megacmd-inotify-limit.conf)
+     install(FILES ${CMAKE_CURRENT_BINARY_DIR}/99-megacmd-inotify-limit.conf
+-        DESTINATION "etc/sysctl.d"
++        DESTINATION "/etc/sysctl.d"
+         )
+ 
+     #Install vcpkg dynamic libraries in locations defined by GNUInstallDirs.

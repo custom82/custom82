@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+    <maintainer type="project">
+        <email>ravencoin@gentoo.org</email>
+        <name>Ravencoin Gentoo Maintainers</name>
+    </maintainer>
+    <upstream>
+        <remote-id type="github">Zerocoin/libzerocoin</remote-id>
+    </upstream>
+    <longdescription>
+        libzerocoin is a cryptographic library that provides an implementation
+        of the Zerocoin protocol. Zerocoin is an extension to Bitcoin that
+        enables anonymous transactions.
+        
+        This library is required for Ravencoin's Zerocoin functionality.
+    </longdescription>
+    <use>
+        <flag name="static-libs">Build static libraries</flag>
+        <flag name="test">Build and run tests</flag>
+    </use>
+</pkgmetadata>
