@@ -47,7 +47,7 @@ src_install() {
 	# allow slotted install
 	local CUDNN_PATH="${CUDNN_PATH:-${EPREFIX}/opt/cuda}"
 
-	cd "${WORKDIR}/cudnn-linux-${narch}-${PV}_cuda12-archive" || die
+	cd "${WORKDIR}/cudnn-linux-${narch}-${PV}_cuda13-archive" || die
 
 	dodir "${CUDNN_PATH}/targets/${narch}-linux"
 	mv \
