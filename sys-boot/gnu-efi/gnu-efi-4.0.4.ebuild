@@ -116,10 +116,12 @@ efimake() {
 }
 
 src_compile() {
-	tc-export BUILD_CC AR AS CC OBJCOPY
+	tc-export BUILD_CC AR AS CC LD OBJCOPY
 
 	if ! use custom-cflags; then
 		unset CFLAGS CPPFLAGS LDFLAGS
+	else
+		filter-ldflags -Wl,\*
 	fi
 
 	# work around musl: include first the compiler include dir, then the system one
