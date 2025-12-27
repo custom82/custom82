@@ -46,7 +46,7 @@ src_install() {
 
 	# Install configuration file
 	insinto /etc/security
-	newins "${S}/files/pam_facial.conf.example" pam_facial.conf
+	newins "${S}/etc/pam_facial_auth.conf" pam_facial_auth.conf
 
 	# Trained models directory (Resilient: /etc/security)
 	diropts -m0750
