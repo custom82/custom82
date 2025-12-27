@@ -1,101 +1,64 @@
-# Copyright
-# Distributed under the terms of the GNU General Public License v2
+# Copyright 2024-2025 custom82
+# Distributed under the terms of the GNU General Public License v3
 
 EAPI=8
 
-inherit cmake pam git-r3
+# git-r3 for fetching from your repo, pam for specialized PAM functions
+inherit cmake git-r3 pam
 
-DESCRIPTION="PAM facial authentication module with OpenCV DNN (YuNet/SFace/LBPH/Eigen/Fisher)"
+DESCRIPTION="Universal Facial Authentication PAM module using OpenCL (AMD/NVIDIA/Intel)"
 HOMEPAGE="https://github.com/custom82/pam_facial_auth"
 EGIT_REPO_URI="https://github.com/custom82/pam_facial_auth.git"
-EGIT_BRANCH="dev"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 
-IUSE="cuda opencl"
-
-# ============================================================
-# DEPENDENZE
-# ============================================================
-
-# OpenCV deve avere:
-#  - contrib + contribdnn
-#  - face
-#  - videoio
-#
-# Ogni backend viene abilitato tramite USE separata
-#
+# OpenCV on Gentoo requires contrib and contribdnn for face/dnn modules
+IUSE="opencl debug"
 
 RDEPEND="
-	media-libs/opencv:=[contrib,contribdnn]
-	media-libs/libv4l
-
-	cuda? (
-		media-libs/opencv[cuda]
-		dev-util/nvidia-cuda-toolkit
-	)
-
-	opencl? (
-		media-libs/opencv[opencl]
-	virtual/opencl
-	)
-
+	media-libs/opencv:=[contrib,contribdnn,opencl?]
 	sys-libs/pam
 "
-
-DEPEND="${RDEPEND}
-	virtual/pkgconfig
-"
-BDEPEND=""
-
-# ============================================================
-# CONFIGURAZIONE CMake
-# ============================================================
+DEPEND="${RDEPEND}"
+BDEPEND="virtual/pkgconfig"
 
 src_configure() {
 	local mycmakeargs=(
-        -DENABLE_CUDA=$(usex cuda ON OFF)
-        -DENABLE_OPENCL=$(usex opencl ON OFF)
-        -DCMAKE_INSTALL_PREFIX=/usr
+		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
 	)
-
 	cmake_src_configure
 }
 
-# ============================================================
-# INSTALLAZIONE
-# ============================================================
-
 src_install() {
-
-	insinto /lib64/security
-	doins "${BUILD_DIR}/pam_facial_auth.so"
-	fperms 0755 /lib64/security/pam_facial_auth.so
-
+	# Install system administration tools to /usr/sbin
+	dosbin "${BUILD_DIR}/facial_test"
+	dosbin "${BUILD_DIR}/facial_training"
+	
+	# Install core shared library
 	dolib.so "${BUILD_DIR}/libfacialauth.so"
 
-	dosbin "${BUILD_DIR}/facial_capture"
-	dosbin "${BUILD_DIR}/facial_training"
-	dosbin "${BUILD_DIR}/facial_test"
+	# Install PAM module using the specialized newpammod function
+	# This automatically handles the path (e.g., /lib64/security)
+	newpammod "${BUILD_DIR}/pam_facial_auth.so" pam_facial_auth.so
 
-	doman man/facial_capture.1
-	doman man/facial_training.1
-	doman man/facial_test.1
-	doman man/pam_facial_auth.8
-
+	# Install configuration file
 	insinto /etc/security
-	doins "${S}/etc/pam_facial.conf" || die
+	newins "${S}/files/pam_facial.conf.example" pam_facial.conf
 
-	dodoc "${S}/README.md"
-	dodoc "${S}/LICENSE"
+	# Trained models directory (Resilient: /etc/security)
+	diropts -m0750
+	keepdir /etc/security/pam_facial_auth
+
+	# Captured datasets directory (Variable data: /var/lib)
+	diropts -m0700
+	keepdir /var/lib/pam_facial_auth
 }
 
 pkg_postinst() {
-	elog "PAM Facial Auth installed."
-	elog "Configuration file: /etc/security/pam_facial.conf"
-	elog "Add to /etc/pam.d/system-auth or login:"
-	elog "    auth sufficient pam_facial_auth.so"
+	elog "Modulo installato con successo."
+	elog "I tool di amministrazione sono stati installati in /usr/sbin/"
+	elog "Assicurati che OpenCV sia compilato con le flag: contrib, contribdnn e opencl."
+	elog "I modelli .onnx vanno inseriti in /etc/security/models/"
 }
-
