@@ -27,13 +27,15 @@ BDEPEND="virtual/pkgconfig"
 
 src_configure() {
 	local mycmakeargs=(
-		-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
+		-DENABLE_OPENCV=$(usex opencv)
 	)
+
 	cmake_src_configure
 }
 
 src_install() {
 	# Install system administration tools to /usr/sbin
+	dosbin "${BUILD_DIR}/facial_capture"
 	dosbin "${BUILD_DIR}/facial_test"
 	dosbin "${BUILD_DIR}/facial_training"
 	
