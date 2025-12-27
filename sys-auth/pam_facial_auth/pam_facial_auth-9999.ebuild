@@ -9,6 +9,7 @@ inherit cmake git-r3 pam
 DESCRIPTION="Universal Facial Authentication PAM module using OpenCL (AMD/NVIDIA/Intel)"
 HOMEPAGE="https://github.com/custom82/pam_facial_auth"
 EGIT_REPO_URI="https://github.com/custom82/pam_facial_auth.git"
+EGIT_BRANCH="dev"
 
 LICENSE="GPL-3"
 SLOT="0"
