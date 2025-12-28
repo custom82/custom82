@@ -5,7 +5,7 @@ includedir=${prefix}/include
 
 Name: libsph
 Description: SPH (Secure Hash) library implementation for various cryptographic algorithms
-Version: 9999
+Version: 3.0
 Libs: -L${libdir} -lsph
-Cflags: -I${includedir}/sphlib
+Cflags: -I${includedir}/libsph
 
