@@ -1,6 +1,6 @@
 prefix=/usr
 exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
+libdir=${exec_prefix}/lib64
 includedir=${prefix}/include
 
 Name: libsph
@@ -8,4 +8,3 @@ Description: SPH (Secure Hash) library implementation for various cryptographic 
 Version: 3.0
 Libs: -L${libdir} -lsph
 Cflags: -I${includedir}/libsph
-
