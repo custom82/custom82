@@ -7,7 +7,8 @@ inherit cmake git-r3
 
 DESCRIPTION="Ravencoin Core (daemon, CLI, Qt GUI)"
 HOMEPAGE="https://ravencoin.org"
-EGIT_REPO_URI="https://github.com/RavenProject/Ravencoin.git"
+EGIT_REPO_URI="https://github.com/custom82/Ravencoin.git"
+EGIT_BRANCH="dev"
 
 LICENSE="MIT"
 SLOT="0"
@@ -31,7 +32,7 @@ DEPEND="
 	dev-libs/libsecp256k1:=
 	dev-libs/univalue:=
 	dev-libs/libsph:=
-	wallet? ( dev-db/berkeley-db:= )
+	wallet? ( sys-libs/db:= )
 	upnp? ( net-libs/miniupnpc:= )
 	zmq? ( net-libs/zeromq:= )
 	gui? (
