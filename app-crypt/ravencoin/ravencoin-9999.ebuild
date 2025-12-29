@@ -59,14 +59,6 @@ src_configure() {
 }
 
 src_install() {
-	# upstream non definisce install() attivi in CMakeLists
-	# (linee install(...) commentate); installiamo a mano.
-	dobin "${BUILD_DIR}"/ravend
-	dobin "${BUILD_DIR}"/raven-cli
-	dobin "${BUILD_DIR}"/raven-tx
-
-	if use gui; then
-		dobin "${BUILD_DIR}"/raven-qt
-	fi
+	cmake_src_intall
 }
 
