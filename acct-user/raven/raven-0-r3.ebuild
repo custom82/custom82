@@ -8,7 +8,7 @@ inherit acct-user
 DESCRIPTION="User for app-crypt/raven"
 
 ACCT_USER_ID=916
-ACCT_USER_HOME=/var/lib/raven
+ACCT_USER_HOME=/var/lib/ravend
 ACCT_USER_GROUPS=( raven )
 
 acct-user_add_deps
