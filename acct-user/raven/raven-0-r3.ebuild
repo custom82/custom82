@@ -5,7 +5,7 @@ EAPI=8
 
 inherit acct-user
 
-DESCRIPTION="User for net-dns/bind"
+DESCRIPTION="User for app-crypt/raven"
 
 ACCT_USER_ID=916
 ACCT_USER_HOME=/var/lib/raven

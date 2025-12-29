@@ -41,7 +41,9 @@ DEPEND="
 	)
 "
 
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+		acct-user/raven
+		acct-group/raven"
 
 src_configure() {
 	local mycmakeargs=(
@@ -59,6 +61,6 @@ src_configure() {
 }
 
 src_install() {
-	cmake_src_intall
+	cmake_src_install
 }
 
