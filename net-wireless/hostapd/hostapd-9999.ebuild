@@ -157,7 +157,7 @@ src_configure() {
 	echo "CONFIG_IEEE80211AC=y" >> "${CONFIG}" || die
 	echo "CONFIG_IEEE80211AX=y" >> "${CONFIG}" || die
 	echo "CONFIG_IEEE80211BE=y" >> "${CONFIG}" || die
-	echo "CONFIG_CONFIG_MLO=y" >> "${CONFIG}" || die
+	echo "CONFIG_MLO=y" >> "${CONFIG}" || die
 	echo "CONFIG_OCV=y" >> "${CONFIG}" || die
 	echo "CONFIG_PEERKEY=y" >> "${CONFIG}" || die
 	echo "CONFIG_RSN_PREAUTH=y" >> "${CONFIG}" || die
