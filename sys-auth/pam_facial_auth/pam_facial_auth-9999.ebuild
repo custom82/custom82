@@ -39,5 +39,5 @@ src_install() {
 	fperms 0700 /var/lib/pam_facial_auth
 
 	insinto /etc/security
-	newins "${S}/configs/pam_facial_auth.conf.example" pam_facial_auth.conf
+	newins "${S}/configs/pam_facial_auth.conf" pam_facial_auth.conf
 }
