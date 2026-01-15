@@ -16,33 +16,28 @@ IUSE="debug"
 
 # OpenCV è obbligatorio. Richiediamo esplicitamente contrib e face tramite USE dependencies.
 RDEPEND="
-    sys-libs/pam
-    >=media-libs/opencv-4.0.0:=[contrib,contribdnn]
+	sys-libs/pam
+	>=media-libs/opencv-4.0.0:=[contrib,contribdnn]
 "
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
 src_configure() {
-    local mycmakeargs=(
-        -DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
-    )
-    cmake_src_configure
+	local mycmakeargs=(
+	-DCMAKE_BUILD_TYPE=$(usex debug Debug Release)
+	)
+	cmake_src_configure
 }
 
 src_install() {
-    cmake_src_install
+	dosbin "${BUILD_DIR}/facial_capture"
+	dosbin "${BUILD_DIR}/facial_training"
+	dosbin "${BUILD_DIR}/facial_test"
 
-    # Installiamo i binari helper (ora garantiti dal CMake)
-    dosbin "${BUILD_DIR}/facial_capture"
-    dosbin "${BUILD_DIR}/facial_training"
-    dosbin "${BUILD_DIR}/facial_test"
+	keepdir /var/lib/pam_facial_auth
+	fowners root:root /var/lib/pam_facial_auth
+	fperms 0700 /var/lib/pam_facial_auth
 
-    # Directory per i modelli e le catture (permessi restrittivi per sicurezza)
-    keepdir /var/lib/pam_facial_auth
-    fowners root:root /var/lib/pam_facial_auth
-    fperms 0700 /var/lib/pam_facial_auth
-
-    # Configurazione di default
-    insinto /etc/security
-    newins "${S}/configs/pam_facial_auth.conf.example" pam_facial_auth.conf
+	insinto /etc/security
+	newins "${S}/configs/pam_facial_auth.conf.example" pam_facial_auth.conf
 }
