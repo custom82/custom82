@@ -30,6 +30,8 @@ src_configure() {
 }
 
 src_install() {
+	dolib.so "${BUILD_DIR}/libfacialauth.so"
+
 	dosbin "${BUILD_DIR}/facial_capture"
 	dosbin "${BUILD_DIR}/facial_training"
 	dosbin "${BUILD_DIR}/facial_test"
