@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake pam git-r3
+inherit cmake pam
 
 DESCRIPTION="PAM facial authentication module with OpenCV DNN (YuNet/SFace/LBPH/Eigen/Fisher)"
 HOMEPAGE="https://github.com/custom82/pam_facial_auth"
