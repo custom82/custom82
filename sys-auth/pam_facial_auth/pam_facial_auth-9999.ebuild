@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake git-r3
+inherit cmake git-r3 pam
 
 DESCRIPTION="PAM module for facial authentication using OpenCV"
 HOMEPAGE="https://github.com/custom82/pam_facial_auth"
@@ -30,16 +30,22 @@ src_configure() {
 }
 
 src_install() {
+
+	dopammod "${BUILD_DIR}/pam_facial_auth.so"
+
 	dolib.so "${BUILD_DIR}/libfacialauth.so"
 
 	dosbin "${BUILD_DIR}/facial_capture"
 	dosbin "${BUILD_DIR}/facial_training"
 	dosbin "${BUILD_DIR}/facial_test"
 
-	keepdir /var/lib/pam_facial_auth
-	fowners root:root /var/lib/pam_facial_auth
-	fperms 0700 /var/lib/pam_facial_auth
+	doman "${S}"/man/facial_capture.1
+	doman "${S}"/man/facial_training.1
+	doman "${S}"/man/facial_test.1
+	doman "${S}"/man/pam_facial_auth.8
 
-	insinto /etc/security
-	newins "${S}/etc/pam_facial_auth.conf" pam_facial_auth.conf
+	dopamsecurity "${S}/etc/pam_facial.conf" 
+
+	dodoc "${S}/README.md"
+	dodoc "${S}/LICENSE"
 }
