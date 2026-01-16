@@ -15,7 +15,6 @@ EGIT_BRANCH="dev"
 
 LICENSE="GPL-3"
 SLOT="6"
-KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~x86"
 IUSE=""
 
 DEPEND="
