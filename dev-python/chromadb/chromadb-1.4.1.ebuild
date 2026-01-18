@@ -4,8 +4,10 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{10..14} )
-DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_USE_PEP517=maturin
+
 inherit distutils-r1
+
 DESCRIPTION="the open-source embedding database"
 HOMEPAGE="https://pypi.org/project/chromadb/"
 SRC_URI="https://files.pythonhosted.org/packages/03/35/24479ac00e74b86e388854a573a9ebe6d41c51c37e03d00864bb967d861f/chromadb-1.4.1.tar.gz -> ${P}.tar.gz"
