@@ -47,6 +47,7 @@ RDEPEND="
 		dev-python/loguru[${PYTHON_USEDEP}]
 		dev-python/opentelemetry-api[${PYTHON_USEDEP}]
 		dev-python/markdown[${PYTHON_USEDEP}]
+		dev-python/pyjwt[${PYTHON_USEDEP}]
 	')
 	ollama? ( sci-ml/ollama )
 "
