@@ -63,6 +63,12 @@ src_install() {
 	insinto "${MY_HTDOCSDIR}"
 	doins -r backend || die
 
+	# CREA le directory hostroot prima
+	keepdir "${MY_HOSTROOTDIR}/openwebui"
+	keepdir "${MY_HOSTROOTDIR}/openwebui/data"
+	keepdir "${MY_HOSTROOTDIR}/openwebui/log"
+
+	# Ora puoi marcarle come scrivibili dal webserver
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui"
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui/data"
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui/log"
