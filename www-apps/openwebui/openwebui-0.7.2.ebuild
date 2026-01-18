@@ -21,7 +21,7 @@ RDEPEND="
 	${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/fastapi[${PYTHON_USEDEP}]
-		dev-python/uvicorn[standard,${PYTHON_USEDEP}]
+		dev-python/uvicorn[${PYTHON_USEDEP}]
 		dev-python/starlette[${PYTHON_USEDEP}]
 		dev-python/pydantic[${PYTHON_USEDEP}]
 		dev-python/pydantic-settings[${PYTHON_USEDEP}]
