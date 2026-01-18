@@ -17,8 +17,6 @@ KEYWORDS="~amd64 ~arm64"
 IUSE="+ollama openai"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-# webapp users typically run behind reverse proxy; we just deploy the app tree.
-# Runtime deps: python backend modules.
 RDEPEND="
 	${PYTHON_DEPS}
 	$(python_gen_cond_dep '
@@ -44,8 +42,7 @@ RDEPEND="
 		dev-python/itsdangerous[${PYTHON_USEDEP}]
 		dev-python/httpx[${PYTHON_USEDEP}]
 	')
-	ollama? ( net-misc/ollama )
-	virtual/httpd-php? ( )  # non serve: qui non è PHP, ma webapp eclass è per layout vhost
+	ollama? ( sci-ml/ollama )
 "
 
 DEPEND="${RDEPEND}"
@@ -58,20 +55,12 @@ S="${WORKDIR}/open-webui-${PV}"
 src_install() {
 	webapp_src_preinst
 
-	# Installiamo l’intero tree (backend + frontend) sotto htdocs del vhost.
-	# Nota: se upstream include già frontend buildato va bene; altrimenti servirà fase build node (non gestita qui).
 	insinto "${MY_HTDOCSDIR}"
 	doins -r backend frontend || die
 
-	# Directory dati persistenti: per webapp eclass meglio metterle in hostroot (non in htdocs).
-	# Questo path diventa per-vhost, es: /var/www/localhost/hostroot/openwebui
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui"
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui/data"
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui/log"
-
-	# (Opzionale) se OpenWebUI usa sqlite/local cache dentro backend,
-	# conviene NON scrivere dentro htdocs. Usiamo HOSTROOT e poi setti env nel servizio.
-	# Niente config files automatici qui (webapp_configfile) perché OpenWebUI usa env vars.
 
 	webapp_postinst_txt en "${FILESDIR}/postinstall-en.txt"
 	webapp_postupgrade_txt en "${FILESDIR}/postupgrade-en.txt"
