@@ -45,6 +45,8 @@ RDEPEND="
 		dev-python/starlette-compress[${PYTHON_USEDEP}]
 		dev-python/starsessions[${PYTHON_USEDEP}]
 		dev-python/loguru[${PYTHON_USEDEP}]
+		dev-python/opentelemetry-api[${PYTHON_USEDEP}]
+		dev-python/markdown[${PYTHON_USEDEP}]
 	')
 	ollama? ( sci-ml/ollama )
 "
