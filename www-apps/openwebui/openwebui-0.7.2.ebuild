@@ -12,7 +12,6 @@ HOMEPAGE="https://github.com/open-webui/open-webui"
 SRC_URI="https://github.com/open-webui/open-webui/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
-SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 IUSE="+ollama openai"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
