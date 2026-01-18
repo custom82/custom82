@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{11,12,13} )
 
 inherit webapp python-r1
 
@@ -20,7 +20,7 @@ RDEPEND="
 	${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/fastapi[${PYTHON_USEDEP}]
-		dev-python/uvicorn[${PYTHON_USEDEP}]
+		dev-python/uvicorn[standard,${PYTHON_USEDEP}]
 		dev-python/starlette[${PYTHON_USEDEP}]
 		dev-python/pydantic[${PYTHON_USEDEP}]
 		dev-python/pydantic-settings[${PYTHON_USEDEP}]
@@ -35,7 +35,7 @@ RDEPEND="
 		dev-python/python-dotenv[${PYTHON_USEDEP}]
 		dev-python/sqlalchemy[${PYTHON_USEDEP}]
 		dev-python/alembic[${PYTHON_USEDEP}]
-		dev-python/passlib[${PYTHON_USEDEP}]
+		dev-python/passlib[bcrypt,${PYTHON_USEDEP}]
 		dev-python/bcrypt[${PYTHON_USEDEP}]
 		dev-python/cryptography[${PYTHON_USEDEP}]
 		dev-python/itsdangerous[${PYTHON_USEDEP}]
@@ -51,6 +51,12 @@ RESTRICT="test"
 
 S="${WORKDIR}/open-webui-${PV}"
 
+src_configure() { :; }
+
+src_compile() {
+	einfo "Skipping build: upstream Makefile uses docker-compose; we install sources only."
+}
+
 src_install() {
 	webapp_src_preinst
 
@@ -65,23 +71,4 @@ src_install() {
 	webapp_postupgrade_txt en "${FILESDIR}/postupgrade-en.txt"
 
 	webapp_src_install
-}
-
-pkg_postinst() {
-	webapp_pkg_postinst
-
-	elog
-	elog "Open WebUI files installed under:"
-	elog "  ${VHOST_ROOT}${MY_HTDOCSDIR}"
-	elog
-	elog "Writable runtime dirs (per-vhost) created under:"
-	elog "  ${VHOST_ROOT}${MY_HOSTROOTDIR}/openwebui/{data,log}"
-	elog
-	elog "To run it you still need to start the Python ASGI app, e.g.:"
-	elog "  cd ${VHOST_ROOT}${MY_HTDOCSDIR}/backend"
-	elog "  WEBUI_DATA_DIR=${VHOST_ROOT}${MY_HOSTROOTDIR}/openwebui/data \\"
-	elog "  uvicorn open_webui.main:app --host 127.0.0.1 --port 8080"
-	elog
-	elog "Then reverse-proxy your vhost to http://127.0.0.1:8080 (nginx/caddy/apache)."
-	elog
 }
