@@ -36,7 +36,7 @@ RDEPEND="
 		dev-python/python-dotenv[${PYTHON_USEDEP}]
 		dev-python/sqlalchemy[${PYTHON_USEDEP}]
 		dev-python/alembic[${PYTHON_USEDEP}]
-		dev-python/passlib[bcrypt,${PYTHON_USEDEP}]
+		dev-python/passlib[${PYTHON_USEDEP}]
 		dev-python/bcrypt[${PYTHON_USEDEP}]
 		dev-python/cryptography[${PYTHON_USEDEP}]
 		dev-python/itsdangerous[${PYTHON_USEDEP}]
