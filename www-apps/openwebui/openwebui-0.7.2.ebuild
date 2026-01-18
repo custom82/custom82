@@ -52,6 +52,7 @@ RDEPEND="
 		dev-python/peewee[${PYTHON_USEDEP}]
 		dev-python/python-mimeparse[${PYTHON_USEDEP}]
 		dev-python/authlib[${PYTHON_USEDEP}]
+		dev-python/chromadb[${PYTHON_USEDEP}]
 	')
 	ollama? ( sci-ml/ollama )
 "
