@@ -6,7 +6,7 @@ EAPI=8
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..13} )
 
-inherit distutils-r1 pypi
+inherit distutils-r1
 
 DESCRIPTION="GZip and Brotli compression middleware for Starlette and FastAPI"
 HOMEPAGE="https://github.com/Zaczero/starlette-compress"
