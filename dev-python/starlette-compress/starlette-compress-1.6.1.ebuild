@@ -18,7 +18,7 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 
 RDEPEND="
 	>=dev-python/starlette-0.27.0[${PYTHON_USEDEP}]
-	dev-python/brotli[${PYTHON_USEDEP}]
+	dev-python/brotlicffi[${PYTHON_USEDEP}]
 "
 BDEPEND="
 	test? (
