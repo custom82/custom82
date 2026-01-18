@@ -41,6 +41,7 @@ RDEPEND="
 		dev-python/itsdangerous[${PYTHON_USEDEP}]
 		dev-python/httpx[${PYTHON_USEDEP}]
 		dev-python/typer[${PYTHON_USEDEP}]
+		dev-python/iocache[${PYTHON_USEDEP}]
 	')
 	ollama? ( sci-ml/ollama )
 "
