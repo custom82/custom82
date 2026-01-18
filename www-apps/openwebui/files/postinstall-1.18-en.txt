@@ -1,0 +1,10 @@
+Open WebUI requires a Python ASGI server (uvicorn) to run.
+
+Example (run as a dedicated user, behind a reverse proxy):
+  cd @MY_HTDOCSDIR@/backend
+  WEBUI_DATA_DIR=@MY_HOSTROOTDIR@/openwebui/data \
+  uvicorn open_webui.main:app --host 127.0.0.1 --port 8080
+
+Writable dirs (per vhost):
+  @MY_HOSTROOTDIR@/openwebui/data
+  @MY_HOSTROOTDIR@/openwebui/log
