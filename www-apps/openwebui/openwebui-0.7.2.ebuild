@@ -61,7 +61,7 @@ src_install() {
 	webapp_src_preinst
 
 	insinto "${MY_HTDOCSDIR}"
-	doins -r backend frontend || die
+	doins -r backend || die
 
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui"
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui/data"
