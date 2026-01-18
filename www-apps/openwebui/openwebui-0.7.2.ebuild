@@ -69,7 +69,7 @@ src_install() {
 
 	insinto "${MY_HTDOCSDIR}"
 	doins -r backend || die
-	doins CHANGELOG.md|| die
+	doins CHANGELOG.md || die
 
 	# CREA le directory hostroot prima
 	keepdir "${MY_HOSTROOTDIR}/openwebui"
