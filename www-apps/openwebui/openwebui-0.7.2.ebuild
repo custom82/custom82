@@ -49,6 +49,7 @@ RDEPEND="
 		dev-python/markdown[${PYTHON_USEDEP}]
 		dev-python/pyjwt[${PYTHON_USEDEP}]
 		dev-python/pytz[${PYTHON_USEDEP}]
+		dev-python/peewee[${PYTHON_USEDEP}]
 	')
 	ollama? ( sci-ml/ollama )
 "
