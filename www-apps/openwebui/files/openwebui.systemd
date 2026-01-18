@@ -1,0 +1,37 @@
+[Unit]
+Description=Open WebUI (FastAPI / Uvicorn)
+After=network.target ollama.service
+Wants=ollama.service
+
+[Service]
+Type=simple
+
+# Directory dove risiede il backend
+WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend
+
+# Variabili ambiente fondamentali
+Environment=WEBUI_DATA_DIR=/usr/share/webapps/openwebui/0.7.2/hostroot/openwebui/data
+Environment=OLLAMA_BASE_URL=http://127.0.0.1:11434
+Environment=HOST=127.0.0.1
+Environment=PORT=8080
+
+# Log non bufferizzati
+Environment=PYTHONUNBUFFERED=1
+
+# Avvio Open WebUI
+ExecStart=/usr/bin/python3 -m uvicorn open_webui.main:app \
+  --host 127.0.0.1 \
+  --port 8080 \
+  --proxy-headers \
+  --forwarded-allow-ips=*
+
+Restart=on-failure
+RestartSec=3
+
+# Sicurezza base (puoi irrigidirla dopo)
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+

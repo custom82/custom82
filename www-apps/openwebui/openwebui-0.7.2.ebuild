@@ -5,7 +5,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13} )
 
-inherit webapp python-r1
+inherit webapp python-r1 systemd
 
 DESCRIPTION="Open WebUI - self-hosted web UI for LLMs (Ollama/OpenAI compatible)"
 HOMEPAGE="https://github.com/open-webui/open-webui"
@@ -77,4 +77,5 @@ src_install() {
 	webapp_postupgrade_txt en "${FILESDIR}/postupgrade-en.txt"
 
 	webapp_src_install
+	systemd_dounit "${S}"/openwebui.systemd
 }
