@@ -1,13 +1,14 @@
 <pkgmetadata>
 <maintainer type="project">
 <email>andrea.postiglione@gmail.com</email>
-<name>Andrea Postiglione</name>
+<name>Andreas Postiglione</name>
 </maintainer>
 <upstream>
-<remote-id type="pypi">chromadb</remote-id>
+<remote-id type="pypi">hnswlib</remote-id>
+<remote-id type="github">hnswlib</remote-id>
 <maintainer status="unknown">
 <email>andrea.postiglione@gmail.com</email>
-<name>andrea.postiglione@gmail.com</name>
+<name>Andrea Postiglione</name>
 </maintainer>
 </upstream>
 </pkgmetadata>
