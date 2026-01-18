@@ -73,9 +73,6 @@ src_install() {
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui/data"
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui/log"
 
-	webapp_postinst_txt en "${FILESDIR}/postinstall-en.txt"
-	webapp_postupgrade_txt en "${FILESDIR}/postupgrade-en.txt"
-
 	webapp_src_install
 	systemd_newunit "${FILESDIR}"/openwebui.service openwebui.service
 }

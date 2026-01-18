@@ -1,4 +1,0 @@
-After upgrading, check upstream release notes for migration steps.
-If the database schema changed, Open WebUI may require an update on first start.
-Backup your data dir:
-  @MY_HOSTROOTDIR@/openwebui/data

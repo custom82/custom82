@@ -4,7 +4,7 @@ After=network.target ollama.service
 Wants=ollama.service
 
 [Service]
-Type=simple
+Type=forking
 
 # Directory dove risiede il backend
 WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend/open_webui
