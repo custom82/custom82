@@ -19,7 +19,7 @@ Environment=PORT=8080
 Environment=PYTHONUNBUFFERED=1
 
 # Avvio Open WebUI
-ExecStart=/usr/bin/python3 -m uvicorn open_webui.main:app \
+ExecStart=/usr/bin/python3 -m uvicorn open_webui.main \
   --host 127.0.0.1 \
   --port 8080 \
   --proxy-headers \
