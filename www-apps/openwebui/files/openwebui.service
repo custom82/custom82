@@ -7,7 +7,7 @@ Wants=ollama.service
 Type=forking
 
 # Directory dove risiede il backend
-WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend/open_webui
+WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend
 
 # Variabili ambiente fondamentali
 Environment=WEBUI_DATA_DIR=/usr/share/webapps/openwebui/0.7.2/hostroot/openwebui/data
