@@ -77,5 +77,5 @@ src_install() {
 	webapp_postupgrade_txt en "${FILESDIR}/postupgrade-en.txt"
 
 	webapp_src_install
-	systemd_dounit "${FILESDIR}"/openwebui.service
+	systemd_newunit "${FILESDIR}"/openwebui.service openwebui.service
 }

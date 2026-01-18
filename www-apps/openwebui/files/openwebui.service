@@ -7,7 +7,7 @@ Wants=ollama.service
 Type=simple
 
 # Directory dove risiede il backend
-WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend
+WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend/open_webui
 
 # Variabili ambiente fondamentali
 Environment=WEBUI_DATA_DIR=/usr/share/webapps/openwebui/0.7.2/hostroot/openwebui/data
@@ -19,7 +19,7 @@ Environment=PORT=8080
 Environment=PYTHONUNBUFFERED=1
 
 # Avvio Open WebUI
-ExecStart=/usr/bin/python3 -m uvicorn open_webui.main \
+ExecStart=/usr/bin/python3 -m uvicorn main.py \
   --host 127.0.0.1 \
   --port 8080 \
   --proxy-headers \
