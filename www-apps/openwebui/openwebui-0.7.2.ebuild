@@ -42,7 +42,7 @@ RDEPEND="
 		dev-python/httpx[${PYTHON_USEDEP}]
 		dev-python/typer[${PYTHON_USEDEP}]
 		dev-python/aiocache[${PYTHON_USEDEP}]
-		dev-python/starlette_compress[${PYTHON_USEDEP}]
+		dev-python/starlette-compress[${PYTHON_USEDEP}]
 	')
 	ollama? ( sci-ml/ollama )
 "
