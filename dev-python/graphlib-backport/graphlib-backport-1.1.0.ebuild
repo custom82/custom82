@@ -15,6 +15,7 @@ SRC_URI="https://github.com/mariushelf/graphlib_backport/archive/refs/tags/1.1.0
 LICENSE="PSF"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
+S="${WORKDIR}/graphlib_backport-${PV}"
 
 RDEPEND="
 	dev-python/peewee[${PYTHON_USEDEP}]
