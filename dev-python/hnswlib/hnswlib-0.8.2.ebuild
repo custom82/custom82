@@ -9,8 +9,8 @@ PYTHON_COMPAT=( python3_{11..14} )
 inherit distutils-r1
 
 DESCRIPTION="fast approximate nearest neighbor search"
-HOMEPAGE="https://github.com/nmslib/hnswlib"
-SRC_URI="https://github.com/nmslib/hnswlib/archive/refs/tags/v0.8.0.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/chroma-core/hnswlib/"
+SRC_URI="https://github.com/chroma-core/hnswlib/archive/refs/tags/0.8.2.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

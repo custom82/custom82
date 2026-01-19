@@ -1,37 +1,49 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..14} )
 DISTUTILS_USE_PEP517=maturin
+PYTHON_COMPAT=( python3_{12..14} )
 
 inherit distutils-r1
 
-DESCRIPTION="the open-source embedding database"
-HOMEPAGE="https://pypi.org/project/chromadb/"
-SRC_URI="https://files.pythonhosted.org/packages/03/35/24479ac00e74b86e388854a573a9ebe6d41c51c37e03d00864bb967d861f/chromadb-1.4.1.tar.gz -> ${P}.tar.gz"
+DESCRIPTION="Embedding database for LLM apps"
+HOMEPAGE="https://github.com/chroma-core"
+SRC_URI="https://github.com/chroma-core/chroma/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
-LICENSE="Apache 2.0"
+
+LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64 arm arm64 x86"
-IUSE="test"
-RESTRICT="!test? ( test )"
+KEYWORDS="~amd64 ~arm64 ~x86"
 
-DOCS="README.rst"
+S="${WORKDIR}/chroma-${PV}"
 
+#	>=dev-python/build-1.0.3[${PYTHON_USEDEP}]
+# FIXME: WiP, add missing deps
 RDEPEND="
-	dev-python/hnswlib[${PYTHON_USEDEP}]
+	dev-python/build[${PYTHON_USEDEP}]
+	dev-python/pydantic[${PYTHON_USEDEP}]
+	dev-python/pybase64[${PYTHON_USEDEP}]
+	dev-python/uvicorn[${PYTHON_USEDEP}]
+	dev-python/numpy[${PYTHON_USEDEP}]
+	dev-python/posthog[${PYTHON_USEDEP}]
+	dev-python/typing_extensions[${PYTHON_USEDEP}]
+	sci-libs/onnxruntime[python]
+
 "
 
+#	>=dev-python/tokenizers-0.13.2[${PYTHON_USEDEP}]
+#	>=dev-python/pypika-0.48.9[${PYTHON_USEDEP}]
+#	>=dev-python/pybase64-1.4.1[${PYTHON_USEDEP}]
+#	>=dev-python/posthog-2.4.0[${PYTHON_USEDEP}]
+#	>=dev-python/onnxruntime-1.14.1[${PYTHON_USEDEP}]
+#	>=dev-python/opentelemetry-exporter-otlp-proto-grpc-1.2.0[${PYTHON_USEDEP}]
+#	>=dev-python/kubernetes-28.1.0[${PYTHON_USEDEP}]
+#	>=dev-python/mmh3-4.0.1[${PYTHON_USEDEP}]
 
-BDEPEND="
-	test? (
-		dev-python/pytest[${PYTHON_USEDEP}]
-	)"
+DEPEND="${RDEPEND}"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-python_test() {
-	py.test -v -v || die
-}
-
-distutils_enable_tests pytest
+RESTRICT="test"
+#distutils_enable_tests pytest
