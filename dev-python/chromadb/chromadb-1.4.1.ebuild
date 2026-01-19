@@ -1031,14 +1031,12 @@ src_prepare() {
 
 src_compile() {
 	export SWAGGER_UI_DOWNLOAD_URL="file://${S}/swagger-ui-${SWAGGER_UI_VER}.zip"
-	# Build only the python bindings crate
-	pushd rust/python_bindings >/dev/null || die
 	cargo_src_compile
-	popd >/dev/null || die
+
 }
 
 src_install() {
-    distutils-r1_src_install
+    cargo_src_install
 }
 
 
