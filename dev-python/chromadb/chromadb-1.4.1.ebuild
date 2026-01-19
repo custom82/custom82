@@ -1042,3 +1042,8 @@ distutils-r1_python_install() {
 		2>/dev/null || true
 }
 
+src_install() {
+	distutils-r1_src_install
+}
+
+
