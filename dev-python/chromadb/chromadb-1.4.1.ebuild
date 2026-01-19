@@ -11,7 +11,9 @@ inherit distutils-r1 cargo
 DESCRIPTION="Embedding database for LLM apps"
 HOMEPAGE="https://github.com/chroma-core/chroma"
 
+
 GCLOUD_RUST_TAG="v20251222"
+GCLOUD_RUST_VER="20251222"
 GCLOUD_RUST_PN="google-cloud-rust"
 GCLOUD_RUST_P="${GCLOUD_RUST_PN}-${GCLOUD_RUST_TAG}"
 
@@ -978,7 +980,7 @@ src_prepare() {
 	distutils-r1_src_prepare
 
 	# Bundle google-cloud-rust sotto rust/
-	local gcloud_src="${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_TAG}"
+	local gcloud_src="${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"
 	local gcloud_dst="${S}/rust/${GCLOUD_RUST_PN}"
 	[[ -d "${gcloud_src}" ]] || die "google-cloud-rust sorgente non trovato: ${gcloud_src}"
 	rm -rf "${gcloud_dst}" || die
