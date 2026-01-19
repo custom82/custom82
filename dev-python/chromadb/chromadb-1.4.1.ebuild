@@ -29,10 +29,15 @@ RDEPEND="
 	dev-python/numpy[${PYTHON_USEDEP}]
 	dev-python/posthog[${PYTHON_USEDEP}]
 	dev-python/typing_extensions[${PYTHON_USEDEP}]
-	sci-libs/onnxruntime[python]
+	sci-libs/onnxruntime[python${PYTHON_USEDEP}]
 	dev-python/opentelemetry-api[${PYTHON_USEDEP}]
 	dev-python/opentelemetry-exporter-otlp-proto-grpc[${PYTHON_USEDEP}]
 	dev-python/opentelemetry-api[${PYTHON_USEDEP}]
+	sci-ml/tokenizers[${PYTHON_USEDEP}]
+	dev-python/pika[${PYTHON_USEDEP}]
+	dev-python/tqdm[${PYTHON_USEDEP}]
+	dev-python/overrides[${PYTHON_USEDEP}]
+
 
 "
 
