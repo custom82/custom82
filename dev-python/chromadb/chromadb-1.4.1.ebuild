@@ -1029,6 +1029,16 @@ src_compile() {
 	popd >/dev/null || die
 }
 
-src_install() {
-	distutils-r1_src_install
+distutils-r1_python_install() {
+	# install wheel via PEP517 (maturin)
+	pep517_install
+
+	# distutils-r1 (in certe versioni) prova a rm wrapper che con maturin non esistono,
+	# e va in die. Qui rendiamo l'operazione safe.
+	rm -f \
+		"${ED}/usr/bin/${EPYTHON}" \
+		"${ED}/usr/bin/python3" \
+		"${ED}/usr/bin/python" \
+		2>/dev/null || true
 }
+
