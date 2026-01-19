@@ -21,7 +21,8 @@ HNSWLIB_COMMIT="312991cf9e640d5ccab879906a51e7612ce6fcf1"
 HNSWLIB_PN="hnswlib"
 HNSWLIB_P="${HNSWLIB_PN}-${HNSWLIB_COMMIT}"
 SWAGGER_UI_VER="v5.17.14"
-RUST_MIN_VER="1.85.1"
+
+PATCHES="${FILESDIR}/no_network_fix.patch"
 
 
 CRATES="\
@@ -988,7 +989,7 @@ src_unpack() {
 
 src_prepare() {
 	default
-	distutils-r1_src_prepare
+	#distutils-r1_src_prepare
 
 	# Bundle google-cloud-rust sotto rust/
 	local gcloud_src="${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"
@@ -1004,28 +1005,6 @@ src_prepare() {
 	[[ -d "${hnsw_src}" ]] || die "hnswlib sorgente non trovato: ${hnsw_src}"
 	rm -rf "${hnsw_dst}" || die
 	cp -a "${hnsw_src}" "${hnsw_dst}" || die
-
-	# Force all git deps to local paths (offline friendly)
-	local cargo_toml="${S}/Cargo.toml"
-
-	if ! grep -q '^\[patch\."https://github\.com/chroma-core/hnswlib\.git"\]' "${cargo_toml}" ; then
-		cat >> "${cargo_toml}" <<-EOF || die
-		[patch."https://github.com/chroma-core/hnswlib.git"]
-		hnswlib = { path = "rust/hnswlib" }
-		EOF
-	fi
-
-	if ! grep -q '^\[patch\."https://github\.com/yoshidan/google-cloud-rust"\]' "${cargo_toml}" ; then
-		cat >> "${cargo_toml}" <<-EOF || die
-		[patch."https://github.com/yoshidan/google-cloud-rust"]
-		gcloud-auth = { path = "rust/google-cloud-rust/foundation/auth" }
-		gcloud-gax = { path = "rust/google-cloud-rust/foundation/gax" }
-		gcloud-longrunning = { path = "rust/google-cloud-rust/foundation/longrunning" }
-		gcloud-metadata = { path = "rust/google-cloud-rust/foundation/metadata" }
-		gcloud-googleapis = { path = "rust/google-cloud-rust/googleapis" }
-		gcloud-spanner = { path = "rust/google-cloud-rust/spanner" }
-		EOF
-	fi
 
 }
 
