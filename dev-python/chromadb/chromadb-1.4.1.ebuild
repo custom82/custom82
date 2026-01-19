@@ -40,7 +40,8 @@ RDEPEND="
 	dev-python/importlib-resources[${PYTHON_USEDEP}]
 	dev-python/graphlib-backport[${PYTHON_USEDEP}]
 	dev-python/grpcio[${PYTHON_USEDEP}]
-
+	dev-python/typer[${PYTHON_USEDEP}]
+	dev-python/pyyaml[${PYTHON_USEDEP}]
 
 "
 
