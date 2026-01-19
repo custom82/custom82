@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/chroma-core"
 GCLOUD_RUST_TAG="v20251222"
 GCLOUD_RUST_PN="google-cloud-rust"
 GCLOUD_RUST_P="${GCLOUD_RUST_PN}-${GCLOUD_RUST_TAG}"
-
+GCLOUD_RUST_VER="20251222"
 
 
 SRC_URI="
@@ -67,7 +67,7 @@ src_prepare() {
 	distutils-r1_src_prepare
 
 	# 1) Copia google-cloud-rust dentro rust/ (accanto agli altri crate del workspace)
-	local gcloud_src="${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_TAG}"
+	local gcloud_src="${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"
 	local gcloud_dst="${S}/rust/${GCLOUD_RUST_PN}"
 
 	[[ -d "${gcloud_src}" ]] || die "google-cloud-rust sorgente non trovato: ${gcloud_src}"
