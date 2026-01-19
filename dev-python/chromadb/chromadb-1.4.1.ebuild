@@ -41,7 +41,7 @@ RDEPEND="
 	dev-python/opentelemetry-api[${PYTHON_USEDEP}]
 	dev-python/opentelemetry-exporter-otlp-proto-grpc[${PYTHON_USEDEP}]
 	dev-python/opentelemetry-api[${PYTHON_USEDEP}]
-	sci-ml/tokenizers[${PYTHON_USEDEP}]
+	sci-ml/tokenizers
 	dev-python/pika[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/overrides[${PYTHON_USEDEP}]
