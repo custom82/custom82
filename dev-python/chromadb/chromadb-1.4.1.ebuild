@@ -38,6 +38,8 @@ RDEPEND="
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/overrides[${PYTHON_USEDEP}]
 	dev-python/importlib-resources[${PYTHON_USEDEP}]
+	dev-python/graphlib-backport[${PYTHON_USEDEP}]
+	dev-python/grpcio[${PYTHON_USEDEP}]
 
 
 "
