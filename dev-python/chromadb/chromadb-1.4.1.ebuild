@@ -1008,7 +1008,7 @@ src_prepare() {
 		[patch."https://github.com/yoshidan/google-cloud-rust"]
 		gcloud-auth = { path = "rust/google-cloud-rust/foundation/auth" }
 		gcloud-gax = { path = "rust/google-cloud-rust/foundation/gax" }
-		gcloud-longrunning = { path = "rust/google-cloud-rust/googleapis/longrunning" }
+		gcloud-longrunning = { path = "rust/google-cloud-rust/foundation/longrunning" }
 		gcloud-metadata = { path = "rust/google-cloud-rust/foundation/metadata" }
 		gcloud-googleapis = { path = "rust/google-cloud-rust/googleapis" }
 		gcloud-spanner = { path = "rust/google-cloud-rust/spanner" }
