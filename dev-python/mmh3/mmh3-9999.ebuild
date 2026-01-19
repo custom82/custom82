@@ -7,14 +7,13 @@ DISTUTILS_USE_PEP517=setuptools
 DISTUTILS_EXT=1
 PYTHON_COMPAT=( python3_{11..14} )
 
-inherit distutils-r1
+inherit distutils-r1 git-r3
 
 DESCRIPTION="Python extension for MurmurHash"
 HOMEPAGE="https://github.com/hajimes/mmh3"
-SRC_URI="https://github.com/hajimes/${PN}/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz"
+EGIT_REPO_URI="https://github.com/hajimes/${PN}.git"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
 
 distutils_enable_tests pytest
