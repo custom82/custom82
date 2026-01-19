@@ -21,6 +21,7 @@ HNSWLIB_COMMIT="312991cf9e640d5ccab879906a51e7612ce6fcf1"
 HNSWLIB_PN="hnswlib"
 HNSWLIB_P="${HNSWLIB_PN}-${HNSWLIB_COMMIT}"
 SWAGGER_UI_VER="v5.17.14"
+RUST_MIN_VER="1.85.1"
 
 
 CRATES="\
@@ -968,6 +969,13 @@ RDEPEND="
 	dev-python/jsonschema[${PYTHON_USEDEP}]
 "
 DEPEND="${RDEPEND}"
+
+BDEPEND="
+    dev-python/gpep517[${PYTHON_USEDEP}]
+    dev-python/installer[${PYTHON_USEDEP}]
+    dev-python/pyproject-hooks[${PYTHON_USEDEP}]
+"
+
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RESTRICT="test"
@@ -1029,21 +1037,10 @@ src_compile() {
 	popd >/dev/null || die
 }
 
-distutils-r1_python_install() {
-	# install wheel via PEP517 (maturin)
-	pep517_install
-
-	# distutils-r1 (in certe versioni) prova a rm wrapper che con maturin non esistono,
-	# e va in die. Qui rendiamo l'operazione safe.
-	rm -f \
-		"${ED}/usr/bin/${EPYTHON}" \
-		"${ED}/usr/bin/python3" \
-		"${ED}/usr/bin/python" \
-		2>/dev/null || true
-}
-
 src_install() {
-	distutils-r1_src_install
+    distutils-r1_src_install
 }
+
+
 
 
