@@ -20,6 +20,8 @@ GCLOUD_RUST_P="${GCLOUD_RUST_PN}-${GCLOUD_RUST_TAG}"
 HNSWLIB_COMMIT="312991cf9e640d5ccab879906a51e7612ce6fcf1"
 HNSWLIB_PN="hnswlib"
 HNSWLIB_P="${HNSWLIB_PN}-${HNSWLIB_COMMIT}"
+SWAGGER_UI_VER="v5.17.14"
+
 
 CRATES="\
 	addr2line-0.21.0\
@@ -928,6 +930,7 @@ SRC_URI="
 	https://github.com/chroma-core/chroma/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz
 	https://github.com/yoshidan/${GCLOUD_RUST_PN}/archive/refs/tags/${GCLOUD_RUST_TAG}.tar.gz -> ${GCLOUD_RUST_P}.tar.gz
 	https://github.com/chroma-core/${HNSWLIB_PN}/archive/${HNSWLIB_COMMIT}.tar.gz -> ${HNSWLIB_P}.tar.gz
+	https://github.com/swagger-api/swagger-ui/archive/refs/tags/${SWAGGER_UI_VER}.zip -> swagger-ui-${SWAGGER_UI_VER}.zip
 	$(cargo_crate_uris)
 "
 
@@ -985,6 +988,7 @@ src_prepare() {
 	[[ -d "${gcloud_src}" ]] || die "google-cloud-rust sorgente non trovato: ${gcloud_src}"
 	rm -rf "${gcloud_dst}" || die
 	cp -a "${gcloud_src}" "${gcloud_dst}" || die
+	cp "${DISTDIR}/swagger-ui-${SWAGGER_UI_VER}.zip" "${S}/swagger-ui-${SWAGGER_UI_VER}.zip" || die
 
 	# Bundle hnswlib sotto rust/
 	local hnsw_src="${WORKDIR}/${HNSWLIB_PN}-${HNSWLIB_COMMIT}"
@@ -1014,9 +1018,11 @@ src_prepare() {
 		gcloud-spanner = { path = "rust/google-cloud-rust/spanner" }
 		EOF
 	fi
+
 }
 
 src_compile() {
+	export SWAGGER_UI_DOWNLOAD_URL="file://${S}/swagger-ui-${SWAGGER_UI_VER}.zip"
 	# Build only the python bindings crate
 	pushd rust/python_bindings >/dev/null || die
 	cargo_src_compile
