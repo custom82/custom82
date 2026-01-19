@@ -37,6 +37,7 @@ RDEPEND="
 	dev-python/pika[${PYTHON_USEDEP}]
 	dev-python/tqdm[${PYTHON_USEDEP}]
 	dev-python/overrides[${PYTHON_USEDEP}]
+	dev-python/importlib-resources[${PYTHON_USEDEP}]
 
 
 "
