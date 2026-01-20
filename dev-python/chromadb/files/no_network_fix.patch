@@ -35,3 +35,19 @@ diff '--color=auto' -uPNr chroma-1.4.1/rust/google-cloud-rust/spanner/Cargo.toml
  
  google-cloud-auth = { package = "gcloud-auth", optional = true, version = "1.2.0", path="../foundation/auth", default-features=false }
  
+diff '--color=auto' -uPNr chroma-1.4.1/rust/js_bindings/Cargo.toml chroma-1.4.1-patched/rust/js_bindings/Cargo.toml
+--- chroma-1.4.1/rust/js_bindings/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
++++ chroma-1.4.1-patched/rust/js_bindings/Cargo.toml	2026-01-20 18:43:44.404864659 +0100
+@@ -8,9 +8,9 @@
+ 
+ [dependencies]
+ # Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
+-napi = { version = "2.12.2", default-features = false, features = ["napi4"] }
+-napi-derive = "2.12.2"
++napi = { version = "3.3.0", default-features = false, features = ["napi4"] }
++napi-derive = "3.2.5"
+ chroma-cli = { workspace = true }
+ 
+ [build-dependencies]
+-napi-build = "2.0.1"
++napi-build = "2.3.1"
