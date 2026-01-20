@@ -543,6 +543,7 @@ CRATES="\
 	powerfmt-0.2.0\
 	pprof_util-0.7.0\
 	ppv-lite86-0.2.20\
+	primeorder-0.13.6\
 	prettyplease-0.2.16\
 	proc-macro-error-attr2-2.0.0\
 	proc-macro-error2-2.0.1\
