@@ -260,6 +260,7 @@ CRATES="\
 	fastrace-opentelemetry-0.8.0\
 	fastrand-2.2.0\
 	fdeflate-0.3.7\
+	fiat-crypto-0.3.0\
 	ff-0.12.1\
 	figment-0.10.19\
 	fixedbitset-0.5.7\
