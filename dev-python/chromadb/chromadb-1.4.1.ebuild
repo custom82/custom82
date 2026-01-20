@@ -719,7 +719,7 @@ CRATES="\
 	tantivy-0.25.0\
 	tantivy-bitpacker-0.6.0\
 	tantivy-columnar-0.6.0\
-	tantivy-common-0.7.0\
+	tantivy-common-0.10.0\
 	tantivy-fst-0.5.0\
 	tantivy-query-grammar-0.22.0\
 	tantivy-sstable-0.3.0\
