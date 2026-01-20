@@ -454,7 +454,7 @@ CRATES="\
 	ndk-context-0.1.1\
 	network-interface-1.1.4\
 	nom-7.1.3\
-	nu-ansi-term-0.46.0\
+	nu-ansi-term-0.50.3\
 	num-0.4.3\
 	num-bigint-0.4.6\
 	num-bigint-dig-0.8.4\
