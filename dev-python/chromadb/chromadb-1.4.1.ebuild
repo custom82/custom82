@@ -369,6 +369,7 @@ CRATES="\
 	image-0.25.5\
 	indexmap-1.0.2\
 	indexmap-2.2.1\
+	indexmap-2.5.0\
 	indicatif-0.17.9\
 	indoc-2.0.5\
 	inferno-0.12.2\
