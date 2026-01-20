@@ -718,7 +718,7 @@ CRATES="\
 	system-configuration-sys-0.6.0\
 	tabwriter-1.4.1\
 	tantivy-0.25.0\
-	tantivy-bitpacker-0.6.0\
+	tantivy-bitpacker-0.9.0\
 	tantivy-columnar-0.6.0\
 	tantivy-common-0.10.0\
 	tantivy-fst-0.5.0\
