@@ -615,8 +615,7 @@ CRATES="\
 	rustix-1.0.3\
 	rustls-0.22.2\
 	rustls-0.23.35\
-	rustls-native-certs-0.6.3\
-	rustls-native-certs-0.8.1\
+	rustls-native-certs-0.7.3\
 	rustls-pemfile-1.0.4\
 	rustls-pemfile-2.2.0\
 	rustls-pki-types-1.13.0\
