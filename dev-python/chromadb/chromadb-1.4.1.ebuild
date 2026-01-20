@@ -315,7 +315,7 @@ CRATES="\
 	glob-0.3.1\
 	globset-0.4.15\
 	gloo-timers-0.3.0\
-	group-0.13.0\
+	group-0.12.0\
 	guacamole-0.11.0\
 	h2-0.3.26\
 	h2-0.4.7\
