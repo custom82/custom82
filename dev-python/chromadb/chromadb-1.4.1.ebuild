@@ -447,8 +447,8 @@ CRATES="\
 	naive-timer-0.2.0\
 	nanorand-0.7.0\
 	napi-3.3.0\
-	napi-build-2.1.6\
-	napi-derive-2.16.13\
+	napi-build-2.3.1\
+	napi-derive-3.2.5\
 	napi-derive-backend-1.0.75\
 	napi-sys-2.4.0\
 	native-tls-0.2.12\
