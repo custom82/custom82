@@ -778,7 +778,7 @@ CRATES="\
 	tracing-attributes-0.1.30\
 	tracing-core-0.1.33\
 	tracing-log-0.2.0\
-	tracing-opentelemetry-0.28.0\
+	tracing-opentelemetry-0.32.1\
 	tracing-subscriber-0.3.18\
 	tracing-test-0.2.5\
 	tracing-test-macro-0.2.5\
