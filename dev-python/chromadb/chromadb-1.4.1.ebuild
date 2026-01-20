@@ -864,6 +864,7 @@ CRATES="\
 	weezl-0.1.8\
 	which-4.4.2\
 	whoami-1.5.2\
+	widestring-1.2.1\
 	winapi-0.3.9\
 	winapi-i686-pc-windows-gnu-0.4.0\
 	winapi-util-0.1.8\
