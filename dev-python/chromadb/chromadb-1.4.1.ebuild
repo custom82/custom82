@@ -425,7 +425,7 @@ CRATES="\
 	lz4-sys-1.10.0\
 	lz4_flex-0.11.3\
 	lzma-rs-0.3.0\
-	madsim-0.2.30\
+	madsim-0.2.34\
 	madsim-macros-0.2.12\
 	madsim-tokio-0.2.28\
 	mappings-0.7.0\
