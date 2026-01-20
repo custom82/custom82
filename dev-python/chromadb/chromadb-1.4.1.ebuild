@@ -676,7 +676,7 @@ CRATES="\
 	similar-2.7.0\
 	simple_asn1-0.6.3\
 	siphasher-1.0.1\
-	sketches-ddsketch-0.2.2\
+	sketches-ddsketch-0.3.0\
 	slab-0.4.9\
 	small_ctor-0.1.2\
 	smallvec-1.15.1\
