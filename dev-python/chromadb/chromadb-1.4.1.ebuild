@@ -613,7 +613,7 @@ CRATES="\
 	rustc_version-0.4.1\
 	rustix-0.38.41\
 	rustix-1.0.3\
-	rustls-0.21.12\
+	rustls-0.22.2\
 	rustls-0.23.35\
 	rustls-native-certs-0.6.3\
 	rustls-native-certs-0.8.1\
