@@ -650,7 +650,7 @@ CRATES="\
 	serde_core-1.0.228\
 	serde_derive-1.0.228\
 	serde_derive_internals-0.29.1\
-	serde_json-1.0.133\
+	serde_json-1.0.140\
 	serde_path_to_error-0.1.16\
 	serde_regex-1.1.0\
 	serde_spanned-0.6.8\
