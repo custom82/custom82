@@ -978,7 +978,6 @@ BDEPEND="
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-PATCHES="${FILESDIR}/no_network_fix.patch"
 
 RESTRICT="test"
 distutils_enable_tests pytest
@@ -1006,6 +1005,7 @@ src_prepare() {
 	[[ -d "${hnsw_src}" ]] || die "hnswlib sorgente non trovato: ${hnsw_src}"
 	rm -rf "${hnsw_dst}" || die
 	cp -a "${hnsw_src}" "${hnsw_dst}" || die
+	eapply "${FILESDIR}/no_network_fix.patch"
 
 }
 
