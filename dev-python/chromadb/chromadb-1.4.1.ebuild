@@ -780,6 +780,7 @@ CRATES="\
 	tokio-util-0.7.12\
 	toml-0.8.20\
 	toml-0.9.8\
+	toml_datetime-0.6.8\
 	toml_datetime-0.7.3\
 	toml_edit-0.22.24\
 	tonic-0.12.3\
