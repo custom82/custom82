@@ -214,6 +214,7 @@ CRATES="\
 	darling_macro-0.20.10\
 	darling_macro-0.21.3\
 	dashmap-6.1.0\
+	data-encoding-2.10.0\
 	deflate64-0.1.9\
 	der-0.6.1\
 	der-0.7.9\
