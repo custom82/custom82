@@ -51,6 +51,18 @@ diff '--color=auto' -uPNr chroma-1.4.1/rust/cache/Cargo.toml chroma-1.4.1-patche
  
  # TODO(rescrv):  Deprecated.  Find a suitable replacement for such things.
  serde_yaml = "0.9"
+diff '--color=auto' -uPNr chroma-1.4.1/rust/google-cloud-rust/foundation/auth/Cargo.toml chroma-1.4.1-patched/rust/google-cloud-rust/foundation/auth/Cargo.toml
+--- chroma-1.4.1/rust/google-cloud-rust/foundation/auth/Cargo.toml	2025-12-22 07:07:59.000000000 +0100
++++ chroma-1.4.1-patched/rust/google-cloud-rust/foundation/auth/Cargo.toml	2026-01-20 14:46:11.876685974 +0100
+@@ -38,7 +38,7 @@
+ [dev-dependencies]
+ tokio = { version = "1.32", features = ["test-util", "rt-multi-thread", "macros"] }
+ tracing-subscriber = { version = "0.3", features = ["env-filter", "std"] }
+-ctor = "0.5"
++ctor = "0.6.3"
+ tempfile = "3.8.0"
+ temp-env = { version = "0.3.6", features = ["async_closure"] }
+ 
 diff '--color=auto' -uPNr chroma-1.4.1/rust/google-cloud-rust/spanner/Cargo.toml chroma-1.4.1-patched/rust/google-cloud-rust/spanner/Cargo.toml
 --- chroma-1.4.1/rust/google-cloud-rust/spanner/Cargo.toml	2025-12-22 07:07:59.000000000 +0100
 +++ chroma-1.4.1-patched/rust/google-cloud-rust/spanner/Cargo.toml	2026-01-20 13:17:55.692405279 +0100
