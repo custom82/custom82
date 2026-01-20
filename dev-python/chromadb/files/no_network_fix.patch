@@ -1,6 +1,6 @@
 diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patched/Cargo.toml
 --- chroma-1.4.1/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
-+++ chroma-1.4.1-patched/Cargo.toml	2026-01-20 14:02:33.333359792 +0100
++++ chroma-1.4.1-patched/Cargo.toml	2026-01-20 15:47:37.124742359 +0100
 @@ -25,10 +25,10 @@
  murmur3 = "0.5.2"
  num_cpus = "1.16.0"
@@ -16,6 +16,15 @@ diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patched/Cargo.tom
  parking_lot = { version = "0.12.3", features = ["serde"] }
  parquet = { version = "55.1", features = ["async"] }
  pin-project = "1.1.10"
+@@ -53,7 +53,7 @@
+ backon = "1.3.0"
+ tracing = { version = "0.1" }
+ tracing-bunyan-formatter = "0.3"
+-tracing-opentelemetry = "0.28.0"
++tracing-opentelemetry = "0.32.1"
+ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+ uuid = { version = "1.11.0", features = ["v4", "v7", "fast-rng", "macro-diagnostics", "serde"] }
+ utoipa = { version = "5", features = ["macros", "axum_extras", "debug", "uuid"] }
 @@ -67,7 +67,7 @@
  rayon = "1.10.0"
  validator = { version = "0.19", features = ["derive"] }
