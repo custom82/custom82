@@ -17,7 +17,7 @@ GCLOUD_RUST_VER="20251222"
 GCLOUD_RUST_PN="google-cloud-rust"
 GCLOUD_RUST_P="${GCLOUD_RUST_PN}-${GCLOUD_RUST_TAG}"
 
-HNSWLIB_COMMIT="312991cf9e640d5ccab879906a51e7612ce6fcf1"
+HNSWLIB_COMMIT="c1b9b79af3d10c6ee7b5d0afa1ce851ae975254c"
 HNSWLIB_PN="hnswlib"
 HNSWLIB_P="${HNSWLIB_PN}-${HNSWLIB_COMMIT}"
 SWAGGER_UI_VER="v5.17.14"
@@ -999,8 +999,8 @@ src_prepare() {
 	cp "${DISTDIR}/swagger-ui-${SWAGGER_UI_VER}.zip" "${S}/swagger-ui-${SWAGGER_UI_VER}.zip" || die
 
 
-	if [[ -d "${hnsw_src}" ]] ; then
-	mv ${WORKDIR}/${HNSWLIB_P} "${S}"/rust/${HNSWLIB_PN}
+	if [[ -d ${WORKDIR}/${HNSWLIB_P} ]] ; then
+		mv ${WORKDIR}/${HNSWLIB_P} "${S}"/rust/${HNSWLIB_PN}
 	fi
 
 	eapply "${FILESDIR}/no_network_fix.patch"
