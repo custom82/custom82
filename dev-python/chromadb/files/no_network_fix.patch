@@ -63,3 +63,15 @@ diff '--color=auto' -uPNr chroma-1.4.1/rust/google-cloud-rust/spanner/Cargo.toml
  google-cloud-auth = { package = "gcloud-auth", path="../foundation/auth", default-features=false, features=["rustls-tls"]}
  
  [features]
+diff '--color=auto' -uPNr chroma-1.4.1/rust/index/Cargo.toml chroma-1.4.1-patched/rust/index/Cargo.toml
+--- chroma-1.4.1/rust/index/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
++++ chroma-1.4.1-patched/rust/index/Cargo.toml	2026-01-20 14:30:45.788942876 +0100
+@@ -37,7 +37,7 @@
+ chroma-distance = { workspace = true }
+ itertools = { workspace = true }
+ hnswlib = { workspace = true }
+-opentelemetry = { version = "0.27.0", default-features = false, features = ["trace", "metrics"] }
++opentelemetry = { version = "0.31.0", default-features = false, features = ["trace", "metrics"] }
+ 
+ [dev-dependencies]
+ indicatif = { workspace = true }
