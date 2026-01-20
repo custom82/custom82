@@ -726,6 +726,7 @@ CRATES="\
 	test-log-0.2.18\
 	test-log-macros-0.2.18\
 	textwrap-0.16.2\
+	temp-env-0.3.6\
 	thiserror-1.0.69\
 	thiserror-2.0.4\
 	thiserror-impl-1.0.69\
