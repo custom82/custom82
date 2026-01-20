@@ -445,6 +445,7 @@ CRATES="\
 	miniz_oxide-0.8.9\
 	mio-1.0.2\
 	mixtrics-0.1.0\
+	moka-0.12.12\
 	multimap-0.10.1\
 	murmur3-0.5.2\
 	murmurhash32-0.3.1\
