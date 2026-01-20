@@ -971,9 +971,9 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 BDEPEND="
-    dev-python/gpep517[${PYTHON_USEDEP}]
-    dev-python/installer[${PYTHON_USEDEP}]
-    dev-python/pyproject-hooks[${PYTHON_USEDEP}]
+	dev-python/gpep517[${PYTHON_USEDEP}]
+	dev-python/installer[${PYTHON_USEDEP}]
+	dev-python/pyproject-hooks[${PYTHON_USEDEP}]
 "
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
@@ -994,15 +994,18 @@ src_prepare() {
 	# Bundle google-cloud-rust sotto rust/
 	local gcloud_src="${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"
 	local gcloud_dst="${S}/rust/${GCLOUD_RUST_PN}"
-	[[ -d "${gcloud_src}" ]] || die "google-cloud-rust sorgente non trovato: ${gcloud_src}"
-	rm -rf "${gcloud_dst}" || die
-	cp -a "${gcloud_src}" "${gcloud_dst}" || die
+	if [ -d "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}" ] ; then
+		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"/spanner ${S}/rust/ || die
+		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"/googleapis ${S}/rust/ || die
+		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"/foundation/gax ${S}/rust/ || die
+	fi
+
 	cp "${DISTDIR}/swagger-ui-${SWAGGER_UI_VER}.zip" "${S}/swagger-ui-${SWAGGER_UI_VER}.zip" || die
 
 	# Bundle hnswlib sotto rust/
 	local hnsw_src="${WORKDIR}/${HNSWLIB_PN}-${HNSWLIB_COMMIT}"
 	local hnsw_dst="${S}/rust/${HNSWLIB_PN}"
-	[[ -d "${hnsw_src}" ]] || die "hnswlib sorgente non trovato: ${hnsw_src}"
+	[[ -d "${hnsw_src}" ]] || die
 	rm -rf "${hnsw_dst}" || die
 	cp -a "${hnsw_src}" "${hnsw_dst}" || die
 	eapply "${FILESDIR}/no_network_fix.patch"
@@ -1017,7 +1020,7 @@ src_compile() {
 }
 
 src_install() {
-    cargo_src_install
+	argo_src_install
 }
 
 
