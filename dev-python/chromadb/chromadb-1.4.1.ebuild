@@ -242,7 +242,7 @@ CRATES="\
 	ed25519-2.2.3\
 	ed25519-dalek-2.2.0\
 	either-1.13.0\
-	elliptic-curve-0.13.6\
+	elliptic-curve-0.13.7\
 	encode_unicode-0.3.6\
 	encoding_rs-0.8.35\
 	env_filter-0.1.3\
