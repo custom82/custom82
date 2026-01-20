@@ -1,6 +1,21 @@
 diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patch/Cargo.toml
 --- chroma-1.4.1/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
-+++ chroma-1.4.1-patch/Cargo.toml	2026-01-20 10:30:49.787753259 +0100
++++ chroma-1.4.1-patch/Cargo.toml	2026-01-20 10:49:33.507246198 +0100
+@@ -25,10 +25,10 @@
+ murmur3 = "0.5.2"
+ num_cpus = "1.16.0"
+ once_cell = "1.21.3"
+-opentelemetry = { version = "0.27.0", default-features = false, features = ["trace", "metrics"] }
+-opentelemetry-otlp = { version = "0.27", features = ["http-proto"] }
+-opentelemetry-http = { version = "0.27", features = ["reqwest-rustls"] }
+-opentelemetry_sdk = { version = "0.27", features = ["rt-tokio"] }
++opentelemetry = { version = "0.31", default-features = false, features = ["trace", "metrics"] }
++opentelemetry_sdk = { version = "0.31", features = ["rt-tokio"] }
++opentelemetry-otlp = { version = "0.31", features = ["http-proto"] }
++opentelemetry-http = { version = "0.31", features = ["reqwest-rustls"] }
+ parking_lot = { version = "0.12.3", features = ["serde"] }
+ parquet = { version = "55.1", features = ["async"] }
+ pin-project = "1.1.10"
 @@ -67,7 +67,7 @@
  rayon = "1.10.0"
  validator = { version = "0.19", features = ["derive"] }
