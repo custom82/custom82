@@ -201,7 +201,7 @@ CRATES="\
 	crypto-common-0.1.6\
 	csv-1.3.0\
 	csv-core-0.1.11\
-	ctor-0.2.9\
+	ctor-0.5.0\
 	darling-0.14.4\
 	darling-0.20.10\
 	darling-0.21.3\
