@@ -531,6 +531,7 @@ CRATES="\
 	plotters-backend-0.3.5\
 	plotters-svg-0.3.5\
 	png-0.17.16\
+	pollster-0.4.0\
 	portable-atomic-1.9.0\
 	portable-atomic-util-0.2.4\
 	powerfmt-0.2.0\
