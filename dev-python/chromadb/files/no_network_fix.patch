@@ -113,3 +113,17 @@ diff '--color=auto' -uPNr chroma-1.4.1/rust/tracing/Cargo.toml chroma-1.4.1-patc
 -middleware = ["dep:tower", "dep:axum", "dep:tower-http", "dep:futures"]
 \ Manca newline alla fine del file
 +middleware = ["dep:tower", "dep:axum", "dep:tower-http", "dep:futures"]
+diff '--color=auto' -uPNr chroma-1.4.1/rust/worker/Cargo.toml chroma-1.4.1-patched/rust/worker/Cargo.toml
+--- chroma-1.4.1/rust/worker/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
++++ chroma-1.4.1-patched/rust/worker/Cargo.toml	2026-01-20 15:32:34.237671706 +0100
+@@ -66,8 +66,8 @@
+ s3heap = { workspace = true }
+ s3heap-service = { workspace = true }
+ 
+-fastrace = "0.7"
+-fastrace-opentelemetry = "0.8"
++fastrace = "0.7.16"
++fastrace-opentelemetry = "0.15.1"
+ 
+ [dev-dependencies]
+ random-port = { workspace = true }
