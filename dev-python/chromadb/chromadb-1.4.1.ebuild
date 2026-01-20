@@ -648,7 +648,7 @@ CRATES="\
 	sea-query-0.32.1\
 	sea-query-binder-0.7.0\
 	sea-query-derive-0.4.2\
-	sec1-0.3.0\
+	sec1-0.7.1\
 	secrecy-0.8.0\
 	security-framework-2.11.1\
 	security-framework-3.0.1\
