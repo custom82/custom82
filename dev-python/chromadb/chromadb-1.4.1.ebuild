@@ -739,6 +739,7 @@ CRATES="\
 	tantivy-sstable-0.6.0\
 	tantivy-stacker-0.6.0\
 	tantivy-tokenizer-api-0.6.0\
+	tagptr-0.2.0\
 	tap-1.0.1\
 	target-lexicon-0.13.2\
 	tempfile-3.14.0\
