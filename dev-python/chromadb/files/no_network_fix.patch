@@ -1,6 +1,6 @@
-diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1.new/Cargo.toml
+diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patch/Cargo.toml
 --- chroma-1.4.1/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
-+++ chroma-1.4.1.new/Cargo.toml	2026-01-20 10:01:43.595073925 +0100
++++ chroma-1.4.1/Cargo.toml	2026-01-20 10:13:53.490051687 +0100
 @@ -67,7 +67,7 @@
  rayon = "1.10.0"
  validator = { version = "0.19", features = ["derive"] }
