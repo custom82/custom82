@@ -410,7 +410,7 @@ CRATES="\
 	litrs-0.4.1\
 	lock_api-0.4.12\
 	lockfree-object-pool-0.1.6\
-	log-0.4.22\
+	log-0.4.29\
 	loom-0.5.6\
 	lru-0.12.4\
 	lz4-1.26.0\
