@@ -598,6 +598,7 @@ CRATES="\
 	regex-syntax-0.6.29\
 	regex-syntax-0.8.5\
 	reqwest-0.13.1\
+	reqwest-0.12.2\
 	rfc6979-0.3.1\
 	rgb-0.8.50\
 	ring-0.17.8\
