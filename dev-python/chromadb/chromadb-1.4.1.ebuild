@@ -248,9 +248,9 @@ CRATES="\
 	event-listener-strategy-0.5.2\
 	fastant-0.1.10\
 	fastdivide-0.4.1\
-	fastrace-0.7.8\
-	fastrace-macro-0.7.8\
-	fastrace-opentelemetry-0.8.0\
+	fastrace-0.7.16\
+	fastrace-macro-0.7.16\
+	fastrace-opentelemetry-0.15.1\
 	fastrand-2.2.0\
 	fdeflate-0.3.7\
 	ff-0.12.1\
