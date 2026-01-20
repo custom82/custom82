@@ -456,6 +456,7 @@ CRATES="\
 	ndk-context-0.1.1\
 	network-interface-1.1.4\
 	nom-7.1.3\
+	nohash-hasher-0.2.0\
 	nu-ansi-term-0.46.0\
 	num-0.4.3\
 	num-bigint-0.4.6\
