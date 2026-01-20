@@ -484,7 +484,7 @@ CRATES="\
 	object-0.32.2\
 	object_store-0.12.4\
 	once_cell-1.21.3\
-	oneshot-0.1.6\
+	oneshot-0.1.7\
 	oorandom-11.1.3\
 	openssl-0.10.66\
 	openssl-macros-0.1.1\
