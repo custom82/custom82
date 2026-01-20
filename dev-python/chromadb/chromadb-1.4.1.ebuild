@@ -619,7 +619,7 @@ CRATES="\
 	regex-syntax-0.8.5\
 	reqwest-0.12.24\
 	resolv-conf-0.7.6\
-	rfc6979-0.4.0\
+	rfc6979-0.3.0\
 	rgb-0.8.50\
 	ring-0.17.8\
 	roaring-0.10.6\
