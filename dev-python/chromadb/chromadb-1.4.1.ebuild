@@ -190,7 +190,7 @@ CRATES="\
 	crossbeam-deque-0.8.5\
 	crossbeam-epoch-0.9.18\
 	crossbeam-queue-0.3.12\
-	crossbeam-utils-0.8.20\
+	crossbeam-utils-0.8.21\
 	crossterm-0.28.1\
 	crossterm-0.29.0\
 	crossterm_winapi-0.9.1\
