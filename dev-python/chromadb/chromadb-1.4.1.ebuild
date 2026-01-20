@@ -774,7 +774,7 @@ CRATES="\
 	tower-http-0.6.6\
 	tower-layer-0.3.3\
 	tower-service-0.3.3\
-	tracing-0.1.41\
+	tracing-0.1.44\
 	tracing-attributes-0.1.30\
 	tracing-core-0.1.33\
 	tracing-log-0.2.0\
