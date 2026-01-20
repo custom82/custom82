@@ -502,6 +502,7 @@ CRATES="\
 	ownedbytes-0.7.0\
 	owo-colors-3.5.0\
 	p256-0.13.2\
+	p384-0.13.1\
 	panic-message-0.3.0\
 	parking-2.2.0\
 	parking_lot-0.12.3\
