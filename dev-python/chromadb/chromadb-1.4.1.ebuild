@@ -1006,6 +1006,7 @@ src_prepare() {
 	rm -rf "${hnsw_dst}" || die
 	cp -a "${hnsw_src}" "${hnsw_dst}" || die
 	eapply "${FILESDIR}/no_network_fix.patch"
+	eapply "${FILESDIR}/fix_google-cloud-rust.patch"
 
 }
 

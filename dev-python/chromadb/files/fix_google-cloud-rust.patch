@@ -1,0 +1,12 @@
+diff '--color=auto' -uPNr google-cloud-rust-20251222/spanner/Cargo.toml google-cloud-rust-20251222-patch/spanner/Cargo.toml
+--- google-cloud-rust-20251222/spanner/Cargo.toml	2025-12-22 07:07:59.000000000 +0100
++++ google-cloud-rust-20251222-patch/spanner/Cargo.toml	2026-01-20 11:13:14.499676801 +0100
+@@ -36,7 +36,7 @@
+ tokio = { version="1.32", features=["rt-multi-thread"] }
+ tracing-subscriber = { version="0.3", features=["env-filter"] }
+ serial_test = "3.1"
+-ctor = "0.5"
++ctor = "0.6.3"
+ google-cloud-auth = { package = "gcloud-auth", path="../foundation/auth", default-features=false, features=["rustls-tls"]}
+ 
+ [features]
