@@ -268,6 +268,7 @@ CRATES="\
 	foreign-types-shared-0.3.1\
 	form_urlencoded-1.2.1\
 	foyer-0.22.2\
+	foyer-tokio-0.22.2\
 	foyer-common-0.22.2\
 	foyer-intrusive-collections-0.10.0-dev\
 	foyer-memory-0.22.2\
