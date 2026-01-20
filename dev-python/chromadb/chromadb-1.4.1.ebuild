@@ -334,7 +334,7 @@ CRATES="\
 	humantime-2.2.0\
 	hyper-0.14.31\
 	hyper-1.7.0\
-	hyper-rustls-0.27.3\
+	hyper-rustls-0.26.0\
 	hyper-timeout-0.4.1\
 	hyper-timeout-0.5.1\
 	hyper-tls-0.6.0\
