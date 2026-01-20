@@ -446,7 +446,7 @@ CRATES="\
 	murmurhash32-0.3.1\
 	naive-timer-0.2.0\
 	nanorand-0.7.0\
-	napi-3.4.0\
+	napi-3.3.0\
 	napi-build-2.1.6\
 	napi-derive-2.16.13\
 	napi-derive-backend-1.0.75\
