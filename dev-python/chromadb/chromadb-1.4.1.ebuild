@@ -246,7 +246,7 @@ CRATES="\
 	ed25519-2.2.3\
 	ed25519-dalek-2.2.0\
 	either-1.13.0\
-	elliptic-curve-0.13.7\
+	elliptic-curve-0.12.3\
 	encode_unicode-0.3.6\
 	encoding_rs-0.8.35\
 	enum-as-inner-0.6.1\
