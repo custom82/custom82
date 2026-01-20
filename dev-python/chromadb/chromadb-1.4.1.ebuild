@@ -630,6 +630,7 @@ CRATES="\
 	rust-embed-utils-8.5.0\
 	rust-stemmers-1.2.0\
 	rustc-demangle-0.1.24\
+	rustc-hash-1.0.1\
 	rustc-hash-2.1.1\
 	rustc_version-0.4.1\
 	rustix-0.38.41\
