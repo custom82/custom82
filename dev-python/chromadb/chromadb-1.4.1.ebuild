@@ -667,6 +667,7 @@ CRATES="\
 	serde_json-1.0.140\
 	serde_path_to_error-0.1.16\
 	serde_regex-1.1.0\
+	serde_spanned-0.6.8\
 	serde_spanned-1.0.3\
 	serde_urlencoded-0.7.1\
 	serde_yaml-0.9.34+deprecated\
