@@ -484,11 +484,11 @@ CRATES="\
 	openssl-macros-0.1.1\
 	openssl-probe-0.1.5\
 	openssl-sys-0.9.103\
-	opentelemetry-0.27.0\
-	opentelemetry-http-0.27.0\
-	opentelemetry-otlp-0.27.0\
-	opentelemetry-proto-0.27.0\
-	opentelemetry_sdk-0.27.0\
+	opentelemetry-0.31.0\
+	opentelemetry-http-0.31.0\
+	opentelemetry-otlp-0.31.0\
+	opentelemetry-proto-0.31.0\
+	opentelemetry_sdk-0.31.0\
 	option-ext-0.2.0\
 	ordered-float-2.10.1\
 	ordered_hash_map-0.4.0\
