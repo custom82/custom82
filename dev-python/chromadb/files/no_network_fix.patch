@@ -1,41 +1,16 @@
 diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patched/Cargo.toml
 --- chroma-1.4.1/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
-+++ chroma-1.4.1-patched/Cargo.toml	2026-01-20 17:29:24.900865765 +0100
-@@ -25,10 +25,10 @@
- murmur3 = "0.5.2"
- num_cpus = "1.16.0"
- once_cell = "1.21.3"
--opentelemetry = { version = "0.27.0", default-features = false, features = ["trace", "metrics"] }
--opentelemetry-otlp = { version = "0.27", features = ["http-proto"] }
--opentelemetry-http = { version = "0.27", features = ["reqwest-rustls"] }
--opentelemetry_sdk = { version = "0.27", features = ["rt-tokio"] }
-+opentelemetry = { version = "0.31.0", default-features = false, features = ["trace", "metrics"] }
-+opentelemetry-otlp = { version = "0.31.0", features = ["http-proto"] }
-+opentelemetry-http = { version = "0.31.0", features = ["reqwest-rustls"] }
-+opentelemetry_sdk = { version = "0.31.0", features = ["rt-tokio"] }
- parking_lot = { version = "0.12.3", features = ["serde"] }
- parquet = { version = "55.1", features = ["async"] }
- pin-project = "1.1.10"
-@@ -53,7 +53,7 @@
- backon = "1.3.0"
- tracing = { version = "0.1" }
- tracing-bunyan-formatter = "0.3"
--tracing-opentelemetry = "0.28.0"
-+tracing-opentelemetry = "0.32.1"
- tracing-subscriber = { version = "0.3", features = ["env-filter"] }
- uuid = { version = "1.11.0", features = ["v4", "v7", "fast-rng", "macro-diagnostics", "serde"] }
- utoipa = { version = "5", features = ["macros", "axum_extras", "debug", "uuid"] }
-@@ -67,17 +67,18 @@
++++ chroma-1.4.1-patched/Cargo.toml	2026-01-20 18:08:16.642764228 +0100
+@@ -67,7 +67,7 @@
  rayon = "1.10.0"
  validator = { version = "0.19", features = ["derive"] }
  rust-embed = { version = "8.5.0", features = ["include-exclude", "debug-embed"] }
 -hnswlib = { version = "0.8.2", git = "https://github.com/chroma-core/hnswlib.git", branch = "master" }
--reqwest = { version = "0.12.9", features = ["rustls-tls-native-roots", "http2"], default-features = false }
 +hnswlib =  { path = "rust/hnswlib", package = "hnswlib" }
-+reqwest = { version = "0.12.2", features = ["rustls-tls-native-roots", "http2"], default-features = false }
+ reqwest = { version = "0.12.9", features = ["rustls-tls-native-roots", "http2"], default-features = false }
  random-port = "0.1.1"
  ndarray = { version = "0.16.1", features = ["approx"] }
- humantime = { version = "2.2.0" }
+@@ -75,9 +75,9 @@
  petgraph = { version = "0.8.1" }
  base64 = "0.22"
  tikv-jemallocator = { version = "0.6.0", features = ["profiling"] }
@@ -45,8 +20,6 @@ diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patched/Cargo.tom
 +google-cloud-spanner = { path = "rust/google-cloud-rust/spanner", package = "gcloud-spanner" }
 +google-cloud-gax = { path = "rust/google-cloud-rust/foundation/gax", package = "gcloud-gax" }
 +google-cloud-googleapis = { path = "rust/google-cloud-rust/googleapis", package = "gcloud-googleapis" }
-+
  
  chroma = { path = "rust/chroma", version = "0.12.0" }
  chroma-api-types = { path = "rust/api-types", version = "0.12.0" }
-
