@@ -92,3 +92,24 @@ diff '--color=auto' -uPNr chroma-1.4.1/rust/index/Cargo.toml chroma-1.4.1-patche
  
  [dev-dependencies]
  indicatif = { workspace = true }
+diff '--color=auto' -uPNr chroma-1.4.1/rust/tracing/Cargo.toml chroma-1.4.1-patched/rust/tracing/Cargo.toml
+--- chroma-1.4.1/rust/tracing/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
++++ chroma-1.4.1-patched/rust/tracing/Cargo.toml	2026-01-20 15:28:55.324459850 +0100
+@@ -4,8 +4,8 @@
+ edition = "2021"
+ 
+ [dependencies]
+-fastrace = "0.7.8"
+-fastrace-opentelemetry = "0.8"
++fastrace = "0.7.16"
++fastrace-opentelemetry = "0.15.1"
+ http = { version = "1", optional = true }
+ opentelemetry = { workspace = true }
+ opentelemetry-otlp = { workspace = true }
+@@ -26,4 +26,4 @@
+ 
+ [features]
+ grpc = ["dep:tower", "dep:http"]
+-middleware = ["dep:tower", "dep:axum", "dep:tower-http", "dep:futures"]
+\ Manca newline alla fine del file
++middleware = ["dep:tower", "dep:axum", "dep:tower-http", "dep:futures"]
