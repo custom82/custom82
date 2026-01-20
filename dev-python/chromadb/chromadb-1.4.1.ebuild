@@ -246,6 +246,7 @@ CRATES="\
 	elliptic-curve-0.13.7\
 	encode_unicode-0.3.6\
 	encoding_rs-0.8.35\
+	enum-as-inner-0.6.1\
 	env_filter-0.1.3\
 	env_logger-0.11.7\
 	equivalent-1.0.1\
