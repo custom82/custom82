@@ -608,7 +608,7 @@ CRATES="\
 	rust-embed-utils-8.5.0\
 	rust-stemmers-1.2.0\
 	rustc-demangle-0.1.24\
-	rustc-hash-2.1.1\
+	rustc-hash-1.1.0\
 	rustc_version-0.4.1\
 	rustix-0.38.41\
 	rustix-1.0.3\
@@ -716,7 +716,7 @@ CRATES="\
 	system-configuration-0.6.1\
 	system-configuration-sys-0.6.0\
 	tabwriter-1.4.1\
-	tantivy-0.22.0\
+	tantivy-0.25.0\
 	tantivy-bitpacker-0.6.0\
 	tantivy-columnar-0.3.0\
 	tantivy-common-0.7.0\
