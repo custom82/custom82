@@ -201,8 +201,7 @@ CRATES="\
 	crypto-common-0.1.6\
 	csv-1.3.0\
 	csv-core-0.1.11\
-	ctor-0.6.3\
-	ctor-proc-macro-0.0.7\
+	ctor-0.2.9\
 	darling-0.14.4\
 	darling-0.20.10\
 	darling-0.21.3\
@@ -214,7 +213,8 @@ CRATES="\
 	darling_macro-0.21.3\
 	dashmap-6.1.0\
 	deflate64-0.1.9\
-	der-0.7.10\
+	der-0.6.1\
+	der-0.7.9\
 	deranged-0.5.5\
 	derivative-2.2.0\
 	derive_arbitrary-1.4.1\
@@ -232,11 +232,8 @@ CRATES="\
 	dotenvy-0.15.7\
 	downcast-rs-1.2.1\
 	dunce-1.0.5\
-	dot-0.1.1\
 	dyn-clone-1.0.17\
-	dtor-0.1.1\
 	ecdsa-0.14.8\
-	ed25519-dalek-2.2.0\
 	either-1.13.0\
 	elliptic-curve-0.12.3\
 	encode_unicode-0.3.6\
@@ -251,9 +248,9 @@ CRATES="\
 	event-listener-strategy-0.5.2\
 	fastant-0.1.10\
 	fastdivide-0.4.1\
-	fastrace-0.7.16\
-	fastrace-macro-0.7.16\
-	fastrace-opentelemetry-0.15.1\
+	fastrace-0.7.8\
+	fastrace-macro-0.7.8\
+	fastrace-opentelemetry-0.8.0\
 	fastrand-2.2.0\
 	fdeflate-0.3.7\
 	ff-0.12.1\
@@ -270,12 +267,11 @@ CRATES="\
 	foreign-types-shared-0.1.1\
 	foreign-types-shared-0.3.1\
 	form_urlencoded-1.2.1\
-	foyer-0.22.2\
-	foyer-tokio-0.22.2\
-	foyer-common-0.22.2\
+	foyer-0.17.3\
+	foyer-common-0.17.3\
 	foyer-intrusive-collections-0.10.0-dev\
-	foyer-memory-0.22.2\
-	foyer-storage-0.22.2\
+	foyer-memory-0.17.3\
+	foyer-storage-0.17.3\
 	fs4-0.13.1\
 	fs4-0.8.4\
 	fs_extra-1.3.0\
@@ -334,7 +330,8 @@ CRATES="\
 	humantime-2.2.0\
 	hyper-0.14.31\
 	hyper-1.7.0\
-	hyper-rustls-0.26.0\
+	hyper-rustls-0.24.2\
+	hyper-rustls-0.27.3\
 	hyper-timeout-0.4.1\
 	hyper-timeout-0.5.1\
 	hyper-tls-0.6.0\
@@ -412,7 +409,7 @@ CRATES="\
 	litrs-0.4.1\
 	lock_api-0.4.12\
 	lockfree-object-pool-0.1.6\
-	log-0.4.29\
+	log-0.4.22\
 	loom-0.5.6\
 	lru-0.12.4\
 	lz4-1.26.0\
@@ -423,13 +420,12 @@ CRATES="\
 	madsim-macros-0.2.12\
 	madsim-tokio-0.2.28\
 	mappings-0.7.0\
-	matchers-0.2.0\
+	matchers-0.1.0\
 	matchit-0.7.3\
 	matchit-0.8.4\
 	matrixmultiply-0.3.9\
 	md-5-0.10.6\
 	md5-0.7.0\
-	mea-0.6.1\
 	measure_time-0.8.3\
 	memchr-2.7.4\
 	memmap2-0.9.5\
@@ -440,7 +436,7 @@ CRATES="\
 	miniz_oxide-0.7.4\
 	miniz_oxide-0.8.9\
 	mio-1.0.2\
-	mixtrics-0.2.3\
+	mixtrics-0.1.0\
 	multimap-0.10.1\
 	murmur3-0.5.2\
 	murmurhash32-0.3.1\
@@ -456,7 +452,7 @@ CRATES="\
 	ndk-context-0.1.1\
 	network-interface-1.1.4\
 	nom-7.1.3\
-	nu-ansi-term-0.50.3\
+	nu-ansi-term-0.46.0\
 	num-0.4.3\
 	num-bigint-0.4.6\
 	num-bigint-dig-0.8.4\
@@ -488,11 +484,11 @@ CRATES="\
 	openssl-macros-0.1.1\
 	openssl-probe-0.1.5\
 	openssl-sys-0.9.103\
-	opentelemetry-0.31.0\
-	opentelemetry-http-0.31.0\
-	opentelemetry-otlp-0.31.0\
-	opentelemetry-proto-0.31.0\
-	opentelemetry_sdk-0.31.0\
+	opentelemetry-0.27.0\
+	opentelemetry-http-0.27.0\
+	opentelemetry-otlp-0.27.0\
+	opentelemetry-proto-0.27.0\
+	opentelemetry_sdk-0.27.0\
 	option-ext-0.2.0\
 	ordered-float-2.10.1\
 	ordered_hash_map-0.4.0\
@@ -500,15 +496,13 @@ CRATES="\
 	overload-0.1.1\
 	ownedbytes-0.7.0\
 	owo-colors-3.5.0\
-	p256-0.13.2\
-	p384-0.13.1\
+	p256-0.11.1\
 	panic-message-0.3.0\
 	parking-2.2.0\
 	parking_lot-0.12.3\
 	parking_lot_core-0.9.10\
 	parquet-55.1.0\
 	paste-1.0.15\
-	path-clean-1.0.1\
 	path-tree-0.8.3\
 	pbkdf2-0.12.2\
 	pear-0.2.9\
@@ -534,7 +528,6 @@ CRATES="\
 	plotters-backend-0.3.5\
 	plotters-svg-0.3.5\
 	png-0.17.16\
-	pollster-0.4.0\
 	portable-atomic-1.9.0\
 	portable-atomic-util-0.2.4\
 	powerfmt-0.2.0\
@@ -596,7 +589,7 @@ CRATES="\
 	regex-lite-0.1.6\
 	regex-syntax-0.6.29\
 	regex-syntax-0.8.5\
-	reqwest-0.12.2\
+	reqwest-0.12.24\
 	rfc6979-0.3.1\
 	rgb-0.8.50\
 	ring-0.17.8\
@@ -613,9 +606,10 @@ CRATES="\
 	rustc_version-0.4.1\
 	rustix-0.38.41\
 	rustix-1.0.3\
-	rustls-0.22.2\
+	rustls-0.21.12\
 	rustls-0.23.35\
-	rustls-native-certs-0.7.3\
+	rustls-native-certs-0.6.3\
+	rustls-native-certs-0.8.1\
 	rustls-pemfile-1.0.4\
 	rustls-pemfile-2.2.0\
 	rustls-pki-types-1.13.0\
@@ -711,7 +705,7 @@ CRATES="\
 	syn-0.15.44\
 	syn-1.0.109\
 	syn-2.0.102\
-	sync_wrapper-0.1.2\
+	sync_wrapper-1.0.2\
 	synstructure-0.13.1\
 	system-configuration-0.6.1\
 	system-configuration-sys-0.6.0\
@@ -731,7 +725,6 @@ CRATES="\
 	test-log-0.2.18\
 	test-log-macros-0.2.18\
 	textwrap-0.16.2\
-	temp-env-0.3.6\
 	thiserror-1.0.69\
 	thiserror-2.0.4\
 	thiserror-impl-1.0.69\
@@ -756,7 +749,8 @@ CRATES="\
 	tokio-macros-2.6.0\
 	tokio-native-tls-0.3.1\
 	tokio-retry2-0.6.2\
-	tokio-rustls-0.25.0\
+	tokio-rustls-0.24.1\
+	tokio-rustls-0.26.4\
 	tokio-stream-0.1.16\
 	tokio-test-0.4.4\
 	tokio-util-0.7.12\
@@ -775,12 +769,12 @@ CRATES="\
 	tower-http-0.6.6\
 	tower-layer-0.3.3\
 	tower-service-0.3.3\
-	tracing-0.1.44\
-	tracing-attributes-0.1.31\
-	tracing-core-0.1.36\
+	tracing-0.1.41\
+	tracing-attributes-0.1.30\
+	tracing-core-0.1.33\
 	tracing-log-0.2.0\
-	tracing-opentelemetry-0.32.1\
-	tracing-subscriber-0.3.22\
+	tracing-opentelemetry-0.28.0\
+	tracing-subscriber-0.3.18\
 	tracing-test-0.2.5\
 	tracing-test-macro-0.2.5\
 	try-lock-0.2.5\
@@ -904,7 +898,6 @@ CRATES="\
 	wit-bindgen-rt-0.33.0\
 	write16-1.0.0\
 	writeable-0.5.5\
-	winreg-0.50.0\
 	wyz-0.5.1\
 	x11rb-0.13.1\
 	x11rb-protocol-0.13.1\
