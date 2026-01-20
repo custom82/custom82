@@ -783,6 +783,7 @@ CRATES="\
 	toml_datetime-0.6.8\
 	toml_datetime-0.7.3\
 	toml_edit-0.22.24\
+	toml_parser-1.0.4\
 	tonic-0.12.3\
 	tonic-0.14.2\
 	tonic-build-0.14.2\
