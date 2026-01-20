@@ -237,6 +237,7 @@ CRATES="\
 	dtor-0.1.1\
 	dtor-proc-macro-0.0.6\
 	ecdsa-0.14.8\
+	ed25519-2.2.3\
 	ed25519-dalek-2.2.0\
 	either-1.13.0\
 	elliptic-curve-0.12.3\
