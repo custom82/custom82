@@ -1,5 +1,6 @@
---- a/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
-+++ b/Cargo.toml	2026-01-20 11:50:12.899472695 +0100
+diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patch/Cargo.toml
+--- chroma-1.4.1/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
++++ chroma-1.4.1-patch/Cargo.toml	2026-01-20 12:13:28.036675523 +0100
 @@ -25,10 +25,10 @@
  murmur3 = "0.5.2"
  num_cpus = "1.16.0"
@@ -24,7 +25,7 @@
  reqwest = { version = "0.12.9", features = ["rustls-tls-native-roots", "http2"], default-features = false }
  random-port = "0.1.1"
  ndarray = { version = "0.16.1", features = ["approx"] }
-@@ -75,9 +75,9 @@
+@@ -75,9 +75,10 @@
  petgraph = { version = "0.8.1" }
  base64 = "0.22"
  tikv-jemallocator = { version = "0.6.0", features = ["profiling"] }
@@ -33,6 +34,7 @@
 -google-cloud-googleapis = { git = "https://github.com/yoshidan/google-cloud-rust", tag = "v20251222", package = "gcloud-googleapis", features = ["spanner"] }
 +google-cloud-gax = { path = "rust/gax", package = "gcloud-gax" }
 +google-cloud-spanner = { path = "rust/spanner", package = "gcloud-spanner" }
++google-cloud-auth = { path = "rust/auth", package = "gcloud-auth" }
 +google-cloud-googleapis = { path = "rust/googleapis", package = "gcloud-googleapis" }
  
  chroma = { path = "rust/chroma", version = "0.12.0" }
