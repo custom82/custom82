@@ -449,7 +449,7 @@ CRATES="\
 	napi-3.3.0\
 	napi-build-2.3.1\
 	napi-derive-3.2.5\
-	napi-derive-backend-1.0.75\
+	napi-derive-backend-2.2.0\
 	napi-sys-3.0.1\
 	native-tls-0.2.12\
 	ndarray-0.16.1\
