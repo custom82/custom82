@@ -993,17 +993,16 @@ src_prepare() {
 
 	# Bundle google-cloud-rust sotto rust/
 	if [ -d "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}" ] ; then
-		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}" ${S}/rust/google-cloud-rust || die
+		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}" ${S}/rust/${GCLOUD_RUST_PN} || die
 	fi
 
-	cp "${DISTDIR}/swagger-ui-${SWAGGER_UI_VER}.zip" "${S}/swagger-ui-${SWAGGER_UI_VER}.zip" || die
+	mv "${DISTDIR}/swagger-ui-${SWAGGER_UI_VER}.zip" "${S}/swagger-ui-${SWAGGER_UI_VER}.zip" || die
 
-	# Bundle hnswlib sotto rust/
-	local hnsw_src="${WORKDIR}/${HNSWLIB_PN}-${HNSWLIB_COMMIT}"
-	local hnsw_dst="${S}/rust/${HNSWLIB_PN}"
-	[[ -d "${hnsw_src}" ]] || die
-	rm -rf "${hnsw_dst}" || die
-	cp -a "${hnsw_src}" "${hnsw_dst}" || die
+
+	if [[ -d "${hnsw_src}" ]] ; then
+	mv ${WORKDIR}/${HNSWLIB_P} "${S}"/rust/${HNSWLIB_PN}
+	fi
+
 	eapply "${FILESDIR}/no_network_fix.patch"
 
 }
