@@ -508,7 +508,7 @@ CRATES="\
 	overload-0.1.1\
 	ownedbytes-0.9.0\
 	owo-colors-3.5.0\
-	p256-0.13.2\
+	p256-0.11.1\
 	p384-0.13.1\
 	panic-message-0.3.0\
 	parking-2.2.0\
