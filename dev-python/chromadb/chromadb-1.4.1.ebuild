@@ -234,6 +234,7 @@ CRATES="\
 	downcast-rs-1.2.1\
 	dunce-1.0.5\
 	dyn-clone-1.0.17\
+	dtor-0.1.1\
 	ecdsa-0.14.8\
 	either-1.13.0\
 	elliptic-curve-0.12.3\
