@@ -503,6 +503,7 @@ CRATES="\
 	parking_lot_core-0.9.10\
 	parquet-55.1.0\
 	paste-1.0.15\
+	path-clean-1.0.1\
 	path-tree-0.8.3\
 	pbkdf2-0.12.2\
 	pear-0.2.9\
