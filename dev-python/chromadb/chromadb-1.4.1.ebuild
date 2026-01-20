@@ -713,7 +713,7 @@ CRATES="\
 	syn-0.15.44\
 	syn-1.0.109\
 	syn-2.0.102\
-	sync_wrapper-1.0.2\
+	sync_wrapper-0.1.2\
 	synstructure-0.13.1\
 	system-configuration-0.6.1\
 	system-configuration-sys-0.6.0\
