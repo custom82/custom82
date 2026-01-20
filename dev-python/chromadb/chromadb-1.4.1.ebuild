@@ -21,8 +21,7 @@ HNSWLIB_COMMIT="312991cf9e640d5ccab879906a51e7612ce6fcf1"
 HNSWLIB_PN="hnswlib"
 HNSWLIB_P="${HNSWLIB_PN}-${HNSWLIB_COMMIT}"
 SWAGGER_UI_VER="v5.17.14"
-
-PATCHES="${FILESDIR}/no_network_fix.patch"
+RUST_MIN_VER="1.85.1"
 
 
 CRATES="\
@@ -989,7 +988,7 @@ src_unpack() {
 
 src_prepare() {
 	default
-	#distutils-r1_src_prepare
+	distutils-r1_src_prepare
 
 	# Bundle google-cloud-rust sotto rust/
 	local gcloud_src="${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"
