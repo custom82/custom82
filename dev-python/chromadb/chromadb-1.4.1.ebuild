@@ -231,7 +231,7 @@ CRATES="\
 	displaydoc-0.2.5\
 	document-features-0.2.11\
 	dotenvy-0.15.7\
-	downcast-rs-1.2.0\
+	downcast-rs-2.0.1\
 	dunce-1.0.5\
 	dyn-clone-1.0.17\
 	dtor-0.1.1\
