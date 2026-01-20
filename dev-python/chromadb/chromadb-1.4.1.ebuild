@@ -904,6 +904,7 @@ CRATES="\
 	wit-bindgen-rt-0.33.0\
 	write16-1.0.0\
 	writeable-0.5.5\
+	winreg-0.55.0\
 	wyz-0.5.1\
 	x11rb-0.13.1\
 	x11rb-protocol-0.13.1\
