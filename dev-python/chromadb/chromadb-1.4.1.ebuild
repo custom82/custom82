@@ -978,6 +978,8 @@ BDEPEND="
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
+PATCHES="${FILESDIR}/no_network_fix.patch"
+
 RESTRICT="test"
 distutils_enable_tests pytest
 
