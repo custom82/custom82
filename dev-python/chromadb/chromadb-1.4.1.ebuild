@@ -996,7 +996,7 @@ src_prepare() {
 		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}" ${S}/rust/${GCLOUD_RUST_PN} || die
 	fi
 
-	mv "${DISTDIR}/swagger-ui-${SWAGGER_UI_VER}.zip" "${S}/swagger-ui-${SWAGGER_UI_VER}.zip" || die
+	cp "${DISTDIR}/swagger-ui-${SWAGGER_UI_VER}.zip" "${S}/swagger-ui-${SWAGGER_UI_VER}.zip" || die
 
 
 	if [[ -d "${hnsw_src}" ]] ; then
