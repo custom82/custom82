@@ -724,7 +724,7 @@ CRATES="\
 	tantivy-fst-0.5.0\
 	tantivy-query-grammar-0.25.0\
 	tantivy-sstable-0.3.0\
-	tantivy-stacker-0.3.0\
+	tantivy-stacker-0.6.0\
 	tantivy-tokenizer-api-0.3.0\
 	tap-1.0.1\
 	target-lexicon-0.13.2\
