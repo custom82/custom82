@@ -110,7 +110,7 @@ CRATES="\
 	backoff-0.4.0\
 	backon-1.5.2\
 	backtrace-0.3.71\
-	base16ct-0.1.1\
+	base16ct-0.2.0\
 	base64-0.21.7\
 	base64-0.22.1\
 	base64-simd-0.8.0\
