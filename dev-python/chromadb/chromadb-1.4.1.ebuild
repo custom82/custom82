@@ -919,6 +919,7 @@ CRATES="\
 	windows_x86_64_msvc-0.48.5\
 	windows_x86_64_msvc-0.52.6\
 	windows_x86_64_msvc-0.53.0\
+	winreg-0.55.0\
 	winnow-0.7.13\
 	wit-bindgen-rt-0.33.0\
 	write16-1.0.0\
