@@ -993,10 +993,7 @@ src_prepare() {
 
 	# Bundle google-cloud-rust sotto rust/
 	if [ -d "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}" ] ; then
-		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"/spanner ${S}/rust/google-cloud-rust/ || die
-		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"/googleapis ${S}/rust/google-cloud-rust/ || die
-		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"/foundation/gax ${S}/rust/google-cloud-rust/ || die
-		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}"/foundation/auth ${S}/rust/google-cloud-rust/ || die
+		mv "${WORKDIR}/${GCLOUD_RUST_PN}-${GCLOUD_RUST_VER}" ${S}/rust/google-cloud-rust/ || die
 	fi
 
 	cp "${DISTDIR}/swagger-ui-${SWAGGER_UI_VER}.zip" "${S}/swagger-ui-${SWAGGER_UI_VER}.zip" || die
