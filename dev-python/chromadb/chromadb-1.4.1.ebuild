@@ -173,8 +173,7 @@ CRATES="\
 	const-random-0.1.18\
 	const-random-macro-0.1.16\
 	constant_time_eq-0.3.1\
-	convert_case-0.6.0\
-	convert_case-0.7.1\
+	convert_case-0.8.0\
 	core-foundation-0.10.0\
 	core-foundation-0.9.4\
 	core-foundation-sys-0.8.7\
