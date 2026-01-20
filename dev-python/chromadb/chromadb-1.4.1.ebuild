@@ -261,7 +261,7 @@ CRATES="\
 	fastrand-2.2.0\
 	fdeflate-0.3.7\
 	fiat-crypto-0.2.1\
-	ff-0.12.1\
+	ff-0.13.1\
 	figment-0.10.19\
 	fixedbitset-0.5.7\
 	flatbuffers-25.2.10\
