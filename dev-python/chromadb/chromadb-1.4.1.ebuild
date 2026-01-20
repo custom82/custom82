@@ -186,7 +186,7 @@ CRATES="\
 	crc32fast-1.4.2\
 	criterion-0.7.0\
 	criterion-plot-0.6.0\
-	crossbeam-channel-0.5.12\
+	crossbeam-channel-0.5.15\
 	crossbeam-deque-0.8.5\
 	crossbeam-epoch-0.9.18\
 	crossbeam-queue-0.3.12\
