@@ -214,8 +214,7 @@ CRATES="\
 	darling_macro-0.21.3\
 	dashmap-6.1.0\
 	deflate64-0.1.9\
-	der-0.6.1\
-	der-0.7.9\
+	der-0.7.10\
 	deranged-0.5.5\
 	derivative-2.2.0\
 	derive_arbitrary-1.4.1\
