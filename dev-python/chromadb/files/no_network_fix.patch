@@ -50,3 +50,15 @@ diff '--color=auto' -uPNr chroma-1.4.1/rust/cache/Cargo.toml chroma-1.4.1-patch/
  
  # TODO(rescrv):  Deprecated.  Find a suitable replacement for such things.
  serde_yaml = "0.9"
+diff '--color=auto' -uPNr chroma-1.4.1/rust/index/Cargo.toml chroma-1.4.1-patch/rust/index/Cargo.toml
+--- chroma-1.4.1/rust/index/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
++++ chroma-1.4.1-patch/rust/index/Cargo.toml	2026-01-20 11:04:38.996320836 +0100
+@@ -37,7 +37,7 @@
+ chroma-distance = { workspace = true }
+ itertools = { workspace = true }
+ hnswlib = { workspace = true }
+-opentelemetry = { version = "0.27.0", default-features = false, features = ["trace", "metrics"] }
++opentelemetry = { version = "0.31.0", default-features = false, features = ["trace", "metrics"] }
+ 
+ [dev-dependencies]
+ indicatif = { workspace = true }
