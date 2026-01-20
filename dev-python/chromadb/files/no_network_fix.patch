@@ -1,6 +1,6 @@
 diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patched/Cargo.toml
 --- chroma-1.4.1/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
-+++ chroma-1.4.1-patched/Cargo.toml	2026-01-20 16:54:21.315062330 +0100
++++ chroma-1.4.1-patched/Cargo.toml	2026-01-20 17:29:24.900865765 +0100
 @@ -25,10 +25,10 @@
  murmur3 = "0.5.2"
  num_cpus = "1.16.0"
@@ -32,7 +32,7 @@ diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patched/Cargo.tom
 -hnswlib = { version = "0.8.2", git = "https://github.com/chroma-core/hnswlib.git", branch = "master" }
 -reqwest = { version = "0.12.9", features = ["rustls-tls-native-roots", "http2"], default-features = false }
 +hnswlib =  { path = "rust/hnswlib", package = "hnswlib" }
-+reqwest = { version = "0.13.1", features = ["rustls-tls-native-roots", "http2"], default-features = false }
++reqwest = { version = "0.12.2", features = ["rustls-tls-native-roots", "http2"], default-features = false }
  random-port = "0.1.1"
  ndarray = { version = "0.16.1", features = ["approx"] }
  humantime = { version = "2.2.0" }
