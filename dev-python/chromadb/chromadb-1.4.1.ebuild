@@ -450,7 +450,7 @@ CRATES="\
 	napi-build-2.3.1\
 	napi-derive-3.2.5\
 	napi-derive-backend-1.0.75\
-	napi-sys-2.4.0\
+	napi-sys-3.0.1\
 	native-tls-0.2.12\
 	ndarray-0.16.1\
 	ndk-context-0.1.1\
