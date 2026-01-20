@@ -421,7 +421,7 @@ CRATES="\
 	madsim-macros-0.2.12\
 	madsim-tokio-0.2.28\
 	mappings-0.7.0\
-	matchers-0.1.0\
+	matchers-0.2.0\
 	matchit-0.7.3\
 	matchit-0.8.4\
 	matrixmultiply-0.3.9\
