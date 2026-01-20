@@ -414,7 +414,7 @@ CRATES="\
 	lock_api-0.4.12\
 	lockfree-object-pool-0.1.6\
 	log-0.4.22\
-	loom-0.5.6\
+	loom-0.7.2\
 	lru-0.12.4\
 	lz4-1.26.0\
 	lz4-sys-1.10.0\
