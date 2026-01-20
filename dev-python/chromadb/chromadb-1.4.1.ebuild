@@ -333,6 +333,7 @@ CRATES="\
 	humantime-2.2.0\
 	hyper-0.14.31\
 	hyper-1.7.0\
+	hyperloglogplus-0.4.1\
 	hickory-resolver-0.25.2\
 	hyper-rustls-0.24.2\
 	hyper-rustls-0.27.3\
