@@ -1,5 +1,6 @@
+diff '--color=auto' -uPNr chroma-1.4.1/Cargo.toml chroma-1.4.1-patch/Cargo.toml
 --- chroma-1.4.1/Cargo.toml	2026-01-13 19:43:35.000000000 +0100
-+++ chroma-1.4.1/Cargo.toml	2026-01-20 10:13:53.490051687 +0100
++++ chroma-1.4.1-patch/Cargo.toml	2026-01-20 10:30:49.787753259 +0100
 @@ -67,7 +67,7 @@
  rayon = "1.10.0"
  validator = { version = "0.19", features = ["derive"] }
@@ -16,9 +17,9 @@
 -google-cloud-spanner = { git = "https://github.com/yoshidan/google-cloud-rust", tag = "v20251222", package = "gcloud-spanner" }
 -google-cloud-gax = { git = "https://github.com/yoshidan/google-cloud-rust", tag = "v20251222", package = "gcloud-gax" }
 -google-cloud-googleapis = { git = "https://github.com/yoshidan/google-cloud-rust", tag = "v20251222", package = "gcloud-googleapis", features = ["spanner"] }
-+google-cloud-spanner = { path = "rust/google-cloud-rust/spanner" }
-+google-cloud-gax     = { path = "rust/google-cloud-rust/foundation/gax" }
-+google-cloud-googleapis = { path = "rust/google-cloud-rust/googleapis" }
++google-cloud-gax = { path = "rust/google-cloud-rust/foundation/gax", package = "gcloud-gax" }
++google-cloud-spanner = { path = "rust/google-cloud-rust/spanner", package = "gcloud-spanner" }
++google-cloud-googleapis = { path = "rust/google-cloud-rust/googleapis", package = "gcloud-googleapis" }
  
  chroma = { path = "rust/chroma", version = "0.12.0" }
  chroma-api-types = { path = "rust/api-types", version = "0.12.0" }
