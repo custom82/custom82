@@ -202,6 +202,7 @@ CRATES="\
 	csv-1.3.0\
 	csv-core-0.1.11\
 	ctor-0.6.3\
+	ctor-proc-macro-0.0.7\
 	darling-0.14.4\
 	darling-0.20.10\
 	darling-0.21.3\
