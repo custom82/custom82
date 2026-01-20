@@ -184,6 +184,7 @@ CRATES="\
 	crc-catalog-2.4.0\
 	crc32c-0.6.8\
 	crc32fast-1.4.2\
+	critical-section-1.2.0\
 	criterion-0.7.0\
 	criterion-plot-0.6.0\
 	crossbeam-channel-0.5.15\
