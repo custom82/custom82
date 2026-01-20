@@ -499,7 +499,7 @@ CRATES="\
 	ordered_hash_map-0.4.0\
 	outref-0.5.1\
 	overload-0.1.1\
-	ownedbytes-0.7.0\
+	ownedbytes-0.9.0\
 	owo-colors-3.5.0\
 	p256-0.13.2\
 	p384-0.13.1\
