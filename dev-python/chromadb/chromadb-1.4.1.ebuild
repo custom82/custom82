@@ -371,6 +371,7 @@ CRATES="\
 	instability-0.3.7\
 	instant-0.1.13\
 	integer-encoding-3.0.4\
+	ipconfig-0.3.2\
 	ipnet-2.10.1\
 	iri-string-0.7.8\
 	is_ci-1.2.0\
