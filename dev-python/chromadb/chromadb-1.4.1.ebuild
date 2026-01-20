@@ -236,7 +236,7 @@ CRATES="\
 	dyn-clone-1.0.17\
 	dtor-0.1.1\
 	dtor-proc-macro-0.0.6\
-	ecdsa-0.14.8\
+	ecdsa-0.16.9\
 	ed25519-2.2.3\
 	ed25519-dalek-2.2.0\
 	either-1.13.0\
