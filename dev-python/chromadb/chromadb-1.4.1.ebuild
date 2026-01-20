@@ -249,6 +249,7 @@ CRATES="\
 	elliptic-curve-0.12.3\
 	elliptic-curve-0.13.1\
 	elliptic-curve-0.13.6\
+	elliptic-curve-0.13.7\
 	encode_unicode-0.3.6\
 	encoding_rs-0.8.35\
 	enum-as-inner-0.6.1\
