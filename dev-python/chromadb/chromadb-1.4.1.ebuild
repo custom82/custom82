@@ -723,6 +723,7 @@ CRATES="\
 	tap-1.0.1\
 	target-lexicon-0.13.2\
 	tempfile-3.14.0\
+	temp-env-0.3.6\
 	test-log-0.2.18\
 	test-log-macros-0.2.18\
 	textwrap-0.16.2\
