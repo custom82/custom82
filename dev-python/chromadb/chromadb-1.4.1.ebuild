@@ -756,8 +756,7 @@ CRATES="\
 	tokio-macros-2.6.0\
 	tokio-native-tls-0.3.1\
 	tokio-retry2-0.6.2\
-	tokio-rustls-0.24.1\
-	tokio-rustls-0.26.4\
+	tokio-rustls-0.25.0\
 	tokio-stream-0.1.16\
 	tokio-test-0.4.4\
 	tokio-util-0.7.12\
