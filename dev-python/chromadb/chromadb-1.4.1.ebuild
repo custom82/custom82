@@ -236,6 +236,7 @@ CRATES="\
 	dyn-clone-1.0.17\
 	dtor-0.1.1\
 	ecdsa-0.14.8\
+	ed25519-dalek-2.2.0\
 	either-1.13.0\
 	elliptic-curve-0.12.3\
 	encode_unicode-0.3.6\
