@@ -426,6 +426,7 @@ CRATES="\
 	matrixmultiply-0.3.9\
 	md-5-0.10.6\
 	md5-0.7.0\
+	mea-0.6.1\
 	measure_time-0.8.3\
 	memchr-2.7.4\
 	memmap2-0.9.5\
