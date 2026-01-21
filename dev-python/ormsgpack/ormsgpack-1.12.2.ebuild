@@ -72,7 +72,7 @@ DEPEND="
 	dev-lang/rust
 "
 BDEPEND="
-	dev-python/maturin[${PYTHON_USEDEP}]
+	dev-util/maturin
 "
 
 S="${WORKDIR}/${P}"
