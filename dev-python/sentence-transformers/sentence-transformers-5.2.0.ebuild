@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 
 RDEPEND="
-    dev-python/transformers
+    sci-ml/transformers
     dev-python/torch
     dev-python/tokenizers
     dev-python/huggingface-hub
