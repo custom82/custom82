@@ -71,6 +71,7 @@ RDEPEND="
 		sci-ml/huggingface_hub[${PYTHON_USEDEP}]
 		dev-python/langchain-classic[${PYTHON_USEDEP}]
 		dev-python/ldap3[${PYTHON_USEDEP}]
+		dev-python/mcp[${PYTHON_USEDEP}]
 
 		
 	')
