@@ -16,8 +16,8 @@ KEYWORDS="~amd64 ~arm64"
 IUSE=""
 
 RDEPEND="
-	dev-python/langchain-core-1.0.0[${PYTHON_USEDEP}]
-	dev-python/langgraph-checkpoint-1.0.0[${PYTHON_USEDEP}]
+	dev-python/langchain-core[${PYTHON_USEDEP}]
+	dev-python/langgraph-checkpoint[${PYTHON_USEDEP}]
 
 "
 
