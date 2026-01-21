@@ -65,6 +65,7 @@ RDEPEND="
 		dev-python/azure-identity[${PYTHON_USEDEP}]
 		dev-python/azure-storage-blob[${PYTHON_USEDEP}]
 		dev-python/ftfy[${PYTHON_USEDEP}]
+		dev-python/httpx-sse[${PYTHON_USEDEP}]
 		
 	')
 	ollama? ( sci-ml/ollama )
