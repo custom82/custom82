@@ -61,6 +61,7 @@ RDEPEND="
 		dev-python/langchain-text-splitters[${PYTHON_USEDEP}]
 		dev-python/boto3[${PYTHON_USEDEP}]
 		dev-python/google-cloud-storage[${PYTHON_USEDEP}]
+		dev-python/azure-core[${PYTHON_USEDEP}]
 		
 	')
 	ollama? ( sci-ml/ollama )
