@@ -1057,8 +1057,9 @@ src_compile() {
 }
 
 src_install() {
-	distutils_pep517_install
+    distutils_pep517_install "${ED}"
 }
+
 
 
 
