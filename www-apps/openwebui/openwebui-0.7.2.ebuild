@@ -59,6 +59,7 @@ RDEPEND="
 		dev-python/audioop-lts[${PYTHON_USEDEP}]
 		dev-python/aiofiles[${PYTHON_USEDEP}]
 		dev-python/langchain-text-splitters[${PYTHON_USEDEP}]
+		dev-python/boto3[${PYTHON_USEDEP}]
 		
 	')
 	ollama? ( sci-ml/ollama )
