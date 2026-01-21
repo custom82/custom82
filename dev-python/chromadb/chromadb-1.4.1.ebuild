@@ -1056,8 +1056,16 @@ src_compile() {
 
 }
 
+RUST_MIN_VER="1.88"
+
 src_install() {
+    distutils-r1_src_install
+}
+
+distutils-r1_python_install() {
+    export WHEEL_BUILD_DIR="${T}/wheel-${EPYTHON}"
     distutils_pep517_install "${ED}"
+
 }
 
 
