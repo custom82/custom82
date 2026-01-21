@@ -10,12 +10,12 @@
 		<name>Proxy Maintainers</name>
 	</maintainer>
 	<longdescription lang="en">
-	Google Cloud Storage allows to store data on Google infrastructure
-	with very high reliability, performance and availability, and can
-	be used to distribute large data objects to users via direct download.
+	This package provides an Google Cloud API client core library,
+	which provides common helpers (e.g. base Client classes) used by all
+	of the google-cloud-* packages.
 	</longdescription>
 	<upstream>
-		<remote-id type="github">googleapis/python-storage</remote-id>
-		<remote-id type="pypi">google-cloud-storage</remote-id>
+		<remote-id type="github">googleapis/python-cloud-core</remote-id>
+		<remote-id type="pypi">google-cloud-core</remote-id>
 	</upstream>
 </pkgmetadata>
