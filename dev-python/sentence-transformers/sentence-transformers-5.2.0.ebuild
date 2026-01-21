@@ -20,7 +20,7 @@ RDEPEND="
     sci-ml/pytorch
     sci-ml/tokenizers
     sci-ml/huggingface_hub
-    dev-python/datasets
+    sci-ml/datasets
     dev-python/accelerate
     dev-python/torchvision
     dev-python/tqdm
