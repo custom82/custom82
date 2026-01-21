@@ -1057,14 +1057,9 @@ src_compile() {
 }
 
 src_install() {
-    distutils-r1_src_install
+    export WHEEL_BUILD_DIR="${T}/wheel"
+    distutils_pep517_install "${ED}"
 }
-
-distutils-r1_python_install() {
-    pep517_install
-
-}
-
 
 
 
