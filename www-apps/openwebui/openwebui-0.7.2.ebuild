@@ -72,6 +72,7 @@ RDEPEND="
 		dev-python/langchain-classic[${PYTHON_USEDEP}]
 		dev-python/ldap3[${PYTHON_USEDEP}]
 		dev-python/mcp[${PYTHON_USEDEP}]
+		dev-python/sse-starlette[${PYTHON_USEDEP}]
 
 		
 	')
