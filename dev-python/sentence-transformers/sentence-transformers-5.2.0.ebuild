@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 
 RDEPEND="
     sci-ml/transformers
-    dev-python/torch
+    sci-ml/pytorch
     dev-python/tokenizers
     dev-python/huggingface-hub
     dev-python/datasets
