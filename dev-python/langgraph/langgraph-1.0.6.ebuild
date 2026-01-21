@@ -18,17 +18,9 @@ IUSE=""
 # Required dependencies per metadata :contentReference[oaicite:2]{index=2}
 RDEPEND="
 	>=dev-python/langchain-core-1.0.0[${PYTHON_USEDEP}]
-
-
 	>=dev-python/langgraph-checkpoint-1.0.0[${PYTHON_USEDEP}]
-
-
 	>=dev-python/langgraph-prebuilt-1.0.0[${PYTHON_USEDEP}]
-
-
 	>=dev-python/langgraph-sdk-1.0.0[${PYTHON_USEDEP}]
-
-
 	>=dev-python/pydantic-2.5[${PYTHON_USEDEP}]
 	>=dev-python/xxhash-3.4.1[${PYTHON_USEDEP}]
 "
