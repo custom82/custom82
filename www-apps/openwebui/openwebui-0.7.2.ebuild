@@ -73,6 +73,7 @@ RDEPEND="
 		dev-python/ldap3[${PYTHON_USEDEP}]
 		dev-python/mcp[${PYTHON_USEDEP}]
 		dev-python/sse-starlette[${PYTHON_USEDEP}]
+		dev-python/black[${PYTHON_USEDEP}]
 
 		
 	')
