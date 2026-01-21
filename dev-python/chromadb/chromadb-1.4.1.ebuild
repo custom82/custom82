@@ -1053,6 +1053,7 @@ src_prepare() {
 src_compile() {
 	export SWAGGER_UI_DOWNLOAD_URL="file://${S}/swagger-ui-${SWAGGER_UI_VER}.zip"
 	cargo_src_compile
+	distutils-r1_src_compile
 
 }
 
