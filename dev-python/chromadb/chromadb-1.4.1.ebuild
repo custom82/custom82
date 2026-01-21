@@ -1057,7 +1057,7 @@ src_compile() {
 }
 
 src_install() {
-	argo_src_install
+	cargo_src_install
 }
 
 
