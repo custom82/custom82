@@ -2,7 +2,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{10..13} )
 
-DISTUTILS_USE_PEP517=hatchling
+DISTUTILS_USE_PEP517=pdm-backend
 
 inherit distutils-r1 pypi
 
@@ -34,7 +34,7 @@ RDEPEND="
 "
 
 BDEPEND="
-	>=dev-python/hatchling-1.20[${PYTHON_USEDEP}]
+	dev-python/pdm-backend[${PYTHON_USEDEP}]
 "
 
 RESTRICT="test"
