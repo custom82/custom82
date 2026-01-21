@@ -68,6 +68,7 @@ RDEPEND="
 		dev-python/httpx-sse[${PYTHON_USEDEP}]
 		dev-python/langchain-community[${PYTHON_USEDEP}]
 		dev-python/validators[${PYTHON_USEDEP}]
+		sci-ml/huggingface_hub[${PYTHON_USEDEP}]
 
 		
 	')
