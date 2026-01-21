@@ -18,12 +18,12 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 
 RDEPEND="
-	dev-python/langchain-core-1.0.0[${PYTHON_USEDEP}]
-	dev-python/ormsgpack-1.0.0[${PYTHON_USEDEP}]
+	dev-python/langchain-core[${PYTHON_USEDEP}]
+	dev-python/ormsgpack[${PYTHON_USEDEP}]
 "
 
 BDEPEND="
-	>=dev-python/hatchling-1.20[${PYTHON_USEDEP}]
+	dev-python/hatchling[${PYTHON_USEDEP}]
 "
 
 RESTRICT="test"

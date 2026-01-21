@@ -24,20 +24,20 @@ RESTRICT="!test? ( test )"
 
 
 BDEPEND="
-	>=dev-python/hatchling-1.18.0[${PYTHON_USEDEP}]
+	dev-python/hatchling[${PYTHON_USEDEP}]
 	test? (
-		>=dev-python/pytest-7.0.0[${PYTHON_USEDEP}]
+		dev-python/pytest[${PYTHON_USEDEP}]
 	)
 "
 
 RDEPEND="
-	>=dev-python/httpx-0.25.0[${PYTHON_USEDEP}]
-	>=dev-python/anyio-4.0.0[${PYTHON_USEDEP}]
-	>=dev-python/pydantic-2.7.0[${PYTHON_USEDEP}]
-	>=dev-python/typing-extensions-4.7.0[${PYTHON_USEDEP}]
-	>=dev-python/orjson-3.9.0[${PYTHON_USEDEP}]
-	>=dev-python/packaging-23.2[${PYTHON_USEDEP}]
-	>=dev-python/tenacity-8.1.0[${PYTHON_USEDEP}]
+	dev-python/httpx[${PYTHON_USEDEP}]
+	dev-python/anyio[${PYTHON_USEDEP}]
+	dev-python/pydantic[${PYTHON_USEDEP}]
+	dev-python/typing-extensions[${PYTHON_USEDEP}]
+	dev-python/orjson[${PYTHON_USEDEP}]
+	dev-python/packaging[${PYTHON_USEDEP}]
+	dev-python/tenacity[${PYTHON_USEDEP}]
 "
 
 distutils_enable_tests pytest

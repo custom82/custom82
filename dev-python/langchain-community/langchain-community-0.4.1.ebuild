@@ -18,19 +18,19 @@ IUSE=""
 # NB: a monte spesso compare anche "langchain-classic"; in Gentoo tipicamente
 # lo tratti come il pacchetto principale dev-python/langchain.
 RDEPEND="
-	>=dev-python/aiohttp-3.9[${PYTHON_USEDEP}]
-	>=dev-python/dataclasses-json-0.6[${PYTHON_USEDEP}]
-	>=dev-python/httpx-sse-0.4[${PYTHON_USEDEP}]
-	>=dev-python/langchain-core-1.0.0[${PYTHON_USEDEP}]
-	<dev-python/langchain-core-2.0.0[${PYTHON_USEDEP}]
-	>=dev-python/langsmith-0.1.0[${PYTHON_USEDEP}]
-	>=dev-python/numpy-1.24[${PYTHON_USEDEP}]
-	>=dev-python/pydantic-settings-2.1[${PYTHON_USEDEP}]
-	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
-	>=dev-python/requests-2.31[${PYTHON_USEDEP}]
-	>=dev-python/sqlalchemy-2.0[${PYTHON_USEDEP}]
-	>=dev-python/tenacity-8.2[${PYTHON_USEDEP}]
-	>=dev-python/langchain-1.0.0[${PYTHON_USEDEP}]
+	dev-python/aiohttp[${PYTHON_USEDEP}]
+	dev-python/dataclasses-json[${PYTHON_USEDEP}]
+	dev-python/httpx-sse[${PYTHON_USEDEP}]
+	dev-python/langchain-core[${PYTHON_USEDEP}]
+	dev-python/langchain-core[${PYTHON_USEDEP}]
+	dev-python/langsmith[${PYTHON_USEDEP}]
+	dev-python/numpy[${PYTHON_USEDEP}]
+	dev-python/pydantic-settings[${PYTHON_USEDEP}]
+	dev-python/pyyaml[${PYTHON_USEDEP}]
+	dev-python/requests[${PYTHON_USEDEP}]
+	dev-python/sqlalchemy[${PYTHON_USEDEP}]
+	dev-python/tenacity[${PYTHON_USEDEP}]
+	dev-python/langchain[${PYTHON_USEDEP}]
 "
 
 BDEPEND="

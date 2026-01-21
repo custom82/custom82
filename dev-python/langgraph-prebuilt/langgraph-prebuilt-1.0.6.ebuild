@@ -22,7 +22,7 @@ RDEPEND="
 "
 
 BDEPEND="
-	>=dev-python/hatchling-1.20[${PYTHON_USEDEP}]
+	dev-python/hatchling[${PYTHON_USEDEP}]
 "
 
 RESTRICT="test"

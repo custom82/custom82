@@ -22,18 +22,18 @@ IUSE=""
 # Required deps list (core): jsonpatch, langsmith, packaging, pydantic, pyyaml,
 # tenacity, typing-extensions, uuid-utils :contentReference[oaicite:2]{index=2}
 RDEPEND="
-	>=dev-python/jsonpatch-1.33[${PYTHON_USEDEP}]
-	>=dev-python/langsmith-0.1.0[${PYTHON_USEDEP}]
-	>=dev-python/packaging-23.2[${PYTHON_USEDEP}]
-	>=dev-python/pydantic-2.5[${PYTHON_USEDEP}]
-	>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
-	>=dev-python/tenacity-8.2[${PYTHON_USEDEP}]
-	>=dev-python/typing-extensions-4.9[${PYTHON_USEDEP}]
-	>=dev-python/uuid-utils-0.9[${PYTHON_USEDEP}]
+	dev-python/jsonpatch[${PYTHON_USEDEP}]
+	dev-python/langsmith[${PYTHON_USEDEP}]
+	dev-python/packaging[${PYTHON_USEDEP}]
+	dev-python/pydantic[${PYTHON_USEDEP}]
+	dev-python/pyyaml[${PYTHON_USEDEP}]
+	dev-python/tenacity[${PYTHON_USEDEP}]
+	dev-python/typing-extensions[${PYTHON_USEDEP}]
+	dev-python/uuid-utils[${PYTHON_USEDEP}]
 "
 
 BDEPEND="
-	>=dev-python/setuptools-68[${PYTHON_USEDEP}]
+	dev-python/setuptools[${PYTHON_USEDEP}]
 "
 
 # Test upstream spesso trascinano extras e snapshot di dataset: meglio abilitarli solo se li vuoi.

@@ -17,14 +17,13 @@ IUSE=""
 
 # Dipendenze required (minime) per langchain 1.2.6: langchain-core, langgraph, pydantic :contentReference[oaicite:1]{index=1}
 RDEPEND="
-	>=dev-python/langchain-core-1.0.0[${PYTHON_USEDEP}]
-	<dev-python/langchain-core-2.0.0[${PYTHON_USEDEP}]
-	>=dev-python/langgraph-0.0.0[${PYTHON_USEDEP}]
-	>=dev-python/pydantic-2.5[${PYTHON_USEDEP}]
+	dev-python/langchain-core[${PYTHON_USEDEP}]
+	dev-python/langgraph[${PYTHON_USEDEP}]
+	dev-python/pydantic[${PYTHON_USEDEP}]
 "
 
 BDEPEND="
-	>=dev-python/hatchling-1.20[${PYTHON_USEDEP}]
+	dev-python/hatchling[${PYTHON_USEDEP}]
 "
 
 RESTRICT="test"

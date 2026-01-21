@@ -23,12 +23,11 @@ python_check_deps() {
 }
 
 RDEPEND="
-	>=dev-python/langchain-core-1.0.0[${PYTHON_USEDEP}]
-	<dev-python/langchain-core-2.0.0[${PYTHON_USEDEP}]
+	dev-python/langchain-core[${PYTHON_USEDEP}]
 "
 
 BDEPEND="
-	>=dev-python/setuptools-68[${PYTHON_USEDEP}]
+	dev-python/setuptools[${PYTHON_USEDEP}]
 "
 
 # Test upstream spesso tirano dentro dipendenze pesanti (es. tokenizers/transformers, ecc.)
