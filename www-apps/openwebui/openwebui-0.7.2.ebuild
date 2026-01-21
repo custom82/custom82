@@ -63,6 +63,8 @@ RDEPEND="
 		dev-python/google-cloud-storage[${PYTHON_USEDEP}]
 		dev-python/azure-core[${PYTHON_USEDEP}]
 		dev-python/azure-identity[${PYTHON_USEDEP}]
+		dev-python/azure-storage-blob[${PYTHON_USEDEP}]
+		dev-python/ftfy[${PYTHON_USEDEP}]
 		
 	')
 	ollama? ( sci-ml/ollama )
