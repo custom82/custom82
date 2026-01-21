@@ -1057,7 +1057,6 @@ src_compile() {
 }
 
 src_install() {
-    export WHEEL_BUILD_DIR="${T}/wheel"
     distutils_pep517_install "${ED}"
 }
 
