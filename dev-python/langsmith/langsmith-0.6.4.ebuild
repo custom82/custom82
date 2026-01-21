@@ -1,12 +1,8 @@
-# Copyright 1999-2026 Gentoo Authors
-# Distributed under the terms of the GNU General Public License v2
-
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..14} )
+PYTHON_COMPAT=( python3_{10..13} )
 
-DISTUTILS_USE_PEP517=setuptools
-DISTUTILS_UPSTREAM_PEP517=hatchling
+DISTUTILS_USE_PEP517=hatchling
 
 inherit distutils-r1 pypi
 
@@ -17,9 +13,7 @@ SRC_URI="$(pypi_sdist_url)"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64"
-IUSE=""
 
-# Required dependencies as reported by package metadata aggregators for PyPI langsmith :contentReference[oaicite:1]{index=1}
 RDEPEND="
 	>=dev-python/httpx-0.25[${PYTHON_USEDEP}]
 	>=dev-python/orjson-3.9[${PYTHON_USEDEP}]
@@ -32,8 +26,17 @@ RDEPEND="
 "
 
 BDEPEND="
-	>=dev-python/setuptools-68[${PYTHON_USEDEP}]
+	>=dev-python/hatchling-1.20[${PYTHON_USEDEP}]
 "
 
-# upstream tests tirano dentro extras (vcr/pytest/otel ecc.)
+# Nel caso (raro) in cui per qualche ragione si finisca su setuptools,
+# rimuoviamo i top-level extra che fanno fallire l'auto-discovery.
+python_prepare_all() {
+	# setuptools >=61 rifiuta i progetti "flat" con più top-level packages.
+	# Nell'sdist di langsmith ci sono directory extra che non vanno installate.
+	rm -rf bench cassettes || die
+
+	distutils-r1_python_prepare_all
+}
+
 RESTRICT="test"
