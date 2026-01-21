@@ -15,6 +15,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 IUSE=""
 
+S="${WORKDIR}"/"${PN}"-"${PN}"-"${PV}"
+
 # Dipendenze required (minime) per langchain 1.2.6: langchain-core, langgraph, pydantic :contentReference[oaicite:1]{index=1}
 RDEPEND="
 	dev-python/langchain-core[${PYTHON_USEDEP}]
