@@ -18,9 +18,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64"
 
 RDEPEND="
-	>=dev-python/langchain-core-1.0.0[${PYTHON_USEDEP}]
-	<dev-python/langchain-core-2.0.0[${PYTHON_USEDEP}]
-	>=dev-python/ormsgpack-1.0.0[${PYTHON_USEDEP}]
+	dev-python/langchain-core-1.0.0[${PYTHON_USEDEP}]
+	dev-python/ormsgpack-1.0.0[${PYTHON_USEDEP}]
 "
 
 BDEPEND="
