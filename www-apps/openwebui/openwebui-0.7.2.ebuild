@@ -62,6 +62,7 @@ RDEPEND="
 		dev-python/boto3[${PYTHON_USEDEP}]
 		dev-python/google-cloud-storage[${PYTHON_USEDEP}]
 		dev-python/azure-core[${PYTHON_USEDEP}]
+		dev-python/azure-identity[${PYTHON_USEDEP}]
 		
 	')
 	ollama? ( sci-ml/ollama )
