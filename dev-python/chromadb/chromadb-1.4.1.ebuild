@@ -1057,8 +1057,14 @@ src_compile() {
 }
 
 src_install() {
-    distutils_pep517_install "${ED}"
+    distutils-r1_src_install
 }
+
+distutils-r1_python_install() {
+    pep517_install
+
+}
+
 
 
 
