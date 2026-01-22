@@ -132,6 +132,6 @@ src_install() {
 
 
 pkg_postinst() {
-		systemd_do_reload
+		systemdctl daemon-reload
 }
 
