@@ -19,6 +19,9 @@ Environment=OLLAMA_BASE_URL=http://127.0.0.1:11434
 Environment=HOST=127.0.0.1
 Environment=PORT=8080
 Environment=PYTHONUNBUFFERED=1
+Environment=HF_HOME=/var/lib/openwebui/hf
+Environment=TRANSFORMERS_CACHE=/var/lib/openwebui/hf/transformers
+Environment=HF_HUB_CACHE=/var/lib/openwebui/hf/hub
 
 # Log: evita di riempire il journal con access log
 ExecStart=/usr/bin/python3 -m uvicorn open_webui.main:app \
@@ -30,7 +33,7 @@ ExecStart=/usr/bin/python3 -m uvicorn open_webui.main:app \
   --log-level warning
 
 Restart=on-failure
-RestartSec=3
+RestartSec=60
 
 # manda stdout/stderr su file (così non esplode journald)
 StandardOutput=append:/var/log/openwebui/openwebui.log
