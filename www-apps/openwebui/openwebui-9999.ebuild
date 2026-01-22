@@ -56,7 +56,7 @@ RDEPEND="
 		dev-python/chromadb[${PYTHON_USEDEP}]
 		dev-python/python-socketio[${PYTHON_USEDEP}]
 		dev-python/pycrdt[${PYTHON_USEDEP}]
-		dev-python/pyaudioop[${PYTHON_USEDEP}]
+		dev-python/audioop-lts[${PYTHON_USEDEP}]
 		dev-python/audioop-lts[${PYTHON_USEDEP}]
 		dev-python/aiofiles[${PYTHON_USEDEP}]
 		dev-python/langchain-text-splitters[${PYTHON_USEDEP}]
