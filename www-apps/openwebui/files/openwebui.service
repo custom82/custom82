@@ -13,20 +13,12 @@ TimeoutStartSec=300
 WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend
 
 # >>> IMPORTANTISSIMO: Open WebUI usa DATA_DIR <<<
-Environment=DATA_DIR=/var/lib/openwebui
-Environment=CHROMA_DATA_PATH=/var/lib/openwebui
-Environment=OLLAMA_BASE_URL=http://127.0.0.1:11434
-Environment=HOST=127.0.0.1
-Environment=PORT=8080
-Environment=PYTHONUNBUFFERED=1
-Environment=HF_HOME=/var/lib/openwebui/hf
-Environment=TRANSFORMERS_CACHE=/var/lib/openwebui/hf/transformers
-Environment=HF_HUB_CACHE=/var/lib/openwebui/hf/hub
+EnvironmentFile=/etc/conf.d/openwebui
 
 # Log: evita di riempire il journal con access log
 ExecStart=/usr/bin/python3 -m uvicorn open_webui.main:app \
-  --host 127.0.0.1 \
-  --port 8080 \
+  --host $HOST \
+  --port $PORT \
   --proxy-headers \
   --forwarded-allow-ips=* \
   --no-access-log \

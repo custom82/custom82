@@ -1,0 +1,10 @@
+DATA_DIR=/var/lib/openwebui
+CHROMA_DATA_PATH=/var/lib/openwebui
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+HOST=127.0.0.1
+PORT=8080
+PYTHONUNBUFFERED=1
+HF_HOME=/var/lib/openwebui/hf
+TRANSFORMERS_CACHE=/var/lib/openwebui/hf/transformers
+HF_HUB_CACHE=/var/lib/openwebui/hf/hub
+
