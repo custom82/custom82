@@ -17,6 +17,8 @@ KEYWORDS="~amd64 ~arm64"
 IUSE="+ollama openai"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
+S="${WORKDIR}"/"${PN}"-"${PV}"
+
 RDEPEND="
 	${PYTHON_DEPS}
 	$(python_gen_cond_dep '
@@ -69,7 +71,7 @@ RDEPEND="
 		dev-python/httpx-sse[${PYTHON_USEDEP}]
 		dev-python/langchain-community[${PYTHON_USEDEP}]
 		dev-python/validators[${PYTHON_USEDEP}]
-		sci-ml/huggingface_hub
+		sci-ml/huggingface_hub[${PYTHON_USEDEP}]
 		dev-python/langchain-classic[${PYTHON_USEDEP}]
 		dev-python/ldap3[${PYTHON_USEDEP}]
 		dev-python/mcp[${PYTHON_USEDEP}]
