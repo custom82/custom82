@@ -114,6 +114,9 @@ src_install() {
 
 	insinto "${MY_HTDOCSDIR}"
 	doins -r backend || die
+	insinto "${MY_HTDOCSDIR}/build"
+    doins -r frontend/build/* || die
+
 	doins CHANGELOG.md || die
 	dodir /var/log/openwebui
 	newconfd "${FILESDIR}/openwebui.confd" openwebui
@@ -132,6 +135,6 @@ src_install() {
 
 
 pkg_postinst() {
-		systemctl daemon-reload
+    webapp_pkg_postinst
+    systemctl daemon-reload >/dev/null 2>&1 || true
 }
-
