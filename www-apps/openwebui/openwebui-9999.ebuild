@@ -129,3 +129,9 @@ src_install() {
 	webapp_src_install
 	systemd_newunit "${FILESDIR}"/openwebui.service openwebui.service
 }
+
+
+pkg_postinst() {
+		systemd_do_reload
+}
+
