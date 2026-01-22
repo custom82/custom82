@@ -125,8 +125,6 @@ src_install() {
 
 	# Ora puoi marcarle come scrivibili dal webserver
 	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui"
-	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui/data"
-	webapp_serverowned "${MY_HOSTROOTDIR}/openwebui/log"
 
 	webapp_src_install
 	systemd_newunit "${FILESDIR}"/openwebui.service openwebui.service
