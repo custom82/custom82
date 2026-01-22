@@ -17,7 +17,7 @@ RDEPEND="${PYTHON_DEPS}"
 DEPEND="${RDEPEND}"
 BDEPEND=">=net-libs/nodejs-18.13.0"
 
-S="${WORKDIR}/${PN}-${PV}"
+S="${WORKDIR}/open-webui-${PV}"
 
 pkg_postinst() {
 	elog "Open WebUI installs the open-webui CLI entrypoint."
