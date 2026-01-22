@@ -5,11 +5,12 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13} )
 
-inherit webapp python-r1 systemd
+inherit webapp python-r1 systemd git-r3
 
 DESCRIPTION="Open WebUI - self-hosted web UI for LLMs (Ollama/OpenAI compatible)"
 HOMEPAGE="https://github.com/open-webui/open-webui"
-SRC_URI="https://github.com/open-webui/open-webui/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+EGIT_REPO_URI="https://github.com/custom82/open-webui.git"
+EGIT_BRANCH="main"
 
 LICENSE="MIT"
 KEYWORDS="~amd64 ~arm64"
