@@ -5,7 +5,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13} )
 
-inherit webapp python-r1 systemd git-r3
+inherit webapp python-single-r1 systemd git-r3
 
 DESCRIPTION="Open WebUI - self-hosted web UI for LLMs (Ollama/OpenAI compatible)"
 HOMEPAGE="https://github.com/open-webui/open-webui"
@@ -58,7 +58,6 @@ RDEPEND="
 		dev-python/chromadb[${PYTHON_USEDEP}]
 		dev-python/python-socketio[${PYTHON_USEDEP}]
 		dev-python/pycrdt[${PYTHON_USEDEP}]
-		dev-python/audioop-lts[${PYTHON_USEDEP}]
 		dev-python/audioop-lts[${PYTHON_USEDEP}]
 		dev-python/aiofiles[${PYTHON_USEDEP}]
 		dev-python/langchain-text-splitters[${PYTHON_USEDEP}]
