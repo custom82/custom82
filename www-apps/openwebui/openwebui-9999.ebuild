@@ -87,6 +87,19 @@ RESTRICT="test"
 
 S=${WORKDIR}/${PN}-${PV}
 
+pkg_setup() {
+	webapp_pkg_setup
+	python-single-r1_pkg_setup
+}
+
+pkg_postinst() {
+	webapp_pkg_postinst
+}
+
+pkg_prerm() {
+	webapp_pkg_prerm
+}
+
 src_configure() { :; }
 
 src_compile() {
