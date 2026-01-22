@@ -116,7 +116,7 @@ src_install() {
 	doins -r backend || die
 	doins CHANGELOG.md || die
 	dodir /var/log/openwebui
-	newconfd "${FILESDIR}/openwebui.confd"
+	newconfd "${FILESDIR}/openwebui.confd" openwebui
 
 	# CREA le directory hostroot prima
 	keepdir "${MY_HOSTROOTDIR}/openwebui"
