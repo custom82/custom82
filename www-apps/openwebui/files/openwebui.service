@@ -8,7 +8,7 @@ Wants=ollama.service
 Type=forking
 User=openwebui
 Group=openwebui
-TimeoutStartSec=300
+TimeoutStartSec=30
 
 WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend
 
