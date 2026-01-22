@@ -113,11 +113,7 @@ src_install() {
 	webapp_src_preinst
 
 	insinto "${MY_HTDOCSDIR}"
-	doins -r backend || die
-	insinto "${MY_HTDOCSDIR}/build"
-    doins -r frontend/build/* || die
-
-	doins CHANGELOG.md || die
+	doins -r * || die
 	dodir /var/log/openwebui
 	newconfd "${FILESDIR}/openwebui.confd" openwebui
 
