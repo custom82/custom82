@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11,12,13} )
+PYTHON_COMPAT=( python3_{11..14} )
 
 inherit webapp python-single-r1 systemd git-r3
 
@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~arm64"
 IUSE="+ollama openai"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-S="${WORKDIR}"/"${PN}"-"${PV}"
+S="${WORKDIR}/${P}"
 
 RDEPEND="
 	${PYTHON_DEPS}
@@ -76,8 +76,6 @@ RDEPEND="
 		dev-python/mcp[${PYTHON_USEDEP}]
 		dev-python/sse-starlette[${PYTHON_USEDEP}]
 		dev-python/black[${PYTHON_USEDEP}]
-
-		
 	')
 	ollama? ( sci-ml/ollama )
 "
@@ -87,7 +85,7 @@ DEPEND="${RDEPEND}"
 need_httpd_cgi
 RESTRICT="test"
 
-S="${WORKDIR}/open-webui-${PV}"
+S=${WORKDIR}/${PN}-${PV}
 
 src_configure() { :; }
 
