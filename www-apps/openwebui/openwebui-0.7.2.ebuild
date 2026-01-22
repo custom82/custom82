@@ -15,7 +15,7 @@ KEYWORDS="~amd64"
 
 RDEPEND="${PYTHON_DEPS}"
 DEPEND="${RDEPEND}"
-BDEPEND=">=net-libs/nodejs-18.13.0"
+BDEPEND="net-libs/nodejs[npm]"
 
 S="${WORKDIR}/open-webui-${PV}"
 
