@@ -15,7 +15,7 @@ KEYWORDS="~amd64"
 
 RDEPEND="${PYTHON_DEPS}"
 DEPEND="${RDEPEND}"
-BDEPEND=">=dev-lang/nodejs-18.13.0"
+BDEPEND=">=net-libs/nodejs-18.13.0"
 
 S="${WORKDIR}/${PN}-${PV}"
 
