@@ -70,7 +70,7 @@ RDEPEND="
 		dev-python/httpx-sse[${PYTHON_USEDEP}]
 		dev-python/langchain-community[${PYTHON_USEDEP}]
 		dev-python/validators[${PYTHON_USEDEP}]
-		sci-ml/huggingface_hub[${PYTHON_USEDEP}]
+		sci-ml/huggingface_hub[${PYTHON_SINGLE_USEDEP}]
 		dev-python/langchain-classic[${PYTHON_USEDEP}]
 		dev-python/ldap3[${PYTHON_USEDEP}]
 		dev-python/mcp[${PYTHON_USEDEP}]
