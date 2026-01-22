@@ -22,7 +22,7 @@ RDEPEND="
     sci-ml/huggingface_hub
     sci-ml/datasets
     sci-ml/accelerate
-    dev-python/torchvision
+    sci-ml/torchvision
     dev-python/tqdm
     dev-python/numpy
     dev-python/scipy
