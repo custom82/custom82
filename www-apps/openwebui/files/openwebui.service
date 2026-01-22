@@ -13,6 +13,7 @@ WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend
 
 # >>> IMPORTANTISSIMO: Open WebUI usa DATA_DIR <<<
 Environment=DATA_DIR=/var/lib/openwebui
+Environment=CHROMA_DATA_PATH=/var/lib/openwebui
 Environment=OLLAMA_BASE_URL=http://127.0.0.1:11434
 Environment=HOST=127.0.0.1
 Environment=PORT=8080
