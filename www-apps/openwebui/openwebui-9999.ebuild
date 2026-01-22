@@ -76,8 +76,11 @@ RDEPEND="
 		dev-python/mcp[${PYTHON_USEDEP}]
 		dev-python/sse-starlette[${PYTHON_USEDEP}]
 		dev-python/black[${PYTHON_USEDEP}]
+		dev-python/scikit-learn[${PYTHON_USEDEP}]
 	')
 	ollama? ( sci-ml/ollama )
+	acct-user/openwebui
+	acct-group/openwebui
 "
 
 DEPEND="${RDEPEND}"

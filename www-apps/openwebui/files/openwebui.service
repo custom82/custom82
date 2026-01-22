@@ -1,36 +1,45 @@
+# /usr/lib/systemd/system/openwebui.service
 [Unit]
 Description=Open WebUI (FastAPI / Uvicorn)
 After=network.target ollama.service
 Wants=ollama.service
 
 [Service]
-Type=forking
+Type=simple
+User=openwebui
+Group=openwebui
 
-# Directory dove risiede il backend
 WorkingDirectory=/usr/share/webapps/openwebui/0.7.2/htdocs/backend
 
-# Variabili ambiente fondamentali
-Environment=WEBUI_DATA_DIR=/usr/share/webapps/openwebui/0.7.2/hostroot/openwebui/data
+# >>> IMPORTANTISSIMO: Open WebUI usa DATA_DIR <<<
+Environment=DATA_DIR=/var/lib/openwebui
 Environment=OLLAMA_BASE_URL=http://127.0.0.1:11434
 Environment=HOST=127.0.0.1
 Environment=PORT=8080
-
-# Log non bufferizzati
 Environment=PYTHONUNBUFFERED=1
 
-# Avvio Open WebUI
+# Log: evita di riempire il journal con access log
 ExecStart=/usr/bin/python3 -m uvicorn open_webui.main:app \
   --host 127.0.0.1 \
   --port 8080 \
   --proxy-headers \
-  --forwarded-allow-ips=*
+  --forwarded-allow-ips=* \
+  --no-access-log \
+  --log-level warning
 
 Restart=on-failure
 RestartSec=3
 
-# Sicurezza base (puoi irrigidirla dopo)
+# manda stdout/stderr su file (così non esplode journald)
+StandardOutput=append:/var/log/openwebui/openwebui.log
+StandardError=append:/var/log/openwebui/openwebui.err
+
+# Sicurezza base
 NoNewPrivileges=true
 PrivateTmp=true
+
+# (opzionale ma utile) evita che scriva ovunque
+UMask=0077
 
 [Install]
 WantedBy=multi-user.target
