@@ -1,10 +1,10 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
 # @ECLASS: npm.eclass
 # @MAINTAINER:
-# Jesus Rivero <neurogeek@gentoo.org>
+# Samuel Bernardo <samuelbernardo.mail@gmail.com>
 # @BLURB: Eclass for NodeJS packages available through the npm registry.
 # @DESCRIPTION:
 # This eclass contains various functions that may be useful when dealing with
@@ -12,7 +12,7 @@
 # Requires EAPI=2 or later.
 
 case ${EAPI} in
-    2|3|4|5) : ;;
+    2|3|4|5|6|7|8) : ;;
     *)     die "npm.eclass: unsupported EAPI=${EAPI:-0}" ;;
 esac
 
@@ -48,8 +48,35 @@ NPM_FILES="index.js lib package.json ${NPM_MODULE}.js"
 # Can be either files, or directories.
 # Example: NPM_EXTRA_FILES="rigger.js modules"
 
-HOMEPAGE="https://www.npmjs.org/package/${PN}"
-SRC_URI="http://registry.npmjs.org/${PN}/-/${P}.tgz"
+# @ECLASS-VARIABLE: NPM_BIN
+# @DESCRIPTION:
+# If there is files that must be included in /usr/bin listed in NPM_FILES or
+# NPM_EXTRA_FILES, then this is the place to put them in.
+# Only files are expected.
+# Example: NPM_BIN="bin/grunt"
+
+# @ECLASS-VARIABLE: NPM_PN_URI
+# @DESCRIPTION:
+# Name of the package at the npm registry. 
+# The Default value for NPM_PN_URI is ${PN}
+#
+# Example: NPM_PN_URI="${MY_PN}"
+if [[ -z $NPM_PN_URI ]]; then
+	NPM_PN_URI="${PN}"
+fi
+
+# @ECLASS-VARIABLE: NPM_GROUP_URI
+# @DESCRIPTION:
+# Name of the group at the npm registry. 
+# The Default value for NPM_GROUP_URI is ${NPM_PN_URI}
+#
+# Example: NPM_GROUP_URI="${MY_PN}"
+if [[ -z $NPM_GROUP_URI ]]; then
+	NPM_GROUP_URI="${NPM_PN_URI}"
+fi
+
+HOMEPAGE="https://www.npmjs.org/package/${NPM_PN_URI}"
+SRC_URI="http://registry.npmjs.org/${NPM_GROUP_URI}/-/${NPM_PN_URI}-${PV}.tgz"
 
 # @FUNCTION: npm-src_unpack
 # @DESCRIPTION:
@@ -103,6 +130,17 @@ npm_src_install() {
             if [[ -e "${S}/$f" ]]; then
                 dodoc -r "${S}/$f"
             fi
+        done
+    fi
+
+    if [[ ! -z $NPM_BIN ]]; then
+	local npm_bin="${NPM_BIN}"
+
+	for f in $npm_bin
+	do
+	    if [[ -f "${S}/bin/$f" ]]; then
+		dobin "${S}/bin/$f"
+	    fi
         done
     fi
 }
