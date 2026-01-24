@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@codemirror/lang-angular"
 inherit npm
 
 DESCRIPTION="This package implements Python language support for the CodeMirror code editor"
 HOMEPAGE="https://github.com/codemirror/lang-angular"
-SRC_URI="https://github.com/codemirror/lang-angular/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -28,12 +29,10 @@ BDEPEND="
         dev-nodejs/codemirror-buildhelper
 "
 
-NPM_MODULE="@codemirror/lang-angular"
-
-NPM_EXTRA_FILES="src"
+NPM_EXTRA_FILES="dist"
 
 
 npm_src_unpack() {
     unpack "${A}"
-    mv "${WORKDIR}"/lang-angular-${PV} "${S}"
+    mv "${WORKDIR}"/package "${S}"
 }

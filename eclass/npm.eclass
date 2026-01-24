@@ -20,7 +20,7 @@ inherit multilib
 # === User-tunable variables (set in ebuild) ===
 # NPM_MODULE: npm package name (default: ${PN})
 # NPM_FILES: space-separated list of files/dirs to install (default: package.json)
-# NPM_EXTRA_FILES: additional files/dirs to install (default: empty)
+# NPM_EXTRA_FILES: additional files/dirs to install (default: empty; may default to "dist" for npm registry tarballs)
 # NPM_DOCS: space-separated list of doc dirs/files to install when USE=doc is enabled (default: empty)
 # NPM_BIN: space-separated list of bin names under ${S}/bin/ to install into /usr/bin (default: empty)
 #
@@ -44,7 +44,7 @@ fi
 : "${NPM_PN:=${NPM_MODULE}}"
 : "${NPM_REGISTRY_TARBALL:=${NPM_PN}}"
 
-# Default SRC_URI/S for npm registry tarballs if the ebuild did not set them.
+# Default SRC_URI for npm registry tarballs if the ebuild did not set it.
 # Unscoped:
 #   https://registry.npmjs.org/<name>/-/<name>-<PV>.tgz
 # Scoped:
@@ -55,14 +55,33 @@ if [[ -z ${SRC_URI} ]]; then
 	SRC_URI="https://registry.npmjs.org/${NPM_MODULE}/-/${NPM_REGISTRY_TARBALL}-${PV}.tgz -> ${P}.tgz"
 fi
 
-# npm tarballs unpack into ${WORKDIR}/package
+# If we're fetching from the npm registry and the ebuild didn't request extra files,
+# default to installing "dist" as it is the most common runtime payload directory.
+# Harmless if a package does not ship dist/ (it's skipped at install time).
+if [[ ${SRC_URI} == https://registry.npmjs.org/* ]] && [[ -z ${NPM_EXTRA_FILES} ]]; then
+	NPM_EXTRA_FILES="dist"
+fi
+
+# For npm tarballs, the unpacked directory is usually ${WORKDIR}/package.
+# Let ebuilds override S explicitly if they want; otherwise default to ${WORKDIR}/package.
 if [[ -z ${S} ]]; then
 	S="${WORKDIR}/package"
 fi
 
 npm_src_unpack() {
-	# Default unpack is fine for .tgz/.tar.gz sources.
-	default
+	# For npm registry tarballs, Portage unpacks into ${WORKDIR}/package.
+	# Some ebuilds prefer S=${WORKDIR}/${P}; in that case, move package -> ${S}.
+	if [[ ${SRC_URI} == https://registry.npmjs.org/* ]]; then
+		unpack "${A}" || die
+
+		if [[ -d ${WORKDIR}/package ]] && [[ ${S} != ${WORKDIR}/package ]]; then
+			# Avoid clobbering if something already created ${S}
+			rm -rf "${S}" || die
+			mv "${WORKDIR}/package" "${S}" || die
+		fi
+	else
+		default
+	fi
 }
 
 npm_src_prepare() {

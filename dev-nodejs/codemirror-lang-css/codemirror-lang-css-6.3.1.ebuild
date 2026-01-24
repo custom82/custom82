@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@codemirror/lang-css"
 inherit npm
 
 DESCRIPTION="This is a C++ grammar for the Lezer parser system."
 HOMEPAGE="https://github.com/codemirror/lang-css"
-SRC_URI="https://github.com/codemirror/lang-css/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +28,3 @@ BDEPEND="
         dev-nodejs/codemirror-buildhelper
 "
 
-
-NPM_MODULE="@codemirror/lang-css"
-
-NPM_EXTRA_FILES="src"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/lang-css-${PV} "${S}"
-}

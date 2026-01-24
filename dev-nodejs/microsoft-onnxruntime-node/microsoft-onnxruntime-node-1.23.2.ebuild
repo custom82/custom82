@@ -4,8 +4,9 @@
 
 EAPI=8
 
-inherit npm
 NPM_MODULE="onnxruntime-node"
+inherit npm
+
 
 DESCRIPTION="This package implements WebAssembly Text Format language support for the CodeMirror code editor"
 HOMEPAGE="https://github.com/microsoft/onnxruntime"
@@ -30,9 +31,13 @@ BDEPEND="
         dev-nodejs/protobufjs
 "
 
+NPM_EXTRA_FILES="dist bin"
 
+npm_src_unpack () {
+        unpack ${A}
+        mv ${WORKDIR}/package "${S}"
+}
 
-NPM_EXTRA_FILES=""
 
 
 
