@@ -8,9 +8,6 @@ inherit npm
 
 DESCRIPTION="ADM-ZIP is a pure JavaScript implementation for zip data compression for NodeJS"
 HOMEPAGE="https://github.com/cthackers/adm-zip"
-SRC_URI="https://github.com/cthackers/adm-zip/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
-
-
 
 LICENSE="MIT"
 SLOT="0"
@@ -25,7 +22,7 @@ BDEPEND="
 "
 
 NPM_MODULE="adm-zip"
-NPM_EXTRA_FILES="zipFile.js zipEntry.js adm-zip.js .prettierrc.json .prettierignore .mocharc.yml util methods headers"
+NPM_EXTRA_FILES=""
 
 npm_src_unpack() {
     unpack "${A}"

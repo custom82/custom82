@@ -24,26 +24,13 @@ BDEPEND="
 	dev-nodejs/esbuild
 "
 
-src_prepare() {
-	default
-	npm install --ignore-scripts --no-audit --no-fund || die
+NPM_EXTRA_FILES="js mjs ts"
+
+npm_src_unpack() {
+    unpack "${A}"
 }
 
-src_compile() {
-	export PATH="${S}/node_modules/.bin:${PATH}"
-	npm run compile || die
-}
+npm_src_compile() {
+    npm run compile
 
-src_install() {
-	# layout standard Gentoo per moduli node
-	insinto /usr/lib/node_modules/${PN}
-
-	# runtime
-	doins -r js ts || die
-
-	# metadata
-	doins package.json || die
-	[[ -f README.md ]] && doins README.md
-	[[ -f LICENSE ]] && doins LICENSE
-	[[ -f LICENSE.txt ]] && doins LICENSE.txt
 }

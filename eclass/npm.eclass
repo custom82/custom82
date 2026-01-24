@@ -1,23 +1,31 @@
 # Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-# Minimal npm helper eclass:
-# - installs a Node module payload into /usr/$(get_libdir)/node_modules/<module>
-# - optionally installs docs + bins
+# npm.eclass (overlay-local)
 #
-# IMPORTANT: This eclass does NOT run "npm install" or "npm pack".
-# The ebuild should do build steps (npm install / npm run build) in src_prepare/src_compile.
+# Goals:
+# - Provide sensible defaults for npm-registry tarballs when the ebuild does not set SRC_URI/S.
+# - Install a Node module payload into /usr/$(get_libdir)/node_modules/<module>
+# - Optionally install docs + bins
+#
+# IMPORTANT:
+# - This eclass does NOT run "npm install" or "npm pack".
+#   The ebuild should do build steps (npm install / npm run build) in src_prepare/src_compile
+#   when building from source.
+# - The SRC_URI default is only suitable for releases published to the npm registry.
+#   For GitHub snapshots/live builds, set SRC_URI/EGIT_* in the ebuild.
 
 inherit multilib
 
 # === User-tunable variables (set in ebuild) ===
-# NPM_MODULE: module install name (default: ${PN})
+# NPM_MODULE: npm package name (default: ${PN})
 # NPM_FILES: space-separated list of files/dirs to install (default: package.json)
 # NPM_EXTRA_FILES: additional files/dirs to install (default: empty)
 # NPM_DOCS: space-separated list of doc dirs/files to install when USE=doc is enabled (default: empty)
 # NPM_BIN: space-separated list of bin names under ${S}/bin/ to install into /usr/bin (default: empty)
 #
-# NOTE: If you want doc support, the ebuild should set IUSE="doc" (optional).
+# NOTE: If you want doc support, the ebuild can set IUSE="doc". This eclass
+# will not error if doc is not in IUSE; it will simply skip doc handling.
 
 : "${NPM_MODULE:=${PN}}"
 : "${NPM_FILES:=package.json}"
@@ -25,9 +33,35 @@ inherit multilib
 : "${NPM_DOCS:=}"
 : "${NPM_BIN:=}"
 
+# Derived variables:
+# - NPM_PN: npm "unscoped" name part (for @scope/name it's "name")
+# - NPM_REGISTRY_TARBALL: tarball basename used by npm registry
+if [[ ${NPM_MODULE} == */* ]]; then
+	NPM_PN=${NPM_MODULE##*/}
+else
+	NPM_PN=${NPM_MODULE}
+fi
+: "${NPM_PN:=${NPM_MODULE}}"
+: "${NPM_REGISTRY_TARBALL:=${NPM_PN}}"
+
+# Default SRC_URI/S for npm registry tarballs if the ebuild did not set them.
+# Unscoped:
+#   https://registry.npmjs.org/<name>/-/<name>-<PV>.tgz
+# Scoped:
+#   https://registry.npmjs.org/@scope/name/-/name-<PV>.tgz
+#
+# We also rename distfile to ${P}.tgz to keep DISTDIR tidy.
+if [[ -z ${SRC_URI} ]]; then
+	SRC_URI="https://registry.npmjs.org/${NPM_MODULE}/-/${NPM_REGISTRY_TARBALL}-${PV}.tgz -> ${P}.tgz"
+fi
+
+# npm tarballs unpack into ${WORKDIR}/package
+if [[ -z ${S} ]]; then
+	S="${WORKDIR}/package"
+fi
+
 npm_src_unpack() {
 	# Default unpack is fine for .tgz/.tar.gz sources.
-	# If you need custom behavior, override in ebuild.
 	default
 }
 
@@ -67,8 +101,8 @@ npm_src_install() {
 		[[ -s "${S}/${f}" ]] && dodoc "${S}/${f}"
 	done
 
-	# Optional extra docs
-	if use doc; then
+	# Optional extra docs (only if doc is declared in IUSE and enabled)
+	if in_iuse doc && use doc; then
 		for f in ${NPM_DOCS}; do
 			[[ -e "${S}/${f}" ]] || continue
 			dodoc -r "${S}/${f}" || die "Failed to install docs: ${f}"
