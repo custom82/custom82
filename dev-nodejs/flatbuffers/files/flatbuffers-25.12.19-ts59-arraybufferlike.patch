@@ -1,0 +1,44 @@
+diff '--color=auto' -uPNr flatbuffers-25.12.19/ts/flexbuffers/builder.ts flatbuffers-25.12.19-patched/ts/flexbuffers/builder.ts
+--- flatbuffers-25.12.19/ts/flexbuffers/builder.ts      2025-12-20 00:06:07.000000000 +0100
++++ flatbuffers-25.12.19-patched/ts/flexbuffers/builder.ts      2026-01-24 17:42:04.848379669 +0100
+@@ -524,7 +524,7 @@
+         this.stack.push(this.floatStackValue(value));
+       }
+     } else if (ArrayBuffer.isView(value)) {
+-      this.writeBlob(value.buffer);
++      this.writeBlob(value.buffer as ArrayBuffer);
+     } else if (typeof value === 'string' || value instanceof String) {
+       this.writeString(value as string);
+     } else if (Array.isArray(value)) {
+diff '--color=auto' -uPNr flatbuffers-25.12.19/ts/flexbuffers/reference.ts flatbuffers-25.12.19-patched/ts/flexbuffers/reference.ts
+--- flatbuffers-25.12.19/ts/flexbuffers/reference.ts    2025-12-20 00:06:07.000000000 +0100
++++ flatbuffers-25.12.19-patched/ts/flexbuffers/reference.ts    2026-01-24 17:53:38.050307947 +0100
+@@ -179,7 +179,7 @@
+     ) {
+       const begin = indirect(this.dataView, this.offset, this.parentWidth);
+       return fromUTF8Array(
+-        new Uint8Array(this.dataView.buffer, begin, this.length()),
++        new Uint8Array(this.dataView.buffer as ArrayBuffer, begin, this.length()),
+       );
+     }
+     return null;
+@@ -188,7 +188,7 @@
+   blobValue(): Uint8Array | null {
+     if (this.isBlob()) {
+       const begin = indirect(this.dataView, this.offset, this.parentWidth);
+-      return new Uint8Array(this.dataView.buffer, begin, this.length());
++      return new Uint8Array(this.dataView.buffer as ArrayBuffer, begin, this.length());
+     }
+     return null;
+   }
+diff '--color=auto' -uPNr flatbuffers-25.12.19/ts/flexbuffers/reference-util.ts flatbuffers-25.12.19-patched/ts/flexbuffers/reference-util.ts
+--- flatbuffers-25.12.19/ts/flexbuffers/reference-util.ts       2025-12-20 00:06:07.000000000 +0100
++++ flatbuffers-25.12.19-patched/ts/flexbuffers/reference-util.ts       2026-01-24 17:53:45.341474058 +0100
+@@ -165,6 +165,6 @@
+     length++;
+   }
+   return fromUTF8Array(
+-    new Uint8Array(dataView.buffer, keyIndirectOffset, length),
++    new Uint8Array(dataView.buffer as ArrayBuffer, keyIndirectOffset, length),
+   );
+ }
