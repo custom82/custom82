@@ -23,7 +23,3 @@ RDEPEND="
         dev-nodejs/lezer-common
         dev-nodejs/lezer-highlight
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"

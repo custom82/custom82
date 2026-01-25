@@ -27,11 +27,3 @@ RDEPEND="
         dev-nodejs/leer-css
         dev-nodejs/lezer-html
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-
-
-
-

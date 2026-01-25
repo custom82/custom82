@@ -1,41 +1,37 @@
 # Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-
+#
 # npm.eclass (overlay-local)
 #
-# Goals:
-# - Provide sensible defaults for npm-registry tarballs when the ebuild does not set SRC_URI/S.
-# - Install a Node module payload into /usr/$(get_libdir)/node_modules/<module>
-# - Optionally install docs + bins
+# Features:
+# - Default SRC_URI/S for npm registry tarballs (based on NPM_MODULE)
+# - For registry tarballs, can automatically populate NPM_EXTRA_FILES from package.json "files"
+# - Installs module payload into /usr/$(get_libdir)/node_modules/<NPM_MODULE>
 #
 # IMPORTANT:
 # - This eclass does NOT run "npm install" or "npm pack".
-#   The ebuild should do build steps (npm install / npm run build) in src_prepare/src_compile
-#   when building from source.
-# - The SRC_URI default is only suitable for releases published to the npm registry.
-#   For GitHub snapshots/live builds, set SRC_URI/EGIT_* in the ebuild.
+# - Auto population happens in src_prepare (after unpack), because package.json is not available earlier.
 
 inherit multilib
 
-# === User-tunable variables (set in ebuild) ===
-# NPM_MODULE: npm package name (default: ${PN})
-# NPM_FILES: space-separated list of files/dirs to install (default: package.json)
-# NPM_EXTRA_FILES: additional files/dirs to install (default: empty; may default to "dist" for npm registry tarballs)
-# NPM_DOCS: space-separated list of doc dirs/files to install when USE=doc is enabled (default: empty)
-# NPM_BIN: space-separated list of bin names under ${S}/bin/ to install into /usr/bin (default: empty)
-#
-# NOTE: If you want doc support, the ebuild can set IUSE="doc". This eclass
-# will not error if doc is not in IUSE; it will simply skip doc handling.
-
+# User variables
 : "${NPM_MODULE:=${PN}}"
+
+# Manual install lists (you can still set these in the ebuild)
 : "${NPM_FILES:=package.json}"
 : "${NPM_EXTRA_FILES:=}"
+
+# Auto-populate controls
+# If 1, populate NPM_EXTRA_FILES from package.json "files" (only when empty).
+# Default: enabled for registry tarballs.
+: "${NPM_POPULATE_EXTRA_FILES:=}"
+: "${NPM_POPULATE_FALLBACK:=dist}"
+
+# Optional docs/bins
 : "${NPM_DOCS:=}"
 : "${NPM_BIN:=}"
 
-# Derived variables:
-# - NPM_PN: npm "unscoped" name part (for @scope/name it's "name")
-# - NPM_REGISTRY_TARBALL: tarball basename used by npm registry
+# Derived variables for registry tarballs
 if [[ ${NPM_MODULE} == */* ]]; then
 	NPM_PN=${NPM_MODULE##*/}
 else
@@ -45,37 +41,26 @@ fi
 : "${NPM_REGISTRY_TARBALL:=${NPM_PN}}"
 
 # Default SRC_URI for npm registry tarballs if the ebuild did not set it.
-# Unscoped:
-#   https://registry.npmjs.org/<name>/-/<name>-<PV>.tgz
-# Scoped:
-#   https://registry.npmjs.org/@scope/name/-/name-<PV>.tgz
-#
-# We also rename distfile to ${P}.tgz to keep DISTDIR tidy.
 if [[ -z ${SRC_URI} ]]; then
 	SRC_URI="https://registry.npmjs.org/${NPM_MODULE}/-/${NPM_REGISTRY_TARBALL}-${PV}.tgz -> ${P}.tgz"
 fi
 
-# If we're fetching from the npm registry and the ebuild didn't request extra files,
-# default to installing "dist" as it is the most common runtime payload directory.
-# Harmless if a package does not ship dist/ (it's skipped at install time).
-if [[ ${SRC_URI} == https://registry.npmjs.org/* ]] && [[ -z ${NPM_EXTRA_FILES} ]]; then
-	NPM_EXTRA_FILES="dist"
-fi
-
-# For npm tarballs, the unpacked directory is usually ${WORKDIR}/package.
-# Let ebuilds override S explicitly if they want; otherwise default to ${WORKDIR}/package.
+# Default S for npm registry tarballs
 if [[ -z ${S} ]]; then
 	S="${WORKDIR}/package"
 fi
 
+# Default: enable populate for registry tarballs
+if [[ -z ${NPM_POPULATE_EXTRA_FILES} ]] && [[ ${SRC_URI} == https://registry.npmjs.org/* ]]; then
+	NPM_POPULATE_EXTRA_FILES=1
+fi
+
 npm_src_unpack() {
-	# For npm registry tarballs, Portage unpacks into ${WORKDIR}/package.
-	# Some ebuilds prefer S=${WORKDIR}/${P}; in that case, move package -> ${S}.
 	if [[ ${SRC_URI} == https://registry.npmjs.org/* ]]; then
 		unpack "${A}" || die
 
+		# If the ebuild set S to something else, move ${WORKDIR}/package -> ${S}
 		if [[ -d ${WORKDIR}/package ]] && [[ ${S} != ${WORKDIR}/package ]]; then
-			# Avoid clobbering if something already created ${S}
 			rm -rf "${S}" || die
 			mv "${WORKDIR}/package" "${S}" || die
 		fi
@@ -84,29 +69,80 @@ npm_src_unpack() {
 	fi
 }
 
-npm_src_prepare() {
-	default
+_npm_guess_extra_files_from_pkgjson() {
+	# Outputs a space-separated list of top-level paths to install (excluding package.json),
+	# derived from package.json "files" globs. Approximates npm-packlist behavior.
+	python - <<'PY' || return 1
+import json, os, glob, sys
+
+S = os.environ["S"]
+fallback = os.environ.get("NPM_POPULATE_FALLBACK", "dist")
+
+pkg = os.path.join(S, "package.json")
+with open(pkg, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+patterns = data.get("files")
+paths = set()
+
+def add(p):
+    rel = os.path.relpath(p, S).replace("\\", "/")
+    if rel and rel != "." and rel != "package.json":
+        paths.add(rel)
+
+if isinstance(patterns, list) and patterns:
+    for pat in patterns:
+        if not isinstance(pat, str) or not pat.strip():
+            continue
+        for m in glob.glob(os.path.join(S, pat), recursive=True):
+            add(m)
+else:
+    fb = os.path.join(S, fallback)
+    if os.path.exists(fb):
+        add(fb)
+
+# Collapse to top-level dirs/files
+top = set()
+for rel in paths:
+    top.add(rel.split("/", 1)[0])
+
+# Drop obvious noise if present
+top.discard("")
+top.discard(".")
+
+# Output space-separated
+sys.stdout.write(" ".join(sorted(top)))
+PY
 }
 
-npm_src_compile() {
-	# Most JS/TS libs don't compile by default; ebuild can override.
-	:
+npm_src_prepare() {
+	default
+
+	# Populate NPM_EXTRA_FILES automatically (only if requested and currently empty)
+	if [[ ${NPM_POPULATE_EXTRA_FILES} == 1 ]] && [[ -z ${NPM_EXTRA_FILES} ]] && [[ -f ${S}/package.json ]]; then
+		local guessed
+		guessed="$(_npm_guess_extra_files_from_pkgjson)" || guessed=""
+		if [[ -n ${guessed} ]]; then
+			NPM_EXTRA_FILES="${guessed}"
+		else
+			# last resort fallback (only if exists)
+			[[ -d ${S}/${NPM_POPULATE_FALLBACK} ]] && NPM_EXTRA_FILES="${NPM_POPULATE_FALLBACK}"
+		fi
+	fi
 }
+
+npm_src_compile() { :; }
 
 npm_src_install() {
 	local node_modules_dir="${ED}/usr/$(get_libdir)/node_modules/${NPM_MODULE}"
 	local npm_files="${NPM_FILES} ${NPM_EXTRA_FILES}"
 
-	# Ensure target directory exists
 	mkdir -p "${node_modules_dir}" || die "Could not create ${node_modules_dir}"
-
-	# Install module payload
 	insinto "/usr/$(get_libdir)/node_modules/${NPM_MODULE}"
 
 	local f
 	for f in ${npm_files}; do
 		[[ -e "${S}/${f}" ]] || continue
-
 		if [[ -d "${S}/${f}" ]]; then
 			doins -r "${S}/${f}" || die "Failed to install dir: ${f}"
 		else
@@ -114,13 +150,13 @@ npm_src_install() {
 		fi
 	done
 
-	# Common docs found in npm packages
+	# Common docs
 	for f in README* HISTORY* ChangeLog AUTHORS NEWS TODO CHANGES \
-			THANKS BUGS FAQ CREDITS CHANGELOG*; do
+			THANKS BUGS FAQ CREDITS CHANGELOG* LICENSE* COPYING*; do
 		[[ -s "${S}/${f}" ]] && dodoc "${S}/${f}"
 	done
 
-	# Optional extra docs (only if doc is declared in IUSE and enabled)
+	# Optional extra docs
 	if in_iuse doc && use doc; then
 		for f in ${NPM_DOCS}; do
 			[[ -e "${S}/${f}" ]] || continue

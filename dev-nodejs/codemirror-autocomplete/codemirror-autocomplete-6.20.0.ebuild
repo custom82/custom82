@@ -22,18 +22,3 @@ RDEPEND="
         dec-nodejs/codemirror-view
         dev-nodejs/lezer-common
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-
-
-
-NPM_EXTRA_FILES="dist"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/package "${S}"
-}
-

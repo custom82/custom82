@@ -20,9 +20,4 @@ RDEPEND="
         dev-nodejs/lezer-json
 "
 
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-
-
 

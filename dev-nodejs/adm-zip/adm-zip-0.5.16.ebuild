@@ -13,13 +13,5 @@ HOMEPAGE="https://github.com/cthackers/adm-zip"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
-
-RDEPEND="
-
-"
-
-BDEPEND="
-"
 
 NPM_EXTRA_FILES="zipFile.js zipEntry.js headers methods util adm-zip.js"

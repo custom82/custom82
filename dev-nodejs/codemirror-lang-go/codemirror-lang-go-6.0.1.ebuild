@@ -23,13 +23,3 @@ RDEPEND="
         dev-nodejs/lezer-common
         dev-nodejs/lezer-go
 "
-
-BDEPEND="
-        dev-nodejs/lezer-common
-        dev-nodejs/lezer-go
-"
-
-
-
-
-

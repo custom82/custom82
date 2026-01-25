@@ -25,9 +25,3 @@ RDEPEND="
         dev-nodejs/lezer-common
         dev-nodejs/lezer-markdown
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-
-

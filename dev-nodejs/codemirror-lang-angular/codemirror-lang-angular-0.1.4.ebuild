@@ -24,15 +24,3 @@ RDEPEND="
         dev-nodejs/lezer-highlight
         dev-nodejs/lezer-lr
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-
-NPM_EXTRA_FILES="dist"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/package "${S}"
-}

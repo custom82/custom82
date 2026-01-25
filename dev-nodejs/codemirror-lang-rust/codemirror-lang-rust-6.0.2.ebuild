@@ -21,8 +21,3 @@ RDEPEND="
         dev-nodejs/lezer-rust
 
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-

@@ -41,10 +41,3 @@ RDEPEND="
         dev-nodejs/codemirror-language
         dev-nodejs/codemirror-legacy-modes
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-
-
-

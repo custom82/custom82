@@ -22,8 +22,3 @@ RDEPEND="
         dev-nodejs/crelt
 "
 
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-
-

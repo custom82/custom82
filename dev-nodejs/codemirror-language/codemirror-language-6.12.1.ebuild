@@ -24,10 +24,3 @@ RDEPEND="
         dev-nodejs/lezer-lr
         dev-nodejs/style-mod
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-        dev-nodejs/lezer-javascript
-"
-
-

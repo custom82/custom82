@@ -16,4 +16,19 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
+RDEPEND="
+        dev-nodejs/protobufjs-aspromise
+        dev-nodejs/protobufjs-base64
+        dev-nodejs/protobufjs-codegen
+        dev-nodejs/protobufjs-eventemitter
+        dev-nodejs/protobufjs-fetch
+        dev-nodejs/protobufjs-float
+        dev-nodejs/protobufjs-inquire
+        dev-nodejs/protobufjs-path
+        dev-nodejs/protobufjs-pool
+        dev-nodejs/protobufjs-utf8
+        dev-nodejs/types-node
+        dev-nodejs/long
+"
+
 NPM_EXTRA_FILES=" index.js index.d.ts light.d.ts light.js minimal.d.ts minimal.js package-lock.json tsconfig.json scripts/postinstall.js dist ext google src"

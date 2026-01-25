@@ -20,9 +20,4 @@ RDEPEND="
         dev-nodejs/codemirror-language
 "
 
-BDEPEND="
-        dev-nodejs/rollup
-        dev-nodejs/typescript
-"
-
 NPM_EXTRA_FILES="rollup.config.js mode"

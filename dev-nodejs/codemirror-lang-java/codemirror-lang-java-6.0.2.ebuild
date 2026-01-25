@@ -20,12 +20,3 @@ RDEPEND="
         dev-nodejs/codemirror-language
         dev-nodejs/lezer-java
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-
-
-
-
-

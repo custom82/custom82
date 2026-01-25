@@ -24,8 +24,3 @@ RDEPEND="
         dev-nodejs/lezer-common
         dev-nodejs/lezer-xml
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-

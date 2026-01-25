@@ -20,12 +20,3 @@ RDEPEND="
         dev-nodejs/codemirror-language
         dev-nodejs/lezer-cpp
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/package "${S}"
-}
