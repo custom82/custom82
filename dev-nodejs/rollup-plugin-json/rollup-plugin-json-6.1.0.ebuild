@@ -4,10 +4,10 @@
 
 EAPI=8
 
-NPM_MODULE="@rollup/plugin-commonjs"
+NPM_MODULE="@rollup/plugin-json"
 inherit npm
 
-DESCRIPTION="Adapter for SvelteKit apps that generates a standalone Node server"
+DESCRIPTION="A Rollup plugin which Converts .json files to ES6 modules"
 HOMEPAGE="https://github.com/rollup/plugins"
 
 LICENSE="MIT"
@@ -15,10 +15,5 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-        dev-nodejs/types-estree
-        dev-nodejs/estree-walker
-        dev-nodejs/picomatch
+        dev-nodejs/rollup/pluginutils
 "
-
-
-

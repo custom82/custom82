@@ -4,10 +4,10 @@
 
 EAPI=8
 
-NPM_MODULE="@rollup/plugin-commonjs"
+NPM_MODULE="@rollup/pluginutils"
 inherit npm
 
-DESCRIPTION="Adapter for SvelteKit apps that generates a standalone Node server"
+DESCRIPTION="A set of utility functions commonly used by 🍣 Rollup plugins"
 HOMEPAGE="https://github.com/rollup/plugins"
 
 LICENSE="MIT"
@@ -19,6 +19,3 @@ RDEPEND="
         dev-nodejs/estree-walker
         dev-nodejs/picomatch
 "
-
-
-
