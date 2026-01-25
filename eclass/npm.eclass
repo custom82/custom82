@@ -5,7 +5,8 @@
 #
 # Features:
 # - Default SRC_URI/S for npm registry tarballs (based on NPM_MODULE)
-# - For registry tarballs, can automatically populate NPM_EXTRA_FILES from package.json "files"
+# - Auto-populates NPM_EXTRA_FILES for registry tarballs by reading package.json
+#   (uses "files" when present; otherwise derives from entrypoints like main/exports/bin/types)
 # - Installs module payload into /usr/$(get_libdir)/node_modules/<NPM_MODULE>
 #
 # IMPORTANT:
@@ -22,9 +23,10 @@ inherit multilib
 : "${NPM_EXTRA_FILES:=}"
 
 # Auto-populate controls
-# If 1, populate NPM_EXTRA_FILES from package.json "files" (only when empty).
+# If 1, populate NPM_EXTRA_FILES from package.json (only when empty).
 # Default: enabled for registry tarballs.
 : "${NPM_POPULATE_EXTRA_FILES:=}"
+# Fallback directory to include if nothing can be derived and it exists.
 : "${NPM_POPULATE_FALLBACK:=dist}"
 
 # Optional docs/bins
@@ -71,7 +73,10 @@ npm_src_unpack() {
 
 _npm_guess_extra_files_from_pkgjson() {
 	# Outputs a space-separated list of top-level paths to install (excluding package.json),
-	# derived from package.json "files" globs. Approximates npm-packlist behavior.
+	# derived from:
+	#   1) package.json "files" globs (approx)
+	#   2) otherwise: main/module/types/typings/browser/bin/exports references
+	#   3) otherwise: fallback dir (default: dist) if it exists
 	python - <<'PY' || return 1
 import json, os, glob, sys
 
@@ -82,35 +87,62 @@ pkg = os.path.join(S, "package.json")
 with open(pkg, "r", encoding="utf-8") as f:
     data = json.load(f)
 
-patterns = data.get("files")
 paths = set()
 
-def add(p):
-    rel = os.path.relpath(p, S).replace("\\", "/")
-    if rel and rel != "." and rel != "package.json":
+def add_path(rel):
+    if not rel or rel == "." or rel == "package.json":
+        return
+    rel = rel.lstrip("./").replace("\\", "/")
+    if rel:
         paths.add(rel)
 
-if isinstance(patterns, list) and patterns:
-    for pat in patterns:
+def add_ref(val):
+    # add string refs like "./index.js" or "dist/index.js"
+    if isinstance(val, str):
+        add_path(val)
+    elif isinstance(val, list):
+        for x in val:
+            add_ref(x)
+    elif isinstance(val, dict):
+        for x in val.values():
+            add_ref(x)
+
+# 1) "files" globs (most accurate for registry packages)
+files = data.get("files")
+if isinstance(files, list) and files:
+    for pat in files:
         if not isinstance(pat, str) or not pat.strip():
             continue
         for m in glob.glob(os.path.join(S, pat), recursive=True):
-            add(m)
+            rel = os.path.relpath(m, S).replace("\\", "/")
+            add_path(rel)
 else:
+    # 2) derive from common entrypoints
+    for key in ("main", "module", "types", "typings", "browser"):
+        add_ref(data.get(key))
+
+    # bin can be string or object
+    add_ref(data.get("bin"))
+
+    # exports can be string/object tree
+    add_ref(data.get("exports"))
+
+# 3) fallback if still empty
+if not paths:
     fb = os.path.join(S, fallback)
     if os.path.exists(fb):
-        add(fb)
+        add_path(fallback)
 
-# Collapse to top-level dirs/files
-top = set()
-for rel in paths:
-    top.add(rel.split("/", 1)[0])
+# Normalize to top-level items
+top = set(p.split("/", 1)[0] for p in paths if p)
+# Drop common dev-only noise if accidentally referenced
+for noise in ("test", "tests", "__tests__", "example", "examples", "script", "scripts"):
+    # Only drop if it's a directory name and not explicitly required as an entrypoint file
+    if noise in top:
+        # Keep if the package actually points to it as main/types/etc (rare)
+        # Can't reliably know here; generally safe to drop.
+        top.remove(noise)
 
-# Drop obvious noise if present
-top.discard("")
-top.discard(".")
-
-# Output space-separated
 sys.stdout.write(" ".join(sorted(top)))
 PY
 }
@@ -122,6 +154,7 @@ npm_src_prepare() {
 	if [[ ${NPM_POPULATE_EXTRA_FILES} == 1 ]] && [[ -z ${NPM_EXTRA_FILES} ]] && [[ -f ${S}/package.json ]]; then
 		local guessed
 		guessed="$(_npm_guess_extra_files_from_pkgjson)" || guessed=""
+
 		if [[ -n ${guessed} ]]; then
 			NPM_EXTRA_FILES="${guessed}"
 		else
@@ -151,7 +184,7 @@ npm_src_install() {
 	done
 
 	# Common docs
-	for f in README* HISTORY* ChangeLog AUTHORS NEWS TODO CHANGES \
+	for f in README* readme* HISTORY* ChangeLog AUTHORS NEWS TODO CHANGES \
 			THANKS BUGS FAQ CREDITS CHANGELOG* LICENSE* COPYING*; do
 		[[ -s "${S}/${f}" ]] && dodoc "${S}/${f}"
 	done
@@ -164,7 +197,7 @@ npm_src_install() {
 		done
 	fi
 
-	# Optional bins from ${S}/bin
+	# Optional bins from ${S}/bin (manual helper)
 	if [[ -n "${NPM_BIN}" ]]; then
 		for f in ${NPM_BIN}; do
 			[[ -f "${S}/bin/${f}" ]] && dobin "${S}/bin/${f}"
