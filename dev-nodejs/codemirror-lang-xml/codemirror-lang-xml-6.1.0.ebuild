@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@codemirror/lang-xml"
 inherit npm
 
 DESCRIPTION="This package implements XML language support for the CodeMirror code editor"
 HOMEPAGE="https://github.com/codemirror/lang-xml"
-SRC_URI="https://github.com/codemirror/lang-xml/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,14 +28,4 @@ RDEPEND="
 BDEPEND="
         dev-nodejs/codemirror-buildhelper
 "
-
-NPM_MODULE="@codemirror/lang-xml"
-
-NPM_EXTRA_FILES="src"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/lang-xml-${PV} "${S}"
-}
 

@@ -4,11 +4,11 @@
 
 EAPI=8
 
+NPM_MODULE="@codemirror/lang-javascript"
 inherit npm
 
 DESCRIPTION="This package implements JavaScript language support for the CodeMirror code editor"
 HOMEPAGE="https://github.com/codemirror/lang-javascript"
-SRC_URI="https://github.com/codemirror/lang-javascript/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -30,13 +30,5 @@ BDEPEND="
         dev-nodejs/lezer-lr
 "
 
-NPM_MODULE="@codemirror/lang-javascript"
 
-NPM_EXTRA_FILES="src"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/lang-javascript-${PV} "${S}"
-}
 

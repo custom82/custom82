@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/php"
 inherit npm
 
 DESCRIPTION="This is a PHP grammar for the Lezer parser system"
 HOMEPAGE="https://github.com/lezer-parser/php"
-SRC_URI="https://github.com/lezer-parser/php/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -28,12 +29,3 @@ BDEPEND="
         dev-nodejs/rollup
 "
 
-NPM_MODULE="@lezer/php"
-
-NPM_EXTRA_FILES="rollup.config.js src dist"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/markdown-${PV} "${S}"
-}

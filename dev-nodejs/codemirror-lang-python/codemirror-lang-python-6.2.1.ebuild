@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@codemirror/lang-python"
 inherit npm
 
 DESCRIPTION="This package implements Python language support for the CodeMirror code editor"
 HOMEPAGE="https://github.com/codemirror/lang-python"
-SRC_URI="https://github.com/codemirror/lang-python/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +28,4 @@ BDEPEND="
         dev-nodejs/codemirror-buildhelper
 "
 
-NPM_MODULE="@codemirror/lang-python"
-
-NPM_EXTRA_FILES="src"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/lang-python-${PV} "${S}"
-}
 

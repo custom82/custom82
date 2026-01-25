@@ -4,11 +4,11 @@
 
 EAPI=8
 
+NPM_MODULE="@huggingface/transformers"
 inherit npm
 
 DESCRIPTION="State-of-the-art Machine Learning for the Web"
 HOMEPAGE="https://github.com/huggingface/transformers.js"
-SRC_URI="https://github.com/huggingface/transformers.js/archive/refs/tags/3.8.1.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -36,14 +36,3 @@ BDEPEND="
         dev-nodejs/webpack-cli
         dev-nodejs/webpack-dev-server
 "
-
-NPM_MODULE="@huggingface/transformers"
-
-NPM_EXTRA_FILES="scripts src webpack.config.js tsconfig.json jest.config.mjs"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/transformers.js-${PV} "${S}"
-}
-

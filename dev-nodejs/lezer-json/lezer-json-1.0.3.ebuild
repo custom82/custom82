@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/json"
 inherit npm
 
 DESCRIPTION="This is a JSON grammar for the lezer parser system"
 HOMEPAGE="https://github.com/lezer-parser/json"
-SRC_URI="https://github.com/lezer-parser/json/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +28,3 @@ BDEPEND="
         dev-nodejs/mocha
         dev-nodejs/rollup
 "
-
-NPM_MODULE="@lezer/json"
-
-NPM_EXTRA_FILES="src dist rollup.config.js"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/json-${PV} "${S}"
-}

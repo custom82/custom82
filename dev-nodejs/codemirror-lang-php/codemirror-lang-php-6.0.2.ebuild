@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@codemirror/lang-php"
 inherit npm
 
 DESCRIPTION="This package implements PHP language support for the CodeMirror code editor"
 HOMEPAGE="https://github.com/codemirror/lang-php"
-SRC_URI="https://github.com/codemirror/lang-php/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +28,5 @@ BDEPEND="
         dev-nodejs/codemirror-buildhelper
 "
 
-NPM_MODULE="@codemirror/lang-php"
 
-NPM_EXTRA_FILES="src"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/lang-php-${PV} "${S}"
-}
 

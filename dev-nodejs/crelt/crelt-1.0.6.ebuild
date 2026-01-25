@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="crelt"
 inherit npm
 
 DESCRIPTION="Tiny DOM-element creation utility. Exports a single (default) value"
 HOMEPAGE="https://github.com/marijnh/crelt"
-SRC_URI="https://github.com/marijnh/crelt/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -20,11 +21,4 @@ BDEPEND="
         dev-nodejs/rollup-plugin-copy
 "
 
-NPM_MODULE="crelt"
-
-NPM_EXTRA_FILES="rollup.config.js index.js index.d.ts"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-}
+NPM_EXTRA_FILES="rollup.config.js index.d.ts index.js dist"

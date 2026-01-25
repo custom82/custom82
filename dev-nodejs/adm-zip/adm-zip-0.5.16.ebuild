@@ -4,6 +4,7 @@
 
 EAPI=8
 
+NPM_MODULE="adm-zip"
 inherit npm
 
 DESCRIPTION="ADM-ZIP is a pure JavaScript implementation for zip data compression for NodeJS"
@@ -21,9 +22,4 @@ RDEPEND="
 BDEPEND="
 "
 
-NPM_MODULE="adm-zip"
-NPM_EXTRA_FILES=""
-
-npm_src_unpack() {
-    unpack "${A}"
-}
+NPM_EXTRA_FILES="zipFile.js zipEntry.js headers methods util adm-zip.js"

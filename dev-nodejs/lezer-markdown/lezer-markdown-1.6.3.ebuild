@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/markdown"
 inherit npm
 
 DESCRIPTION="This package implements HTML language support for the CodeMirror code editor"
 HOMEPAGE="https://github.com/lezer-parser/markdown"
-SRC_URI="https://github.com/lezer-parser/markdown/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +28,3 @@ BDEPEND="
         dev-nodejs/ist
         dev-nodejs/mocha
 "
-
-NPM_MODULE="@lezer/markdown"
-
-NPM_EXTRA_FILES="src bin tsconfig.json"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/markdown-${PV} "${S}"
-}

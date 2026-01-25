@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/go"
 inherit npm
 
 DESCRIPTION="This is a Go grammar for the Lezer parser system"
 HOMEPAGE="https://github.com/lezer-parser/go"
-SRC_URI="https://github.com/lezer-parser/go/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -28,12 +29,4 @@ BDEPEND="
         dev-nodejs/rollup
 "
 
-NPM_MODULE="@lezer/go"
 
-NPM_EXTRA_FILES="src rollup.config.js"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/go-${PV} "${S}"
-}

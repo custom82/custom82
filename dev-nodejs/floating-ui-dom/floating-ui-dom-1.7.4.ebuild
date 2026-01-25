@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@floating-ui/dom"
 inherit npm
 
 DESCRIPTION="This is the library to use Floating UI on the web, wrapping @floating-ui/core with DOM interface logic"
 HOMEPAGE="https://github.com/floating-ui/floating-ui"
-SRC_URI="https://github.com/floating-ui/floating-ui/archive/refs/tags/@floating-ui/dom@${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -31,14 +32,3 @@ BDEPEND="
         dev-nodejs/react-dom
         dev-nodejs/react-rotuer-dom
 "
-
-NPM_MODULE="@floating-ui/dom"
-
-NPM_EXTRA_FILES="website turbo.json pnpm-workspace.yaml pnpm-lock.yaml packages package.json extension eslint.config.mjs config"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/floating-ui--floating-ui-dom-${PV} "${S}"
-}
-

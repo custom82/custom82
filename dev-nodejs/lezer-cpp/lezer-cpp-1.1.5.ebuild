@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/cpp"
 inherit npm
 
 DESCRIPTION="This is a C++ grammar for the Lezer parser system."
 HOMEPAGE="https://github.com/lezer-parser/cpp"
-SRC_URI="https://github.com/lezer-parser/cpp/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +28,3 @@ BDEPEND="
         dev-nodejs/mocha
         dev-nodejs/rollup
 "
-
-NPM_MODULE="@lezer/cpp"
-
-NPM_EXTRA_FILES="rollup.config.js src dist"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/cpp-${PV} "${S}"
-}

@@ -4,11 +4,11 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/css"
 inherit npm
 
 DESCRIPTION="This is a C++ grammar for the Lezer parser system."
 HOMEPAGE="https://github.com/lezer-parser/css"
-SRC_URI="https://github.com/lezer-parser/css/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -28,14 +28,3 @@ BDEPEND="
         dev-nodejs/mocha
         dev-nodejs/rollup
 "
-
-
-NPM_MODULE="@lezer/css"
-
-NPM_EXTRA_FILES="src rollup.config.js dist"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/css-${PV} "${S}"
-}

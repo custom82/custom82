@@ -4,11 +4,11 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/highlight"
 inherit npm
 
 DESCRIPTION="Lezer is an incremental parser system intended for use in an editor or similar system"
 HOMEPAGE="https://github.com/lezer-parser/highlight"
-SRC_URI="https://github.com/lezer-parser/highlight/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -23,14 +23,3 @@ BDEPEND="
         dev-nodejs/marijn-buildtool
         dev-nodejs/typescript
 "
-
-NPM_MODULE="@lezer/highlight"
-
-NPM_EXTRA_FILES="tsconfig.json src build.js"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/highlight-${PV} ${S}
-}
-

@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/javascript"
 inherit npm
 
 DESCRIPTION="This is a JavaScript grammar for the lezer parser system"
 HOMEPAGE="https://github.com/lezer-parser/javascript"
-SRC_URI="https://github.com/lezer-parser/javascript/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +28,5 @@ BDEPEND="
         dev-nodejs/mocha
         dev-nodejs/rollup
 "
-NPM_MODULE="@lezer/javascript"
 
-NPM_EXTRA_FILES="src dist rollup.config.js"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/javascript-${PV} ${S}
-}
 

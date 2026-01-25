@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@codemirror/lang-sass"
 inherit npm
 
 DESCRIPTION="This package implements Sass/SCSS language support for the CodeMirror code editor"
 HOMEPAGE="https://github.com/codemirror/lang-sass"
-SRC_URI="https://github.com/codemirror/lang-sass/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +28,4 @@ BDEPEND="
         dev-nodejs/codemirror-buildhelper
 "
 
-NPM_MODULE="@codemirror/lang-sass"
-
-NPM_EXTRA_FILES="src"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/lang-sass-${PV} "${S}"
-}
 
