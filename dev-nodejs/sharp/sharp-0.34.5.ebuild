@@ -4,18 +4,16 @@
 
 EAPI=8
 
+NPM_MODULE="sharp"
 inherit npm
 
 DESCRIPTION="The typical use case for this high speed Node-API module is to convert large images in common formats to smaller, web-friendly JPEG, PNG, WebP, GIF and AVIF images of varying dimensions"
 HOMEPAGE="https://github.com/lovell/sharp"
-SRC_URI="https://github.com/lovell/sharp/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
-
-
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
+
 
 RDEPEND="
         dev-nodejs/img-colour
@@ -44,11 +42,4 @@ BDEPEND="
         dev-nodejs/tsd
 "
 
-NPM_MODULE="sharp"
-NPM_EXTRA_FILES="biome.json src npm lib install "
-
-npm_src_unpack() {
-    unpack "${A}"
-
-
-}
+NPM_EXTRA_FILES="lib install src"

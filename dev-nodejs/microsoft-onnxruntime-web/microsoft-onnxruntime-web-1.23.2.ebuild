@@ -4,16 +4,15 @@
 
 EAPI=8
 
+NPM_MODULE="onnxruntime-web"
 inherit npm
 
 DESCRIPTION="This package implements WebAssembly Text Format language support for the CodeMirror code editor"
 HOMEPAGE="https://github.com/microsoft/onnxruntime"
-SRC_URI="https://github.com/microsoft/onnxruntime/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="test"
 
 RDEPEND="
         dev-nodejs/flatbuffers
@@ -54,15 +53,3 @@ BDEPEND="
         dev-nodejs/source-map
         dev-nodejs/strip-json-comments
 "
-
-NPM_MODULE="onnxruntime-web"
-
-NPM_EXTRA_FILES="types.d.ts tsconfig.json karma.conf.js script lib"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/onnxruntime-1.23.2/js/web ${S}
-    rm -r "${WORKDIR}"/onnxruntime-${PV}
-}
-

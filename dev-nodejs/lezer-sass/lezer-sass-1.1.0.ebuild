@@ -4,11 +4,11 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/sass"
 inherit npm
 
 DESCRIPTION="This is a Sass/SCSS grammar for the lezer parser system"
 HOMEPAGE="https://github.com/lezer-parser/sass"
-SRC_URI="https://github.com/lezer-parser/sass/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +27,3 @@ BDEPEND="
         dev-nodejs/mocha
         dev-nodejs/rollup
 "
-
-NPM_MODULE="@lezer/sass"
-
-NPM_EXTRA_FILES="rollup.config.js src dist"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/sass-${PV} "${S}"
-}

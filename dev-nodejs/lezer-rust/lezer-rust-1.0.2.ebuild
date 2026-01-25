@@ -4,11 +4,11 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/rust"
 inherit npm
 
 DESCRIPTION="This is a Rust grammar for the Lezer parser system"
 HOMEPAGE="https://github.com/lezer-parser/rust"
-SRC_URI="https://github.com/lezer-parser/rust/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -27,13 +27,3 @@ BDEPEND="
         dev-nodejs/mocha
         dev-nodejs/rollup
 "
-
-NPM_MODULE="@lezer/rust"
-
-NPM_EXTRA_FILES="rollup.config.js src dist"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/rust-${PV} "${S}"
-}

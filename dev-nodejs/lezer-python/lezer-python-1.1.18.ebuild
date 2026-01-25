@@ -4,11 +4,12 @@
 
 EAPI=8
 
+NPM_MODULE="@lezer/python"
 inherit npm
 
 DESCRIPTION="This is a Python grammar for the Lezer parser system."
 HOMEPAGE="https://github.com/lezer-parser/python"
-SRC_URI="https://github.com/lezer-parser/python/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+
 
 LICENSE="MIT"
 SLOT="0"
@@ -28,14 +29,3 @@ BDEPEND="
         dev-nodejs/mocha
         dev-nodejs/rollup
 "
-
-NPM_MODULE="@lezer/python"
-
-NPM_EXTRA_FILES="src dist"
-
-
-npm_src_unpack() {
-    unpack "${A}"
-    mv "${WORKDIR}"/python-${PV} "${S}"
-}
-
