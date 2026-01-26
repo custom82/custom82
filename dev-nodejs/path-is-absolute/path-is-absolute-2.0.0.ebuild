@@ -1,0 +1,16 @@
+# Copyright 1999-2018 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+EAPI=8
+
+NPM_MODULE="path-is-absolute"
+inherit npm
+
+DESCRIPTION="This package is no longer relevant as Node.js 0.12 is unmaintained"
+HOMEPAGE="https://github.com/sindresorhus/path-is-absolute"
+
+LICENSE="MIT"
+SLOT="0"
+KEYWORDS="~amd64 ~x86"
+
