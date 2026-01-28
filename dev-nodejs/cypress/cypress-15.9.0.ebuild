@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~x86"
 RDEPEND="
         dev-nodejs/cypress-request
         dev-nodejs/cypress-xvfb
-        dev-nodejs/types/sinonjs-fake-timers
+        dev-nodejs/types-sinonjs-fake-timers
         dev-nodejs/types-sizzle
         dev-nodejs/types-tmp
         dev-nodejs/arch
