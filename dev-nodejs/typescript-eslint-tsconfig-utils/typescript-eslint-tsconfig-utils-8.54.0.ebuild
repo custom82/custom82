@@ -4,17 +4,12 @@
 
 EAPI=8
 
-NPM_MODULE="@typescript-eslint/visitor-keys"
+NPM_MODULE="@typescript-eslint/tsconfig-utils"
 inherit npm
 
-DESCRIPTION="Visitor keys used to help traverse the TypeScript-ESTree AST"
+DESCRIPTION="Utilities for collecting TSConfigs for linting scenarios"
 HOMEPAGE="https://github.com/typescript-eslint/typescript-eslint"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-
-RDEPEND="
-        dev-nodejs/typescript-eslint-types
-        dev-nodejs/eslint-visitor-keys
-"

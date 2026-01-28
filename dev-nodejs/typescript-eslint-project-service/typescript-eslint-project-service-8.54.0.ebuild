@@ -4,10 +4,10 @@
 
 EAPI=8
 
-NPM_MODULE="@typescript-eslint/visitor-keys"
+NPM_MODULE="@typescript-eslint/project-service"
 inherit npm
 
-DESCRIPTION="Visitor keys used to help traverse the TypeScript-ESTree AST"
+DESCRIPTION="Standalone TypeScript project service wrapper for linting"
 HOMEPAGE="https://github.com/typescript-eslint/typescript-eslint"
 
 LICENSE="MIT"
@@ -15,6 +15,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
+        dev-nodejs/typescript-eslint-tsconfig-utils
         dev-nodejs/typescript-eslint-types
-        dev-nodejs/eslint-visitor-keys
 "
