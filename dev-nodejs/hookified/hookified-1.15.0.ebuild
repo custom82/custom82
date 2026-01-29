@@ -4,12 +4,16 @@
 
 EAPI=8
 
-NPM_MODULE="esutils"
+NPM_MODULE="hookified"
 inherit npm
 
-DESCRIPTION="esutils is utility box for ECMAScript language tools"
-HOMEPAGE="https://github.com/estools/esutils"
+DESCRIPTION="Event Emitting and Middleware Hooks"
+HOMEPAGE="https://github.com/jaredwray/hookified"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+
+RDEPEND="
+        dev-nodejs/hookified
+"

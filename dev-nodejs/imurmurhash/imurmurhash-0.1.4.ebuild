@@ -4,11 +4,11 @@
 
 EAPI=8
 
-NPM_MODULE="esutils"
+NPM_MODULE="imurmurhash"
 inherit npm
 
-DESCRIPTION="esutils is utility box for ECMAScript language tools"
-HOMEPAGE="https://github.com/estools/esutils"
+DESCRIPTION="An incremental implementation of the MurmurHash3"
+HOMEPAGE="https://github.com/jensyt/imurmurhash-js"
 
 LICENSE="MIT"
 SLOT="0"

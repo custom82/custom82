@@ -4,11 +4,11 @@
 
 EAPI=8
 
-NPM_MODULE="esutils"
+NPM_MODULE="@keyv/serialize"
 inherit npm
 
-DESCRIPTION="esutils is utility box for ECMAScript language tools"
-HOMEPAGE="https://github.com/estools/esutils"
+DESCRIPTION="Serialization functionality for Keyv"
+HOMEPAGE="https://github.com/jaredwray/keyv"
 
 LICENSE="MIT"
 SLOT="0"

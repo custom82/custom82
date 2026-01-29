@@ -4,11 +4,11 @@
 
 EAPI=8
 
-NPM_MODULE="esutils"
+NPM_MODULE="yocto-queue"
 inherit npm
 
-DESCRIPTION="esutils is utility box for ECMAScript language tools"
-HOMEPAGE="https://github.com/estools/esutils"
+DESCRIPTION="Tiny queue data structure"
+HOMEPAGE="https://github.com/sindresorhus/yocto-queue"
 
 LICENSE="MIT"
 SLOT="0"

@@ -4,11 +4,11 @@
 
 EAPI=8
 
-NPM_MODULE="esutils"
+NPM_MODULE="keyv"
 inherit npm
 
-DESCRIPTION="esutils is utility box for ECMAScript language tools"
-HOMEPAGE="https://github.com/estools/esutils"
+DESCRIPTION="Simple key-value storage with support for multiple backends"
+HOMEPAGE="https://github.com/jaredwray/keyv"
 
 LICENSE="MIT"
 SLOT="0"

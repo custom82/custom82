@@ -4,12 +4,16 @@
 
 EAPI=8
 
-NPM_MODULE="esutils"
+NPM_MODULE="qified"
 inherit npm
 
-DESCRIPTION="esutils is utility box for ECMAScript language tools"
-HOMEPAGE="https://github.com/estools/esutils"
+DESCRIPTION="Task and Message Queues with Multiple Providers"
+HOMEPAGE="https://github.com/jaredwray/qified"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+
+RDEPEND="
+        dev-nodejs/hookified
+"

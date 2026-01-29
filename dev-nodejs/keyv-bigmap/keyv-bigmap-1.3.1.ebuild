@@ -4,12 +4,17 @@
 
 EAPI=8
 
-NPM_MODULE="esutils"
+NPM_MODULE="@keyv/bigmap"
 inherit npm
 
-DESCRIPTION="esutils is utility box for ECMAScript language tools"
-HOMEPAGE="https://github.com/estools/esutils"
+DESCRIPTION="Bigmap for Keyv"
+HOMEPAGE="https://github.com/jaredwray/keyv"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+
+RDEPEND="
+        dev-nodejs/hashery
+        dev-nodejs/hookified
+"

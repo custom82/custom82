@@ -4,12 +4,17 @@
 
 EAPI=8
 
-NPM_MODULE="esutils"
+NPM_MODULE="@cacheable/utils"
 inherit npm
 
-DESCRIPTION="esutils is utility box for ECMAScript language tools"
-HOMEPAGE="https://github.com/estools/esutils"
+DESCRIPTION="Cacheble Utils"
+HOMEPAGE="https://github.com/jaredwray/cacheable"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+
+RDEPEND="
+        dev-nodejs/hashery
+        dev-nodejs/keyv
+"

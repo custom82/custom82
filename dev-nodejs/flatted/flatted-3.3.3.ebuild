@@ -4,11 +4,11 @@
 
 EAPI=8
 
-NPM_MODULE="esutils"
+NPM_MODULE="flatted"
 inherit npm
 
-DESCRIPTION="esutils is utility box for ECMAScript language tools"
-HOMEPAGE="https://github.com/estools/esutils"
+DESCRIPTION="A super light (0.5K) and fast circular JSON parser, directly from the creator of CircularJSON"
+HOMEPAGE="https://github.com/WebReflection/flatted"
 
 LICENSE="MIT"
 SLOT="0"
