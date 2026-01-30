@@ -15,4 +15,3 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-NPM_EXTRA_FILES="sync.js index.js sync.cjs index.cjs"

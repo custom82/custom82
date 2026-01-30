@@ -21,4 +21,3 @@ BDEPEND="
         dev-nodejs/rollup-plugin-copy
 "
 
-NPM_EXTRA_FILES="rollup.config.js index.d.ts index.js dist"

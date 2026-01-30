@@ -30,4 +30,3 @@ RDEPEND="
 
 
 
-NPM_EXTRA_FILES="esm dist types versions"

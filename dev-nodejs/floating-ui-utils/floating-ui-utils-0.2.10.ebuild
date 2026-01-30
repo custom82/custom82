@@ -20,4 +20,3 @@ BDEPEND="
         dev-nodejs/testing-library-jest-dom
         dev-nodejs/config
 "
-NPM_EXTRA_FILES="dom dist"

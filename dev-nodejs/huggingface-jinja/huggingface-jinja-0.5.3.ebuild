@@ -20,4 +20,3 @@ BDEPEND="
         dev-nodejs/huggingface-transformers
         dev-nodejs/typescript
 "
-NPM_EXTRA_FILES="tsconfig.json src dist"

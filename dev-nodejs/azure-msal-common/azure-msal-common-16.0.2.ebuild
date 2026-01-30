@@ -16,7 +16,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-NPM_EXTRA_FILES="dist"
 
 npm_src_unpack () {
         unpack ${A}

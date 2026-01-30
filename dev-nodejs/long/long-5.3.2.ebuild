@@ -16,4 +16,3 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
-NPM_EXTRA_FILES="index.js umd types.d.ts index.d.ts"

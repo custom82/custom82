@@ -21,4 +21,3 @@ BDEPEND="
 
 "
 
-NPM_EXTRA_FILES="index.d.ts index.js index.d.cts index.d.cts index.cjs"

@@ -14,7 +14,6 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-NPM_EXTRA_FILES="index.d.ts flow.d.ts"
 
 
 

@@ -21,4 +21,3 @@ RDEPEND="
         dev-nodejs/reflected-ffi
 "
 
-NPM_EXTRA_FILES="cli.cjs dist"

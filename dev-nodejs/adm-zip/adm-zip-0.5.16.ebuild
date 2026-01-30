@@ -14,4 +14,3 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-NPM_EXTRA_FILES="zipFile.js zipEntry.js headers methods util adm-zip.js"

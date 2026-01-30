@@ -27,5 +27,4 @@ RDEPEND="
         dev-nodejs/type-checked-collections
 "
 
-NPM_EXTRA_FILES="index.js jsdelivr.js types dist"
 

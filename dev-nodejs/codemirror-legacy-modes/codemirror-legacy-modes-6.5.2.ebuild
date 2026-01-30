@@ -20,4 +20,3 @@ RDEPEND="
         dev-nodejs/codemirror-language
 "
 
-NPM_EXTRA_FILES="rollup.config.js mode"

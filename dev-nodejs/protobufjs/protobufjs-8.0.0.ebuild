@@ -31,4 +31,3 @@ RDEPEND="
         dev-nodejs/long
 "
 
-NPM_EXTRA_FILES=" index.js index.d.ts light.d.ts light.js minimal.d.ts minimal.js package-lock.json tsconfig.json scripts/postinstall.js dist ext google src"

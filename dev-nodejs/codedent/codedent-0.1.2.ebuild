@@ -19,4 +19,3 @@ RDEPEND="
         dev-nodejs/plain-tag
 "
 
-NPM_EXTRA_FILES="index.js esm cjs es.js"

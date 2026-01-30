@@ -19,4 +19,3 @@ RDEPEND="
         dev-nodejs/protobufjs-inquire
 "
 
-NPM_EXTRA_FILES="index.js index.d.ts"

@@ -42,4 +42,3 @@ BDEPEND="
         dev-nodejs/tsd
 "
 
-NPM_EXTRA_FILES="lib install src"

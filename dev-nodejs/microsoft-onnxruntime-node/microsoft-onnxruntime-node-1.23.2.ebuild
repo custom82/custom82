@@ -31,7 +31,6 @@ BDEPEND="
         dev-nodejs/protobufjs
 "
 
-NPM_EXTRA_FILES="dist bin"
 
 npm_src_unpack () {
         unpack ${A}

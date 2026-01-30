@@ -19,4 +19,3 @@ RDEPEND="
         dev-nodejs/webreflection-utils
 "
 
-NPM_EXTRA_FILES="index.js types"

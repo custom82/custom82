@@ -20,4 +20,3 @@ RDEPEND="
         dev-nodejs/underscore
 "
 
-NPM_EXTRA_FILES="index.js lib test"
