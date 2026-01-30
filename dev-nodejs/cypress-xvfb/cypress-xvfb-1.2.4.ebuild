@@ -16,5 +16,5 @@ KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
         dev-nodejs/debug
-        dev-nodejs/lodash.once
+        dev-nodejs/lodash-once
 "
