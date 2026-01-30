@@ -2,7 +2,10 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>andrea.postiglione@gmail.com</email>
-		<name>Andrea Postiglione</name>
+		<email>tupone@gentoo.org</email>
+		<name>Alfredo Tupone</name>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">huggingface/accelerate</remote-id>
+	</upstream>
 </pkgmetadata>
