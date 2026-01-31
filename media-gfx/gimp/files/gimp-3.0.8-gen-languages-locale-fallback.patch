@@ -1,6 +1,6 @@
 --- a/tools/gen-languages.c	2026-01-31 15:56:02.689692579 +0100
-+++ b/tools/gen-languages.c	2026-01-31 15:57:55.007401870 +0100
-@@ -290,11 +290,34 @@
++++ b/tools/gen-languages.c	2026-01-31 16:11:36.593426943 +0100
+@@ -290,11 +290,32 @@
        g_setenv ("LC_ALL", "en_US.UTF-8", TRUE);
        if (setlocale (LC_ALL, "") == NULL)
          {
@@ -9,20 +9,20 @@
 -                      "Please install at least \"en_US.UTF-8\" or set a locale other than C or POSIX.\n",
 -                      __FILE__);
 -          exit (EXIT_FAILURE);
-+          /* On minimal build systems (stage3/chroot) locale generation may be
-+           * missing and setlocale() can fail. We try a few common fallbacks and
-+           * continue with a warning instead of aborting the build.
++          /*
++           * In minimal environments (stage3/chroot or locale not generated),
++           * setlocale() may still fail even after forcing LC_ALL.
++           * Try a few common fallbacks and, if none is available, continue
++           * with a warning instead of aborting the build.
 +           */
 +          const char * const fallbacks[] = { "C.UTF-8", "en_US.UTF-8", "POSIX", NULL };
 +          gboolean ok = FALSE;
 +
 +          for (int i = 0; fallbacks[i] != NULL; i++)
 +            {
-+              g_setenv ("LC_ALL", fallbacks[i], TRUE);
-+              if (setlocale (LC_ALL, "") != NULL)
++              if (setlocale (LC_ALL, fallbacks[i]) != NULL)
 +                {
-+                  g_printerr ("WARNING: %s: setlocale() failed for default locale; using fallback locale \"%s\".
-+",
++                  g_printerr ("WARNING: %s: setlocale() failed for default locale; using fallback locale \"%s\".\n",
 +                              __FILE__, fallbacks[i]);
 +                  ok = TRUE;
 +                  break;
@@ -32,10 +32,8 @@
 +          if (! ok)
 +            {
 +              g_printerr ("WARNING: %s: setlocale() failed and no UTF-8 locale fallback is available. "
-+                          "Continuing anyway; generated language list may be incomplete.
-+",
++                          "Continuing anyway; generated language list may be incomplete.\n",
 +                          __FILE__);
-+              /* do not exit */
 +            }
          }
      }
