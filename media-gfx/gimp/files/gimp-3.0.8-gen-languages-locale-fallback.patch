@@ -1,0 +1,42 @@
+--- /home/custom/gen-languages.c.orig	2026-01-31 15:56:02.689692579 +0100
++++ /home/custom/gen-languages.c.patched	2026-01-31 15:57:55.007401870 +0100
+@@ -290,11 +290,34 @@
+       g_setenv ("LC_ALL", "en_US.UTF-8", TRUE);
+       if (setlocale (LC_ALL, "") == NULL)
+         {
+-          g_printerr ("ERROR: %s: setlocale() failed. "
+-                      "The build system needs to be set up for localization. "
+-                      "Please install at least \"en_US.UTF-8\" or set a locale other than C or POSIX.\n",
+-                      __FILE__);
+-          exit (EXIT_FAILURE);
++          /* On minimal build systems (stage3/chroot) locale generation may be
++           * missing and setlocale() can fail. We try a few common fallbacks and
++           * continue with a warning instead of aborting the build.
++           */
++          const char * const fallbacks[] = { "C.UTF-8", "en_US.UTF-8", "POSIX", NULL };
++          gboolean ok = FALSE;
++
++          for (int i = 0; fallbacks[i] != NULL; i++)
++            {
++              g_setenv ("LC_ALL", fallbacks[i], TRUE);
++              if (setlocale (LC_ALL, "") != NULL)
++                {
++                  g_printerr ("WARNING: %s: setlocale() failed for default locale; using fallback locale \"%s\".
++",
++                              __FILE__, fallbacks[i]);
++                  ok = TRUE;
++                  break;
++                }
++            }
++
++          if (! ok)
++            {
++              g_printerr ("WARNING: %s: setlocale() failed and no UTF-8 locale fallback is available. "
++                          "Continuing anyway; generated language list may be incomplete.
++",
++                          __FILE__);
++              /* do not exit */
++            }
+         }
+     }
+ 
