@@ -126,6 +126,7 @@ DOCS=( "AUTHORS" "NEWS" "README" "README.i18n" )
 PATCHES=(
 	"${FILESDIR}"/gimp-3.0.6-respect-NM.patch
 	"${FILESDIR}"/gimp-3.0.8-no-libunwind.patch
+	"${FILESDIR}"/gimp-3.0.8-gen-languages-locale-fallback.patch
 )
 
 pkg_pretend() {
