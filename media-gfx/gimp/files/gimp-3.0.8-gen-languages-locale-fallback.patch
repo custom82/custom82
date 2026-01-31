@@ -1,5 +1,5 @@
---- /home/custom/gen-languages.c.orig	2026-01-31 15:56:02.689692579 +0100
-+++ /home/custom/gen-languages.c.patched	2026-01-31 15:57:55.007401870 +0100
+--- /home/custom/gen-languages.c	2026-01-31 15:56:02.689692579 +0100
++++ /home/custom/gen-languages.c	2026-01-31 15:57:55.007401870 +0100
 @@ -290,11 +290,34 @@
        g_setenv ("LC_ALL", "en_US.UTF-8", TRUE);
        if (setlocale (LC_ALL, "") == NULL)
