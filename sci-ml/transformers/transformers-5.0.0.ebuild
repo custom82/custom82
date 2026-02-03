@@ -5,7 +5,7 @@ EAPI=8
 
 DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..14} )
-DISTUTILS_SINGLE_IMPL=1
+
 inherit distutils-r1
 
 DESCRIPTION="State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow"
@@ -23,9 +23,9 @@ IUSE="torch"
 RESTRICT="test" # Need network, too long to execute
 
 RDEPEND="
-	>=sci-ml/huggingface_hub-0.34.0[${PYTHON_SINGLE_USEDEP}]
+	>=sci-ml/huggingface_hub-0.34.0[${PYTHON_USEDEP}]
 	<sci-ml/huggingface_hub-1
-	=sci-ml/tokenizers-0.22*[${PYTHON_SINGLE_USEDEP}]
+	=sci-ml/tokenizers-0.22*[${PYTHON_USEDEP}]
 	$(python_gen_cond_dep '
 		dev-python/filelock[${PYTHON_USEDEP}]
 		dev-python/numpy[${PYTHON_USEDEP}]
@@ -37,9 +37,9 @@ RDEPEND="
 		sci-ml/safetensors[${PYTHON_USEDEP}]
 	')
 	torch? (
-		sci-ml/accelerate[${PYTHON_SINGLE_USEDEP}]
-		sci-ml/caffe2[${PYTHON_SINGLE_USEDEP}]
-		sci-ml/pytorch[${PYTHON_SINGLE_USEDEP}]
+		sci-ml/accelerate[${PYTHON_USEDEP}]
+		sci-ml/caffe2[${PYTHON_USEDEP}]
+		sci-ml/pytorch[${PYTHON_USEDEP}]
 	)
 "
 
