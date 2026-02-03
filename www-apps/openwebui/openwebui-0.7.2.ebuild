@@ -99,7 +99,7 @@ RDEPEND="
 	transformers? (
 		>=sci-ml/transformers-4.57.6[${PYTHON_USEDEP}]
 		>=dev-python/sentence-transformers-5.2.0[${PYTHON_USEDEP}]
-		>=dev-python/huggingface-hub-0.34.0[${PYTHON_USEDEP}]
+		>=sci-ml/huggingface-hub-0.34.0[${PYTHON_USEDEP}]
 		dev-python/accelerate[${PYTHON_USEDEP}]
 		>=dev-python/pyarrow-20.0.0[${PYTHON_USEDEP}]
 		>=dev-python/einops-0.8.1[${PYTHON_USEDEP}]
