@@ -302,7 +302,6 @@ BDEPEND="
 
 
 		>=dev-nodejs/vite-5.4.21
-		<dev-nodejs/vite-6
 		dev-nodejs/vitest
 		dev-nodejs/cypress
 	)
