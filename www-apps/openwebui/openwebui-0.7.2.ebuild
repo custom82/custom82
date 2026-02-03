@@ -67,7 +67,7 @@ RDEPEND="
 	>=dev-python/sqlalchemy-2.0.45[${PYTHON_USEDEP}]
 	>=dev-python/alembic-1.18.1[${PYTHON_USEDEP}]
 	>=dev-python/peewee-3.19.0[${PYTHON_USEDEP}]
-	>=dev-python/peewee-migrate-1.14.3[${PYTHON_USEDEP}]
+	>=dev-python/peewee_migrate-1.14.3[${PYTHON_USEDEP}]
 
 	>=dev-python/pycrdt-0.12.44[${PYTHON_USEDEP}]
 	redis? ( dev-db/redis )
