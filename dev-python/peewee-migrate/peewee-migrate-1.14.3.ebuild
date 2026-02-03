@@ -9,8 +9,8 @@ PYTHON_COMPAT=( python3_{11..14} )
 inherit distutils-r1
 
 DESCRIPTION="A simple migration engine for Peewee ORM"
-HOMEPAGE="https://github.com/klen/peewee_migrate"
-SRC_URI="https://github.com/klen/peewee_migrate/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/klen/peewee-migrate"
+SRC_URI="https://github.com/klen/peewee-migrate/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
