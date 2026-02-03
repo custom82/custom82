@@ -39,5 +39,3 @@ RDEPEND="
 BDEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
 "
-
-# Se upstream non include file di test “standard”, lasciamo i default di distutils-r1.
