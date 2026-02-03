@@ -60,7 +60,7 @@ RDEPEND="
 	dev-python/aiocache[${PYTHON_USEDEP}]
 	dev-python/aiofiles[${PYTHON_USEDEP}]
 	>=dev-python/starlette-compress-1.6.1[${PYTHON_USEDEP}]
-	>=dev-python/httpx-0.28.1[socks,http2,zstd,cli,brotli,${PYTHON_USEDEP}]
+	>=dev-python/httpx-0.28.1[cli,${PYTHON_USEDEP}]
 	>=dev-python/starsessions-2.2.1[redis,${PYTHON_USEDEP}]
 	>=dev-python/python-mimeparse-2.0.0[${PYTHON_USEDEP}]
 
