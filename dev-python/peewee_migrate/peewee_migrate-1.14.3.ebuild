@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="A simple migration engine for Peewee ORM"
 HOMEPAGE="https://github.com/klen/peewee_migrate"
-SRC_URI="https://github.com/klen/peewee_migrate/archive/refs/tags/1.14.0.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/klen/peewee_migrate/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
