@@ -131,7 +131,7 @@ RDEPEND="
 		>=dev-python/azure-ai-documentintelligence-1.0.2[${PYTHON_USEDEP}]
 	)
 
-	>=media-gfx/pillow-12.1.0[${PYTHON_USEDEP}]
+	>=dev-python/pillow-12.1.0[${PYTHON_USEDEP}]
 	ocr? (
 		>=media-libs/opencv-4.12.0[python,${PYTHON_USEDEP}]
 		>=dev-python/rapidocr-onnxruntime-1.4.4[${PYTHON_USEDEP}]
