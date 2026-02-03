@@ -1,7 +1,7 @@
 # openwebui-0.7.2.ebuild
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11,12} )
+PYTHON_COMPAT=( python3_{11,12,13,14} )
 DISTUTILS_USE_PEP517=hatchling
 
 inherit distutils-r1 systemd
