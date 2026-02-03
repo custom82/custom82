@@ -1,29 +1,35 @@
-# Copyright 1999-2026 Gentoo Authors
+# Copyright 2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
+PYTHON_COMPAT=( python3_{11,12,13,14} )
 DISTUTILS_USE_PEP517=poetry
-PYTHON_COMPAT=( python3_{11..14} )
 
-inherit distutils-r1
+inherit pypi distutils-r1
 
-DESCRIPTION="A simple migration engine for Peewee ORM"
-HOMEPAGE="https://github.com/klen/peewee-migrate"
-SRC_URI="https://github.com/klen/peewee-migrate/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+DESCRIPTION="Simple migration engine for Peewee ORM"
+HOMEPAGE="https://github.com/klen/peewee_migrate"
+
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~x86"
+IUSE=""
 
-RDEPEND="
-	dev-python/peewee[${PYTHON_USEDEP}]
-"
-BDEPEND="
-	test? (
-		dev-python/pytest[${PYTHON_USEDEP}]
-	)
+DEPEND="
+    dev-python/peewee[${PYTHON_USEDEP}]
 "
 
-distutils_enable_tests pytest
+RDEPEND="${DEPEND}"
 
+# Tests (optional)
+DEPEND+="
+    dev-python/pyproject-build[${PYTHON_USEDEP}]
+    dev-python/pytest[${PYTHON_USEDEP}]
+"
+
+src_test() {
+    # Run basic package tests if available
+    pytest -q
+}
