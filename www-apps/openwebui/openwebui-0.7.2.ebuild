@@ -41,7 +41,7 @@ RDEPEND="
 	${PYTHON_DEPS}
 
 	>=dev-python/fastapi-0.128.0[${PYTHON_USEDEP}]
-	>=dev-python/uvicorn-0.40.0[standard,${PYTHON_USEDEP}]
+	>=dev-python/uvicorn-0.40.0[${PYTHON_USEDEP}]
 	>=dev-python/pydantic-2.12.5[${PYTHON_USEDEP}]
 	>=dev-python/python-multipart-0.0.21[${PYTHON_USEDEP}]
 	>=dev-python/itsdangerous-2.2.0[${PYTHON_USEDEP}]
