@@ -140,7 +140,7 @@ RDEPEND="
 
 	whisper? (
 		>=dev-python/onnxruntime-1.23.2[${PYTHON_USEDEP}]
-		>=dev-python/faster-whisper-1.2.1[${PYTHON_USEDEP}]
+		>=dev-python/faster_whisper-1.2.1[${PYTHON_USEDEP}]
 	)
 
 	>=dev-python/black-25.12.0[${PYTHON_USEDEP}]
