@@ -162,7 +162,7 @@ RDEPEND="
 	>=dev-python/ldap3-2.9.1[${PYTHON_USEDEP}]
 
 	postgres? (
-		# Se nel tuo overlay preferisci psycopg2-binary, sostituisci qui.
+
 		dev-python/psycopg:2[${PYTHON_USEDEP}]
 		dev-python/pgvector[${PYTHON_USEDEP}]
 	)
@@ -180,7 +180,7 @@ BDEPEND="
 	frontend? (
 		>=net-libs/nodejs-18
 
-		# Dependencies + devDependencies DIRETTE dal package.json di Open WebUI 0.7.2
+
 		dev-nodejs/azure-msal-browser
 		dev-nodejs/codemirror-lang-javascript
 		dev-nodejs/codemirror-lang-python
@@ -275,7 +275,7 @@ BDEPEND="
 		dev-nodejs/yaml
 		dev-nodejs/yjs
 
-		# Dev deps per build
+
 		dev-nodejs/sveltejs-adapter-auto
 		dev-nodejs/sveltejs-adapter-static
 		dev-nodejs/sveltejs-kit
@@ -300,7 +300,7 @@ BDEPEND="
 		dev-nodejs/tailwindcss
 		dev-nodejs/tslib
 
-		# IMPORTANT: OpenWebUI 0.7.2 ha vite "^5.4.21"
+
 		>=dev-nodejs/vite-5.4.21
 		<dev-nodejs/vite-6
 		dev-nodejs/vitest
