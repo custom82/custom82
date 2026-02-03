@@ -51,7 +51,7 @@ RDEPEND="
 	dev-python/cryptography[${PYTHON_USEDEP}]
 	>=dev-python/bcrypt-5.0.0[${PYTHON_USEDEP}]
 	>=dev-python/argon2-cffi-25.1.0[${PYTHON_USEDEP}]
-	>=dev-python/pyjwt-2.10.0[crypto,${PYTHON_USEDEP}]
+	>=dev-python/pyjwt-2.10.0[${PYTHON_USEDEP}]
 	>=dev-python/authlib-1.6.6[${PYTHON_USEDEP}]
 
 	>=dev-python/requests-2.32.5[${PYTHON_USEDEP}]
