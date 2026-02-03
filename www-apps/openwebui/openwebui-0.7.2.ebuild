@@ -125,7 +125,7 @@ RDEPEND="
 		>=dev-python/xlrd-2.0.2[${PYTHON_USEDEP}]
 		>=dev-python/validators-0.35.0[${PYTHON_USEDEP}]
 		dev-python/psutil[${PYTHON_USEDEP}]
-		dev-python/sentencepiece[${PYTHON_USEDEP}]
+		sci-ml/sentencepiece[${PYTHON_USEDEP}]
 		media-libs/libsndfile
 		>=dev-python/soundfile-0.13.1[${PYTHON_USEDEP}]
 		>=dev-python/azure-ai-documentintelligence-1.0.2[${PYTHON_USEDEP}]
