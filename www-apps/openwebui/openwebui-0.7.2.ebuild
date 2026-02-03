@@ -97,7 +97,7 @@ RDEPEND="
 	>=dev-python/boto3-1.42.29[${PYTHON_USEDEP}]
 
 	transformers? (
-		>=dev-python/transformers-4.57.6[${PYTHON_USEDEP}]
+		>=sci-ml/transformers-4.57.6[${PYTHON_USEDEP}]
 		>=dev-python/sentence-transformers-5.2.0[${PYTHON_USEDEP}]
 		>=dev-python/huggingface-hub-0.34.0[${PYTHON_USEDEP}]
 		dev-python/accelerate[${PYTHON_USEDEP}]
