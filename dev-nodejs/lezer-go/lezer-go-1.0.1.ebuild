@@ -18,6 +18,6 @@ IUSE="test"
 
 RDEPEND="
         dev-nodejs/lezer-common
-        dev-nodejs/lezer-highligth
+        dev-nodejs/lezer-highlight
         dev-nodejs/leezr-lr
 "
