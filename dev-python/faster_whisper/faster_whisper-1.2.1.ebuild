@@ -29,12 +29,12 @@ BDEPEND="
 
 RDEPEND="
 	${PYTHON_DEPS}
-	>=dev-python/av:0[${PYTHON_USEDEP}]
-	>=dev-python/tqdm:0[${PYTHON_USEDEP}]
-	>=sci-ml/tokenizers:0[${PYTHON_USEDEP}]
-	>=sci-ml/huggingface_hub:0[${PYTHON_USEDEP}]
-	>=sci-libs/onnxruntime:0[${PYTHON_USEDEP}]
-	>=sci-libs/ctranslate2:0[${PYTHON_USEDEP}]
+	dev-python/av:0[${PYTHON_USEDEP}]
+	dev-python/tqdm:0[${PYTHON_USEDEP}]
+	sci-ml/tokenizers:0[${PYTHON_USEDEP}]
+	sci-ml/huggingface_hub:0[${PYTHON_USEDEP}]
+	sci-libs/onnxruntime:0[${PYTHON_USEDEP}]
+	sci-libs/ctranslate2:0[${PYTHON_USEDEP}]
 "
 
 src_unpack() { :; }
