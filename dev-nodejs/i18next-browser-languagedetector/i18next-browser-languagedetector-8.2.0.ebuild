@@ -15,5 +15,5 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-        dev-nosejs/babel-runtime
+        dev-nodejs/babel-runtime
 "
