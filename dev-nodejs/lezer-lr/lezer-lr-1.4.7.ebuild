@@ -19,8 +19,3 @@ IUSE="test"
 RDEPEND="
         dev-nodejs/lezer-common
 "
-
-BDEPEND="
-        dev-nodejs/marijn-buildtool
-        dev-nodejs/types-node
-"
