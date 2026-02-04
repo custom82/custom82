@@ -19,5 +19,5 @@ IUSE="test"
 RDEPEND="
         dev-nodejs/lezer-common
         dev-nodejs/lezer-highlight
-        dev-nodejs/leezr-lr
+        dev-nodejs/lezer-lr
 "
