@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
-        dev-nodens/floating-ui-core
+        dev-nodejs/floating-ui-core
         dev-nodejs/floating-ui-dom
         dev-nodejs/esm-env
         dev-nodejs/runed
