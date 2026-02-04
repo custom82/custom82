@@ -19,6 +19,6 @@ IUSE="test"
 RDEPEND="
         dev-nodejs/codemirror-language
         dev-nodejs/codemirror-state
-        dec-nodejs/codemirror-view
+        dev-nodejs/codemirror-view
         dev-nodejs/lezer-common
 "
