@@ -19,5 +19,5 @@ IUSE="test"
 RDEPEND="
         dev-nodejs/adm-zip
         dev-nodejs/global-agent
-        dev-nodejs/microssoft-onnxruntime-common
+        dev-nodejs/onnxruntime-common
 "
