@@ -119,7 +119,13 @@ paths = set()
 def add_path(rel):
     if not rel or rel in (".", "package.json"):
         return
-    rel = rel.lstrip("./").replace("\\", "/")
+    # Normalize npm paths:
+    # - registry "files" list may include absolute-looking entries like "/index.js"
+    # - exports/main/etc may be "./index.js"
+    # - keep everything relative to ${S}
+    rel = rel.replace("\\", "/")
+    rel = rel.lstrip("./")
+    rel = rel.lstrip("/")
     if rel:
         paths.add(rel)
 
@@ -138,6 +144,11 @@ if isinstance(files, list) and files:
     for pat in files:
         if not isinstance(pat, str) or not pat.strip():
             continue
+        # npm "files" patterns can start with '/' (package-root), but glob
+        # treats those as absolute and ignores S; make them relative.
+        pat = pat.strip().replace('\\\\', '/')
+        pat = pat.lstrip('./')
+        pat = pat.lstrip('/')
         for m in glob.glob(os.path.join(S, pat), recursive=True):
             rel = os.path.relpath(m, S).replace("\\", "/")
             add_path(rel)
