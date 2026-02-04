@@ -18,7 +18,7 @@ IUSE="test"
 
 RDEPEND="
         dev-nodejs/codemirror-autocomplete
-        dev-ndoejs/codemirror-language
+        dev-nodejs/codemirror-language
         dev-nodejs/codemirror-state
         dev-nodejs/codemirror-view
         dev-nodejs/lezer-common
