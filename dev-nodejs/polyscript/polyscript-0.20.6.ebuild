@@ -20,7 +20,7 @@ RDEPEND="
         dev-nodejs/webreflection-idb-map
         dev-nodejs/webreflection-utils
         dev-nodejs/basic-devtools
-        dev-ndoejs/codedent
+        dev-nodejs/codedent
         dev-nodejs/coincident
         dev-nodejs/html-escaper
         dev-nodejs/reflected-ffi
