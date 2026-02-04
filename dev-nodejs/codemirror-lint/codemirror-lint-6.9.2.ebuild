@@ -18,7 +18,7 @@ IUSE="test"
 
 RDEPEND="
         dev-nodejs/codemirror-state
-        dec-nodejs/codemirror-view
+        dev-nodejs/codemirror-view
         dev-nodejs/crelt
 "
 
