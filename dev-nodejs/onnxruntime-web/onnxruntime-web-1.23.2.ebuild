@@ -18,7 +18,7 @@ RDEPEND="
         dev-nodejs/flatbuffers
         dev-nodejs/guid-typescript
         dev-nodejs/long
-        dev-nodejs/microsoft-onnxruntime-common
+        dev-nodejs/onnxruntime-common
         dev-nodejs/platform
         dev-nodejs/protobufjs
 "
