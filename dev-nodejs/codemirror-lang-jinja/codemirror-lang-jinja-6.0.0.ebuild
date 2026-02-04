@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 RDEPEND="
-        dev-nodejs/codemirror-html
+        dev-nodejs/codemirror-lang-html
         dev-nodejs/codemirror-language
         dev-nodejs/lezer-common
         dev-nodejs/lezer-highlight
