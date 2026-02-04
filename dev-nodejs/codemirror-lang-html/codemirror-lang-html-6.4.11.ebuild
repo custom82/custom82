@@ -24,6 +24,6 @@ RDEPEND="
         dev-nodejs/codemirror-state
         dev-nodejs/codemirror-view
         dev-nodejs/lezer-common
-        dev-nodejs/leer-css
+        dev-nodejs/lezer-css
         dev-nodejs/lezer-html
 "
