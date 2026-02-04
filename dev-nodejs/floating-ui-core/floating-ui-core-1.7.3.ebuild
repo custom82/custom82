@@ -18,8 +18,3 @@ IUSE="test"
 RDEPEND="
         dev-nodejs/floating-ui-utils
 "
-
-BDEPEND="
-        dev-nodejs/config
-"
-

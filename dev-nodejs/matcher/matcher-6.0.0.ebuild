@@ -4,13 +4,18 @@
 
 EAPI=8
 
-NPM_MODULE="onnxruntime-common"
+NPM_MODULE="matcher"
 inherit npm
 
-DESCRIPTION="This package implements WebAssembly Text Format language support for the CodeMirror code editor"
-HOMEPAGE="https://github.com/microsoft/onnxruntime"
+DESCRIPTION="Simple wildcard matching"
+HOMEPAGE="https://github.com/sindresorhus/matcher"
+
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
+
+RDEPEND="
+        dev-nodejs/escape-string-regexp
+"

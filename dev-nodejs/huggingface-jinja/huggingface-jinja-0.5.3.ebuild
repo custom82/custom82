@@ -14,9 +14,3 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
-
-BDEPEND="
-        dev-nodejs/huggingface-hub
-        dev-nodejs/huggingface-transformers
-        dev-nodejs/typescript
-"

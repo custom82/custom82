@@ -20,25 +20,3 @@ RDEPEND="
         dev-nodejs/detect-libc
         dev-nodejs/semver
 "
-
-BDEPEND="
-        dev-nodejs/biomejs-biome
-        dev-nodejs/cpplint-cli
-        dev-nodejs/emnapi-runtime
-        dev-nodejs/img-sharp-libvips-dev
-        dev-nodejs/img-sharp-libvips-dev-wasm32
-        dev-nodejs/img-sharp-libvips-win32-arm64
-        dev-nodejs/img-sharp-libvips-win32-ia32
-        dev-nodejs/img-sharp-libvips-win32-x64
-        dev-nodejs/types-node
-        dev-nodejs/emnapi
-        dev-nodejs/exif-reader
-        dev-nodejs/extract-zip
-        dev-nodejs/icc
-        dev-nodejs/jsdoc-to-markdown
-        dev-ndoejs/node-addon-api
-        dev-nodejs/node-gyp
-        dev-nodejs/tar-fs
-        dev-nodejs/tsd
-"
-

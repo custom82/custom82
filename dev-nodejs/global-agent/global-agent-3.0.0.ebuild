@@ -16,8 +16,10 @@ KEYWORDS="~amd64 ~x86"
 IUSE="test"
 
 RDEPEND="
-
-"
-
-BDEPEND="
+        dev-nodejs/es6-error
+        dev-nodejs/globalthis
+        dev-nodejs/matcher
+        dev-nodejs/omit-undefined
+        dev-nodejs/semver
+        dev-nodejs/serialize-error
 "

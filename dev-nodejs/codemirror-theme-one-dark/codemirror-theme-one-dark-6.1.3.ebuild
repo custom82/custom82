@@ -17,10 +17,7 @@ IUSE="test"
 
 RDEPEND="
         dev-nodejs/codemirror-language
+        dev-nodejs/codemirror-state
+        dev-nodejs/codemirror-view
+        dev-nodejs/lezer-highlight
 "
-
-BDEPEND="
-        dev-nodejs/rollup
-        dev-nodejs/typescript
-"
-

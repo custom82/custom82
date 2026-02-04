@@ -19,8 +19,3 @@ IUSE="test"
 RDEPEND="
         dev-nodejs/marijn-find-cluster-break
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"
-

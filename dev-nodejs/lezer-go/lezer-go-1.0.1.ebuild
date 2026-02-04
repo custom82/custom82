@@ -21,12 +21,3 @@ RDEPEND="
         dev-nodejs/lezer-highligth
         dev-nodejs/leezr-lr
 "
-
-BDEPEND="
-        dev-nodejs/lezer-generator
-        dev-nodejs/rollup-plugin-node-resolve
-        dev-nodejs/mocha
-        dev-nodejs/rollup
-"
-
-

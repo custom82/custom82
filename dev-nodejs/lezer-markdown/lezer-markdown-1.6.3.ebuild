@@ -20,11 +20,3 @@ RDEPEND="
         dev-nodejs/lezer-common
         dev-nodejs/lezer-highlight
 "
-
-BDEPEND="
-        dev-nodejs/lezer-html
-        dev-nodejs/marijn-buildtool
-        dev-nodejs/getdocs-ts
-        dev-nodejs/ist
-        dev-nodejs/mocha
-"

@@ -4,11 +4,12 @@
 
 EAPI=8
 
-NPM_MODULE="onnxruntime-common"
+NPM_MODULE="es6-error"
 inherit npm
 
-DESCRIPTION="This package implements WebAssembly Text Format language support for the CodeMirror code editor"
-HOMEPAGE="https://github.com/microsoft/onnxruntime"
+DESCRIPTION="An easily-extendable error class for use with ES6 classes (or ES5, if you so choose)"
+HOMEPAGE="https://github.com/bjyoungblood/es6-error"
+
 
 LICENSE="MIT"
 SLOT="0"

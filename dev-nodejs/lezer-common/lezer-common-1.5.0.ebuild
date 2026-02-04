@@ -15,11 +15,3 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="test"
-
-BDEPEND="
-        dev-nodejs/marijn-buildtool
-        dev-nodejs/types-mocha
-        dev-nodejs/ist
-        dev-nodejs/mocha
-        dev-nodejs/ts-node
-"

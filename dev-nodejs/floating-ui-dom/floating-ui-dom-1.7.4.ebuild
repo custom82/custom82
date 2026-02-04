@@ -19,16 +19,4 @@ IUSE="test"
 RDEPEND="
         dev-nodejs/floating-ui-core
         dev-nodejs/floating-ui-utils
-        dev-nodejs/lezer-highlight
-        dev-nodejs/lezer-lr
-"
-
-BDEPEND="
-        dev-nodejs/types-react
-        dev-nodejs/types-react-dom
-        dev-nodejs/vitejs-plugin-react
-        dev-nodejs/config
-        dev-nodejs/react
-        dev-nodejs/react-dom
-        dev-nodejs/react-rotuer-dom
 "

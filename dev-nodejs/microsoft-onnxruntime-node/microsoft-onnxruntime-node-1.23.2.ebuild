@@ -20,23 +20,4 @@ RDEPEND="
         dev-nodejs/adm-zip
         dev-nodejs/global-agent
         dev-nodejs/microssoft-onnxruntime-common
-        "
-
-BDEPEND="
-        dev-nodejs/types-minimist
-        dev-nodejs/cmake-js
-        dev-nodejs/jsonc
-        dev-nodejs/minimist
-        dev-nodejs/node-addon-api
-        dev-nodejs/protobufjs
 "
-
-
-npm_src_unpack () {
-        unpack ${A}
-        mv ${WORKDIR}/package "${S}"
-}
-
-
-
-

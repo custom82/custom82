@@ -21,7 +21,3 @@ RDEPEND="
         dev-nodejs/style-mod
         dev-nodejs/w3c-keyname
 "
-
-BDEPEND="
-        dev-nodejs/codemirror-buildhelper
-"

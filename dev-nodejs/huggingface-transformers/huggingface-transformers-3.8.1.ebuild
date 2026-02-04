@@ -21,18 +21,3 @@ RDEPEND="
         dev-nodejs/onnxruntime-web
         dev-nodejs/sharp
 "
-
-BDEPEND="
-        dev-nodejs/types-jest
-        dev-nodejs/types-node
-        dev-nodejs/webgpu-types
-        dev-nodejs/jest
-        dev-nodejs/jest-environment-node
-        dev-nodejs/jsdoc-to-markdown
-        dev-nodejs/prettier
-        dev-nodejs/typescript
-        dev-nodejs/wavefile
-        dev-nodejs/webpack
-        dev-nodejs/webpack-cli
-        dev-nodejs/webpack-dev-server
-"
