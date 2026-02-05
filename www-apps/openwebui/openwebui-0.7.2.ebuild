@@ -125,7 +125,7 @@ RDEPEND="
 	redis? (
 		$(python_gen_cond_dep '
 			dev-python/redis[${PYTHON_USEDEP}]
-			>=dev-python/starsessions-2.2.1[redis,${PYTHON_USEDEP}]
+			>=dev-python/starsessions-2.2.1[${PYTHON_USEDEP}]
 		')
 	)
 
