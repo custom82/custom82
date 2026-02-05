@@ -178,7 +178,7 @@ RDEPEND="
 	ocr? (
 		$(python_gen_cond_dep '
 			=dev-python/pillow-12.1.0[${PYTHON_USEDEP}]
-			=dev-python/opencv-python-headless-4.12.0.88[${PYTHON_USEDEP}]
+			>=media-libs/opencv-4.12.0[python,${PYTHON_USEDEP}]
 			=dev-python/rapidocr-onnxruntime-1.4.4[${PYTHON_USEDEP}]
 		')
 	)
