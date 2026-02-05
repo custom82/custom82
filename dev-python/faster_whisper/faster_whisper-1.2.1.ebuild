@@ -2,7 +2,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13,14} )
 
-inherit python-r1
+inherit python-single-r1
 
 DESCRIPTION="Faster Whisper transcription with CTranslate2"
 HOMEPAGE="
