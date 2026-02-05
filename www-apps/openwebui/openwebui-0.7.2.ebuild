@@ -145,7 +145,7 @@ RDEPEND="
 		$(python_gen_cond_dep '
 			>=sci-ml/transformers-4.57.6[${PYTHON_USEDEP}]
 			=dev-python/sentence-transformers-5.2.0[${PYTHON_USEDEP}]
-			>=sci-ml/huggingface-hub-0.34.0[${PYTHON_USEDEP}]
+			>=sci-ml/huggingface-hub-0.34.0[${PYTHON_SINGLE_USEDEP}]
 			sci-ml/accelerate[${PYTHON_USEDEP}]
 			=dev-python/pyarrow-20.0.0[${PYTHON_USEDEP}]
 			=dev-python/einops-0.8.1[${PYTHON_USEDEP}]
