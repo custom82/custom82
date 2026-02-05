@@ -100,7 +100,7 @@ RDEPEND="
 
 		dev-python/pydub[${PYTHON_USEDEP}]
 		=dev-python/ddgs-9.10.0[${PYTHON_USEDEP}]
-		=dev-python/youtube-transcript-api-1.2.3[${PYTHON_USEDEP}]
+		>=dev-python/youtube-transcript-api-1.2.3[${PYTHON_USEDEP}]
 		=dev-python/pytube-15.0.0[${PYTHON_USEDEP}]
 
 
