@@ -2,7 +2,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13,14} )
 
-inherit python-r1 pypi
+inherit python-single-r1
 
 DESCRIPTION="Faster Whisper transcription with CTranslate2"
 HOMEPAGE="
@@ -18,30 +18,33 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 RESTRICT="test"
 
 S="${WORKDIR}"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 BDEPEND="
 	${PYTHON_DEPS}
-	dev-python/installer:0[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-python/installer:0[${PYTHON_USEDEP}]
+	')
 "
+
 RDEPEND="
 	${PYTHON_DEPS}
-	dev-python/av:0[${PYTHON_USEDEP}]
-	dev-python/tqdm:0[${PYTHON_USEDEP}]
-	sci-ml/tokenizers:0[${PYTHON_USEDEP}]
-	sci-ml/huggingface_hub:0[${PYTHON_USEDEP}]
-	sci-libs/onnxruntime:0[${PYTHON_USEDEP}]
-	sci-libs/ctranslate2:0[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-python/av[${PYTHON_USEDEP}]
+		dev-python/tqdm[${PYTHON_USEDEP}]
+	')
+	sci-ml/tokenizers[${PYTHON_SINGLE_USEDEP}]
+	sci-ml/huggingface_hub[${PYTHON_SINGLE_USEDEP}]
+	sci-libs/onnxruntime[${PYTHON_SINGLE_USEDEP}]
+	sci-libs/ctranslate2[${PYTHON_SINGLE_USEDEP}]
 "
 
 src_unpack() { :; }
 
 src_install() {
-	python_foreach_impl _install_wheel
-}
+	python_setup
 
-_install_wheel() {
 	"${EPYTHON}" -m installer \
 		--destdir="${D}" \
 		--prefix=/usr \
@@ -50,9 +53,9 @@ _install_wheel() {
 }
 
 pkg_postinst() {
-	python_foreach_impl python_optimize
+	python_optimize
 }
 
 pkg_postrm() {
-	python_foreach_impl python_cleanup
+	python_cleanup
 }
