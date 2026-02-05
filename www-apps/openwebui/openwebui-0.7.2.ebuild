@@ -143,7 +143,7 @@ RDEPEND="
 
 	transformers? (
 		$(python_gen_cond_dep '
-			=dev-python/transformers-4.57.6[${PYTHON_USEDEP}]
+			>=sci-ml/transformers-4.57.6[${PYTHON_USEDEP}]
 			=dev-python/sentence-transformers-5.2.0[${PYTHON_USEDEP}]
 			>=dev-python/huggingface-hub-0.34.0[${PYTHON_USEDEP}]
 			sci-ml/accelerate[${PYTHON_USEDEP}]
