@@ -149,7 +149,7 @@ RDEPEND="
 			sci-ml/accelerate[${PYTHON_USEDEP}]
 			=dev-python/pyarrow-20.0.0[${PYTHON_USEDEP}]
 			>=dev-python/einops-0.8.1[${PYTHON_USEDEP}]
-			dev-python/sentencepiece[${PYTHON_USEDEP}]
+			sci-ml/sentencepiece[${PYTHON_USEDEP}]
 		')
 	)
 
