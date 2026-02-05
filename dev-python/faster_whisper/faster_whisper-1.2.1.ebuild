@@ -19,35 +19,32 @@ RESTRICT="test"
 
 S="${WORKDIR}"
 
-IUSE="${PYTHON_TARGETS_IUSE}"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 BDEPEND="
+	${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/installer:0[${PYTHON_USEDEP}]
 	')
 "
 
 RDEPEND="
+	${PYTHON_DEPS}
 	$(python_gen_cond_dep '
 		dev-python/av[${PYTHON_USEDEP}]
 		dev-python/tqdm[${PYTHON_USEDEP}]
-	')
-	$(python_gen_cond_dep '
-		sci-ml/tokenizers[${PYTHON_USEDEP}]
 		dev-python/huggingface-hub[${PYTHON_USEDEP}]
-		sci-libs/onnxruntime[${PYTHON_USEDEP}]
-		sci-libs/ctranslate2[${PYTHON_USEDEP}]
+		dev-python/onnxruntime[${PYTHON_USEDEP}]
 	')
+	sci-ml/tokenizers[${PYTHON_SINGLE_USEDEP}]
+	sci-libs/ctranslate2[${PYTHON_SINGLE_USEDEP}]
 "
 
 src_unpack() { :; }
 
 src_install() {
-	python_foreach_impl _install_wheel
-}
+	python_setup
 
-_install_wheel() {
 	"${EPYTHON}" -m installer \
 		--destdir="${D}" \
 		--prefix=/usr \
@@ -56,9 +53,9 @@ _install_wheel() {
 }
 
 pkg_postinst() {
-	python_foreach_impl python_optimize
+	python_optimize
 }
 
 pkg_postrm() {
-	python_foreach_impl python_cleanup
+	python_cleanup
 }
