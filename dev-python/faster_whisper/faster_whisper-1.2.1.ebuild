@@ -33,9 +33,9 @@ RDEPEND="
 	$(python_gen_cond_dep '
 		dev-python/av[${PYTHON_USEDEP}]
 		dev-python/tqdm[${PYTHON_USEDEP}]
-		dev-python/huggingface-hub[${PYTHON_USEDEP}]
 		dev-python/onnxruntime[${PYTHON_USEDEP}]
 	')
+	sci-ml/huggingface-hub[${PYTHON_SINGLE_USEDEP}]
 	sci-ml/tokenizers[${PYTHON_SINGLE_USEDEP}]
 	sci-libs/ctranslate2[${PYTHON_SINGLE_USEDEP}]
 "
