@@ -80,7 +80,7 @@ RDEPEND="
 
 		dev-python/openai[${PYTHON_USEDEP}]
 		dev-python/anthropic[${PYTHON_USEDEP}]
-		=dev-python/google-genai-1.59.0[${PYTHON_USEDEP}]
+		>=dev-python/google-genai-1.59.0[${PYTHON_USEDEP}]
 
 
 		=dev-python/langchain-1.2.4[${PYTHON_USEDEP}]
