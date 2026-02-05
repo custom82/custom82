@@ -92,7 +92,7 @@ RDEPEND="
 
 
 		=dev-python/pymysql-1.1.2[${PYTHON_USEDEP}]
-		=dev-python/boto3-1.42.29[${PYTHON_USEDEP}]
+		>=dev-python/boto3-1.42.29[${PYTHON_USEDEP}]
 
 		dev-python/validators[${PYTHON_USEDEP}]
 		dev-python/psutil[${PYTHON_USEDEP}]
