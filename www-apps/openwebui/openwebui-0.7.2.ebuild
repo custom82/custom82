@@ -148,7 +148,7 @@ RDEPEND="
 			>=sci-ml/huggingface-hub-0.34.0[${PYTHON_SINGLE_USEDEP}]
 			sci-ml/accelerate[${PYTHON_USEDEP}]
 			=dev-python/pyarrow-20.0.0[${PYTHON_USEDEP}]
-			=dev-python/einops-0.8.1[${PYTHON_USEDEP}]
+			>=dev-python/einops-0.8.1[${PYTHON_USEDEP}]
 			dev-python/sentencepiece[${PYTHON_USEDEP}]
 		')
 	)
