@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=\${prefix}
+libdir=/usr/$(get_libdir)
+includedir=\${prefix}/include
+
+Name: libpdfium
+Description: PDFium library
+Version: ${PDFIUM_BUILD}
+Libs: -L\${libdir} -lpdfium
+Cflags: -I\${includedir}/pdfium
