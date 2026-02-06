@@ -13,7 +13,7 @@ REQUIRED_USE="xfa? ( v8 )"
 BDEPEND="
 	dev-util/depot_tools
 	dev-build/gn
-	dev-util/ninja
+	dev-build/ninja
 	dev-vcs/git
 	dev-lang/python
 "
