@@ -1,9 +1,13 @@
 EAPI=8
 
-inherit toolchain-funcs
+PYTHON_COMPAT=( python3_{11,12,13,14} )
+
+inherit git-r3 python-any-r1 toolchain-funcs
 
 DESCRIPTION="PDFium PDF rendering library (Chromium project)"
 HOMEPAGE="https://pdfium.googlesource.com/pdfium/"
+EGIT_REPO_URI="https://pdfium.googlesource.com/pdfium.git"
+
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
@@ -11,27 +15,51 @@ IUSE="v8 xfa"
 REQUIRED_USE="xfa? ( v8 )"
 
 BDEPEND="
-	dev-build/gn
-	dev-build/ninja
+	${PYTHON_DEPS}
 	dev-vcs/git
-	dev-lang/python
+	dev-build/gn
+	dev-util/ninja
 "
 
-DEPEND=""
-RDEPEND=""
+# checkout dentro root "gclient" così i DEPS finiscono nel posto giusto
+EGIT_CHECKOUT_DIR="${WORKDIR}/gclient_root/pdfium"
+S="${WORKDIR}/gclient_root/pdfium"
 
-S="${WORKDIR}/repo/pdfium"
+src_prepare() {
+	default
 
-src_unpack() {
-	mkdir -p "${WORKDIR}/repo" || die
-	cd "${WORKDIR}/repo" || die
+	# depot_tools locale (solo per questa build)
+	local dt="${WORKDIR}/depot_tools"
+	if [[ ! -d ${dt}/.git ]] ; then
+		einfo "Cloning depot_tools locally into ${dt}"
+		git clone --depth 1 https://chromium.googlesource.com/chromium/tools/depot_tools.git "${dt}" || die
+	fi
 
-	# evita auto-update di depot_tools e scritture nel $HOME reale
+	# gclient root e .gclient
+	local root="${WORKDIR}/gclient_root"
+	mkdir -p "${root}" || die
+
+	cat > "${root}/.gclient" <<-'EOF' || die
+solutions = [
+  {
+    "name": "pdfium",
+    "url": "https://pdfium.googlesource.com/pdfium.git",
+    "managed": False,
+    "custom_deps": {},
+    "custom_vars": {},
+  },
+]
+EOF
+
 	export DEPOT_TOOLS_UPDATE=0
 	export HOME="${T}"
+	export PATH="${dt}:${PATH}"
 
-	gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git || die
+	cd "${root}" || die
+	einfo "Running gclient sync (fetches PDFium DEPS)..."
 	gclient sync --no-history || die
+
+	[[ -f "${S}/build/config/BUILDCONFIG.gn" ]] || die "DEPS non scaricate: manca build/config/BUILDCONFIG.gn dopo gclient sync"
 }
 
 src_configure() {
@@ -62,12 +90,10 @@ src_install() {
 	if [[ -f out/Release/libpdfium.so ]] ; then
 		so="out/Release/libpdfium.so"
 	else
-		# fallback: cerca una .so prodotta (max 3 livelli, per evitare traverse enormi)
 		so="$(find out/Release -maxdepth 3 -type f \( -name 'libpdfium.so' -o -name '*pdfium*.so' \) | head -n1)"
 	fi
 
-	[[ -n "${so}" && -f "${so}" ]] || die "Nessuna libreria .so trovata in out/Release (build non riuscito o target diverso)"
-
+	[[ -n "${so}" && -f "${so}" ]] || die "Nessuna libreria .so trovata in out/Release"
 	dolib.so "${so}" || die
 
 	insinto /usr/include/pdfium
