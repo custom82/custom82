@@ -5,6 +5,6 @@ includedir=\${prefix}/include
 
 Name: libpdfium
 Description: PDFium library
-Version: ${PDFIUM_BUILD}
+Version: 7049
 Libs: -L\${libdir} -lpdfium
 Cflags: -I\${includedir}/pdfium
