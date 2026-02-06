@@ -146,20 +146,7 @@ src_install() {
 	doins public/cpp/*.h
 
 	insinto /usr/$(get_libdir)/pkgconfig
-	cat > "${T}/libpdfium.pc" <<-EOF || die
-	prefix=/usr
-	exec_prefix=\${prefix}
-	libdir=/usr/$(get_libdir)
-	includedir=\${prefix}/include
-
-	Name: libpdfium
-	Description: Library for PDF rendering, inspection, manipulation and creation
-	Version: ${PV}
-	Cflags: -I\${includedir}
-	Requires.private: freetype2 icu-uc libjpeg lcms2 libopenjp2 zlib
-	Libs: -L\${libdir} -lpdfium
-	EOF
-	doins "${T}/libpdfium.pc"
+    doins "${FILESDIR}"/libpdfium.pc
 
 	dodoc AUTHORS README.md out/release/args.gn
 	dolicense LICENSE
