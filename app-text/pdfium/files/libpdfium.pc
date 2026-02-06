@@ -1,11 +1,10 @@
-prefix=%{_prefix}
-exec_prefix=%{_exec_prefix}
-libdir=%{_libdir}
-includedir=%{_includedir}
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib64
+includedir=${prefix}/include
 
-Name: %{name}
-Description: Library for PDF rendering, inspection, manipulation and creation
-Version: %{version}
-Cflags: -I\${includedir}
-Requires.private: -lfreetype -licuuc -ljpeg -llcms2 -lopenjp2 -lz
-Libs: -L\${libdir} -lpdfium
+Name: pdfium
+Description: PDFium library
+Version: 7049
+Libs: -L${libdir} -lpdfium
+Cflags: -I${includedir}
