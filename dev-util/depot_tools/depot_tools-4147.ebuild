@@ -53,8 +53,3 @@ src_install() {
 	[[ -f LICENSE ]] && dodoc LICENSE
 }
 
-pkg_postinst() {
-	einfo "depot_tools installato in /opt/depot_tools/${PV} (symlink: /opt/depot_tools/current)."
-	einfo "Wrapper installati in /usr/bin (gclient, fetch, gn, autoninja, ...)."
-	einfo "Se vuoi tutto via PATH: export PATH=/opt/depot_tools/current:\$PATH"
-}
