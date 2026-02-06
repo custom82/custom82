@@ -12,7 +12,7 @@ REQUIRED_USE="xfa? ( v8 )"
 
 DEPEND="
 	dev-build/gn
-	dev-util/ninja
+	dev-build/ninja
 "
 RDEPEND="${DEPEND}"
 
