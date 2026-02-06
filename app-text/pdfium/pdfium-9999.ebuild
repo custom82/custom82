@@ -11,7 +11,6 @@ IUSE="v8 xfa"
 REQUIRED_USE="xfa? ( v8 )"
 
 BDEPEND="
-	dev-util/depot_tools
 	dev-build/gn
 	dev-build/ninja
 	dev-vcs/git
