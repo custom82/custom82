@@ -17,16 +17,9 @@ RDEPEND="
 	net-misc/curl
 "
 
-# Gitiles +archive estrae direttamente in WORKDIR senza dir top-level
 S="${WORKDIR}"
 
-src_prepare() {
-	default
-}
-
-src_compile() {
-	:
-}
+src_compile() { :; }
 
 src_install() {
 	local install_root="/opt/depot_tools/${PV}"
@@ -34,18 +27,27 @@ src_install() {
 	dodir "${install_root}"
 	cp -a . "${ED}${install_root}/" || die "cp -a failed"
 
-	# depot_tools usa questo per trovare il python3 di sistema dal wrapper python-bin/python3
-	# Da /opt/depot_tools/current/python-bin -> /usr/bin = ../../../../usr/bin
-	insinto "${install_root}"
-	newins "${FILESDIR}/python3_bin_reldir.txt" python3_bin_reldir.txt
+	# Gentoo: usa il python di sistema, evita bootstrap/vpython/python-bin ricorsivi
+	if [[ -e "${ED}${install_root}/python-bin/python3" ]] ; then
+		cat > "${ED}${install_root}/python-bin/python3" <<'EOF' || die
+#!/bin/sh
+exec /usr/bin/python3 "$@"
+EOF
+		chmod +x "${ED}${install_root}/python-bin/python3" || die
+	fi
 
-	# Symlink "current"
+	# Non vogliamo il meccanismo reldir: può causare loop
+	rm -f "${ED}${install_root}/python3_bin_reldir.txt" || die
+
 	dosym "${install_root}" "/opt/depot_tools/current"
 
-	# PATH via env.d
 	doenvd "${FILESDIR}/50depot_tools"
 
-	# Docs (se presenti)
 	[[ -f README.md ]] && dodoc README.md
 	[[ -f LICENSE ]] && dodoc LICENSE
+}
+
+pkg_postinst() {
+	elog "Esegui: env-update && source /etc/profile"
+	elog "Test: gn --help ; gclient --version"
 }
