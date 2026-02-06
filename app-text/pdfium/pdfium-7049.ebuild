@@ -39,7 +39,7 @@ RDEPEND="
 	media-libs/freetype:2
 	dev-libs/icu:=
 	media-libs/lcms:2
-	media-libs/jpeg:0
+	media-libs/libjpeg-turbo:0
 	media-libs/openjpeg:2
 	media-libs/libpng:0
 	media-libs/tiff:0
