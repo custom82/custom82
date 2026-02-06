@@ -14,7 +14,7 @@ IUSE=""
 RDEPEND="
     dev-vcs/git
     dev-lang/python
-    dev-util/ninja
+    dev-build/ninja
 "
 
 src_unpack() {
