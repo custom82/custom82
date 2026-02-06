@@ -29,9 +29,9 @@ IUSE="test"
 RESTRICT="!test? ( test )"
 
 BDEPEND="
+    app-admin/chrpath
 	dev-util/gn
-	dev-util/ninja
-	sys-apps/chrpath
+	dev-build/ninja
 	virtual/pkgconfig
 "
 RDEPEND="
