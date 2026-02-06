@@ -30,7 +30,7 @@ RESTRICT="!test? ( test )"
 
 BDEPEND="
     app-admin/chrpath
-	dev-util/gn
+	dev-build/gn
 	dev-build/ninja
 	virtual/pkgconfig
 "
