@@ -27,16 +27,12 @@ src_install() {
 	dodir "${install_root}"
 	cp -a . "${ED}${install_root}/" || die "cp -a failed"
 
-	dosym "${install_root}" "/opt/depot_tools/current"
+	# FIX: depot_tools vuole questo file per usare python3 di sistema
+	echo "../../usr/bin" > "${ED}${install_root}/python3_bin_reldir.txt" || die
 
-	# PATH via env.d (FILESDIR)
+	dosym "${install_root}" "/opt/depot_tools/current"
 	doenvd "${FILESDIR}/50depot_tools"
 
 	[[ -f README.md ]] && dodoc README.md
 	[[ -f LICENSE ]] && dodoc LICENSE
-}
-
-pkg_postinst() {
-	elog "Esegui: env-update && source /etc/profile"
-	elog "Poi testa: gn help ; gclient --version"
 }
