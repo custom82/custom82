@@ -116,8 +116,6 @@ src_configure() {
 	mkdir -p out/release || die
 	cp "${FILESDIR}/args.gn" out/release/args.gn || die
 
-	# FMA/fp-contract workaround from spec
-	append-cppflags -ffp-contract=off
 
 	gn gen out/release || die "gn gen failed"
 }
@@ -149,5 +147,5 @@ src_install() {
     doins "${FILESDIR}"/libpdfium.pc
 
 	dodoc AUTHORS README.md out/release/args.gn
-	dolicense LICENSE
+
 }
