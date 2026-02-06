@@ -11,7 +11,7 @@ IUSE="v8 xfa"
 REQUIRED_USE="xfa? ( v8 )"
 
 DEPEND="
-	dev-build/gn
+	dev-util/depot_tools
 	dev-build/ninja
 "
 RDEPEND="${DEPEND}"
