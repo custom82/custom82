@@ -13,7 +13,7 @@ IUSE="v8 xfa"
 
 DEPEND="
     dev-build/gn
-    dev-util/ninja
+    dev-build/ninja
     sys-devel/clang
     sys-devel/llvm
 "
