@@ -187,7 +187,7 @@ RDEPEND="
 		$(python_gen_cond_dep '
 			=dev-python/onnxruntime-1.23.2[${PYTHON_USEDEP}]
 		')
-		=dev-python/faster-whisper-1.2.1[${PYTHON_SINGLE_USEDEP}]
+		>=dev-python/faster-whisper-1.2.1[${PYTHON_USEDEP}]
 	)
 
 	postgres? (
