@@ -10,8 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Run your raw PyTorch training script on any kind of device"
 HOMEPAGE="https://github.com/huggingface/accelerate"
-SRC_URI="https://github.com/huggingface/${PN}/archive/refs/tags/v${PV}.tar.gz
-	-> ${P}.gh.tar.gz"
+SRC_URI="https://github.com/huggingface/${PN}/archive/refs/tags/v${PV}.tar.gz	-> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
