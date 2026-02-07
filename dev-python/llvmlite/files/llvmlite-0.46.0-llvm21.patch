@@ -1,0 +1,336 @@
+diff '--color=auto' -uPNr a/buildscripts/incremental/setup_conda_environment.cmd b/buildscripts/incremental/setup_conda_environment.cmd
+--- a/buildscripts/incremental/setup_conda_environment.cmd	2025-12-08 18:10:30.000000000 +0100
++++ b/buildscripts/incremental/setup_conda_environment.cmd	2026-02-07 17:45:38.697848676 +0100
+@@ -10,6 +10,6 @@
+ call activate %CONDA_ENV%
+ if %errorlevel% neq 0 exit /b %errorlevel%
+ 
+-@rem Install llvmdev 20
+-call conda install -y -c defaults numba/label/dev::llvmdev=20 libxml2
++@rem Install llvmdev 21
++call conda install -y -c defaults numba/label/dev::llvmdev=21 libxml2
+ if %errorlevel% neq 0 exit /b %errorlevel%
+diff '--color=auto' -uPNr a/buildscripts/incremental/setup_conda_environment.sh b/buildscripts/incremental/setup_conda_environment.sh
+--- a/buildscripts/incremental/setup_conda_environment.sh	2025-12-08 18:10:30.000000000 +0100
++++ b/buildscripts/incremental/setup_conda_environment.sh	2026-02-07 17:45:38.697848676 +0100
+@@ -22,12 +22,12 @@
+ source activate $CONDA_ENV
+ set -v
+ 
+-# Install llvmdev 20 and compiler toolchain for linux
++# Install llvmdev 21 and compiler toolchain for linux
+ # 
+ if [[ "$(uname)" == "Linux" ]]; then
+-    $CONDA_INSTALL numba/label/dev::llvmdev=20 gcc_linux-64=11 gxx_linux-64=11
++    $CONDA_INSTALL numba/label/dev::llvmdev=21 gcc_linux-64=11 gxx_linux-64=11
+ else
+-    $CONDA_INSTALL numba/label/dev::llvmdev=20
++    $CONDA_INSTALL numba/label/dev::llvmdev=21
+ fi
+ 
+ # Install dependencies for code coverage (codecov.io)
+diff '--color=auto' -uPNr a/buildscripts/manylinux/build_llvmlite.sh b/buildscripts/manylinux/build_llvmlite.sh
+--- a/buildscripts/manylinux/build_llvmlite.sh	2025-12-08 18:10:30.000000000 +0100
++++ b/buildscripts/manylinux/build_llvmlite.sh	2026-02-07 17:45:38.698004684 +0100
+@@ -24,7 +24,7 @@
+ if [ -n "$LLVMDEV_ARTIFACT_PATH" ] && [ -d "$LLVMDEV_ARTIFACT_PATH" ]; then
+     conda install -y "$LLVMDEV_ARTIFACT_PATH"/llvmdev-*.conda --no-deps
+ else
+-    conda install -y -c defaults numba/label/llvm20-wheel::llvmdev=20 --no-deps
++    conda install -y -c defaults numba/label/llvm21-wheel::llvmdev=21 --no-deps
+ fi
+ 
+ # Prepend builtin Python Path
+diff '--color=auto' -uPNr a/docs/environment.yml b/docs/environment.yml
+--- a/docs/environment.yml	2025-12-08 18:10:30.000000000 +0100
++++ b/docs/environment.yml	2026-02-07 17:45:38.699427747 +0100
+@@ -5,7 +5,7 @@
+   - python
+   # pip for installing llvmlite itself
+   - pip
+-  - llvmdev=20
++  - llvmdev=21
+   - cmake
+   - make
+   - docutils==0.16
+diff '--color=auto' -uPNr a/ffi/CMakeLists.txt b/ffi/CMakeLists.txt
+--- a/ffi/CMakeLists.txt	2025-12-08 18:10:30.000000000 +0100
++++ b/ffi/CMakeLists.txt	2026-02-07 17:45:38.701379729 +0100
+@@ -24,7 +24,7 @@
+ message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
+ 
+ # NOTE: Keep this in sync with the version that llvmlite is declared to support
+-set(LLVMLITE_SUPPORTED_LLVM_VERSION_DEFAULT 20)
++set(LLVMLITE_SUPPORTED_LLVM_VERSION_DEFAULT 21)
+ 
+ # Check LLVM version is supported or intentionally overridden.
+ if (NOT DEFINED LLVM_VERSION_MAJOR)
+@@ -214,15 +214,21 @@
+        ${LLVMLITE_SHARED_DEFAULT})
+ 
+ 
++# Tracks whether llvmlite is effectively linked against the monolithic
++# libLLVM shared library. This can differ from LLVMLITE_SHARED if a static
++# component-link attempt must be downgraded due to distribution packaging.
++set(LLVMLITE_EFFECTIVE_SHARED OFF)
++
++
+ if (LLVMLITE_SHARED)
+     check_library_exists(LLVM LLVMGetVersion "" HAVE_LIBRARY_LLVM)
+     if(NOT HAVE_LIBRARY_LLVM)
+         message(FATAL_ERROR "Could not find libLLVM")
+     endif()
+     set(llvm_libs LLVM)
++    set(LLVMLITE_EFFECTIVE_SHARED ON)
+     message(STATUS
+     "LLVMLITE_SHARED is ON, using dynamic linkage against LLVM")
+-    add_definitions(-DHAVE_LLVMLITE_SHARED)
+ else()
+     # This doesn't work:
+     # llvm_map_components_to_libnames(llvm_libs all)
+@@ -290,11 +296,38 @@
+ 
+     # Map known components to library names for linkage
+     llvm_map_components_to_libnames(llvm_libs ${LLVM_COMPONENTS})
++
++    # Some distributions package only the monolithic libLLVM shared library
++    # and omit LLVM component archives/shared objects. In that case fallback to
++    # dynamic linkage against libLLVM rather than failing at final link time.
++    cmake_push_check_state(RESET)
++    set(CMAKE_REQUIRED_LIBRARIES ${llvm_libs})
++    check_cxx_source_compiles("int main(void){return 0;}"
++                              HAVE_LLVM_COMPONENT_LINK)
++    cmake_pop_check_state()
++
++    if(NOT HAVE_LLVM_COMPONENT_LINK)
++        check_library_exists(LLVM LLVMGetVersion "" HAVE_LIBRARY_LLVM)
++        if(HAVE_LIBRARY_LLVM)
++            message(WARNING
++                    "LLVM component libraries are unavailable; falling back to monolithic libLLVM dynamic linkage")
++            set(llvm_libs LLVM)
++            set(LLVMLITE_EFFECTIVE_SHARED ON)
++        else()
++            message(FATAL_ERROR
++                    "Unable to link LLVM component libraries and libLLVM was not found")
++        endif()
++    endif()
++
+     message(STATUS "LLVM_COMPONENTS: ${LLVM_COMPONENTS}")
+     message(STATUS
+     "LLVMLITE_SHARED is OFF, using static linkage against LLVM")
+ endif()
+ 
++if(LLVMLITE_EFFECTIVE_SHARED)
++    add_definitions(-DHAVE_LLVMLITE_SHARED)
++endif()
++
+ 
+ # If this is a static link to LLVM, bake in whether LLVM has assertions enabled.
+ # 3 states, on, off, and unknown
+@@ -303,7 +336,7 @@
+ set(LLVMLITE_LLVM_ASSERTIONS_ON "1")
+ set(LLVMLITE_LLVM_ASSERTIONS_UNKNOWN "2")
+ 
+-if(LLVMLITE_SHARED)
++if(LLVMLITE_EFFECTIVE_SHARED)
+     add_definitions(
+     -DLLVMLITE_LLVM_ASSERTIONS_STATE=${LLVMLITE_LLVM_ASSERTIONS_UNKNOWN})
+     message(STATUS "LLVM assertions state detected as 'unknown'")
+@@ -329,7 +362,7 @@
+ # suitability.
+ if(UNIX AND NOT APPLE)
+     set(FORCED_LINK_FLAGS "-Wl,--exclude-libs,ALL -Wl,--no-undefined")
+-    if(NOT LLVMLITE_SHARED)
++    if(NOT LLVMLITE_EFFECTIVE_SHARED)
+         # If LLVM is statically linked, we specify -Bsymbolic to prevent
+         # that LLVM symbols can be interposed upon by previously
+         # loaded shared objects that export LLVM symbols.
+diff '--color=auto' -uPNr a/ffi/newpassmanagers.cpp b/ffi/newpassmanagers.cpp
+--- a/ffi/newpassmanagers.cpp	2025-12-08 18:10:30.000000000 +0100
++++ b/ffi/newpassmanagers.cpp	2026-02-07 17:45:38.702008926 +0100
+@@ -1,4 +1,5 @@
+ #include "core.h"
++#include "llvm/Config/llvm-config.h"
+ #include "llvm-c/TargetMachine.h"
+ #include "llvm/Analysis/AliasAnalysisEvaluator.h"
+ #include "llvm/Analysis/AliasSetTracker.h"
+@@ -106,9 +107,14 @@
+ #include "llvm/Transforms/Instrumentation/DataFlowSanitizer.h"
+ #include "llvm/Transforms/Instrumentation/GCOVProfiler.h"
+ #include "llvm/Transforms/Instrumentation/HWAddressSanitizer.h"
++#if __has_include("llvm/Transforms/Instrumentation/InstrOrderFile.h")
+ #include "llvm/Transforms/Instrumentation/InstrOrderFile.h"
++#endif
+ #include "llvm/Transforms/Instrumentation/InstrProfiling.h"
++#if __has_include("llvm/Transforms/Instrumentation/MemProfiler.h")
+ #include "llvm/Transforms/Instrumentation/MemProfiler.h"
++#define LLVMLITE_HAS_MEMPROFILER_PASS 1
++#endif
+ #include "llvm/Transforms/Instrumentation/MemorySanitizer.h"
+ #include "llvm/Transforms/Instrumentation/PGOInstrumentation.h"
+ #include "llvm/Transforms/Instrumentation/SanitizerCoverage.h"
+@@ -637,7 +643,19 @@
+     LLVMPY_function_Add##NAME(LLVMFunctionPassManagerRef FPM) {                \
+         llvm::unwrap(FPM)->addPass(NAME());                                    \
+     }
++
++#undef FUNCTION_PASS_WITH_PARAMS
++#define FUNCTION_PASS_WITH_PARAMS(NAME, ...)                                   \
++    API_EXPORT(void) LLVMPY_module_Add##NAME(LLVMModulePassManagerRef MPM) {   \
++        llvm::unwrap(MPM)->addPass(                                            \
++            createModuleToFunctionPassAdaptor(NAME(__VA_ARGS__)));             \
++    }                                                                          \
++    API_EXPORT(void)                                                           \
++    LLVMPY_function_Add##NAME(LLVMFunctionPassManagerRef FPM) {                \
++        llvm::unwrap(FPM)->addPass(NAME(__VA_ARGS__));                         \
++    }
+ #include "PASSREGISTRY.def"
++#undef FUNCTION_PASS_WITH_PARAMS
+ 
+ #define LOOP_PASS(NAME)                                                        \
+     API_EXPORT(void) LLVMPY_module_Add##NAME(LLVMModulePassManagerRef MPM) {   \
+diff '--color=auto' -uPNr a/ffi/orcjit.cpp b/ffi/orcjit.cpp
+--- a/ffi/orcjit.cpp	2025-12-08 18:10:30.000000000 +0100
++++ b/ffi/orcjit.cpp	2026-02-07 17:45:38.702124688 +0100
+@@ -82,6 +82,51 @@
+                 .setFeatures(template_tm->getTargetFeatureString())
+                 .setOptions(template_tm->Options));
+     }
++#if LLVM_VERSION_MAJOR >= 21
++    builder.setObjectLinkingLayerCreator(
++        [=](llvm::orc::ExecutionSession &session)
++            -> llvm::Expected<std::unique_ptr<llvm::orc::ObjectLayer>> {
++            const auto triple =
++                session.getExecutorProcessControl().getTargetTriple();
++            if (useJitLink) {
++                auto linkingLayer =
++                    std::make_unique<llvm::orc::ObjectLinkingLayer>(session);
++
++                /* FIXME(LLVM16): In newer LLVM versions, there is a simple
++                 * EnableDebugSupport flag on the builder and we don't need to
++                 * do any of this. */
++                //  if (triple.getObjectFormat() == Triple::ELF ||
++                //     triple.getObjectFormat() == Triple::MachO) {
++                //     linkingLayer->addPlugin(
++                //         std::make_unique<orc::GDBJITDebugInfoRegistrationPlugin>(
++                //             ExecutorAddr::fromPtr(
++                //                 &llvm_orc_registerJITLoaderGDBWrapper)));
++                // }
++                if (triple.isOSBinFormatCOFF()) {
++                    linkingLayer->setOverrideObjectFlagsWithResponsibilityFlags(
++                        true);
++                    linkingLayer->setAutoClaimResponsibilityForObjectSymbols(
++                        true);
++                }
++                return linkingLayer;
++            }
++
++            auto linkingLayer =
++                std::make_unique<llvm::orc::RTDyldObjectLinkingLayer>(
++                    session, [](const llvm::MemoryBuffer &) {
++                        return std::make_unique<llvm::SectionMemoryManager>();
++                    });
++            if (triple.isOSBinFormatCOFF()) {
++                linkingLayer->setOverrideObjectFlagsWithResponsibilityFlags(
++                    true);
++                linkingLayer->setAutoClaimResponsibilityForObjectSymbols(true);
++            }
++            linkingLayer->registerJITEventListener(
++                *llvm::JITEventListener::createGDBRegistrationListener());
++
++            return linkingLayer;
++        });
++#else
+     builder.setObjectLinkingLayerCreator(
+         [=](llvm::orc::ExecutionSession &session, const llvm::Triple &triple)
+             -> std::unique_ptr<llvm::orc::ObjectLayer> {
+@@ -123,6 +168,7 @@
+                 return linkingLayer;
+             }
+         });
++#endif
+ 
+     auto jit = builder.create();
+ 
+diff '--color=auto' -uPNr a/ffi/PASSREGISTRY.def b/ffi/PASSREGISTRY.def
+--- a/ffi/PASSREGISTRY.def	2025-12-08 18:10:30.000000000 +0100
++++ b/ffi/PASSREGISTRY.def	2026-02-07 17:45:38.701473872 +0100
+@@ -26,6 +26,11 @@
+ #ifndef FUNCTION_PASS
+ #define FUNCTION_PASS(NAME)
+ #endif
++
++#ifndef FUNCTION_PASS_WITH_PARAMS
++#define FUNCTION_PASS_WITH_PARAMS(NAME, ...)
++#endif
++
+ FUNCTION_PASS(AAEvaluator)
+ FUNCTION_PASS(SimplifyCFGPass)
+ FUNCTION_PASS(LoopUnrollPass)
+@@ -41,7 +46,11 @@
+ FUNCTION_PASS(DomOnlyViewer)
+ FUNCTION_PASS(PostDomViewer)
+ FUNCTION_PASS(PostDomOnlyViewer)
++#if LLVM_VERSION_MAJOR >= 21
++FUNCTION_PASS_WITH_PARAMS(LintPass, false)
++#else
+ FUNCTION_PASS(LintPass)
++#endif
+ FUNCTION_PASS(ADCEPass)
+ FUNCTION_PASS(BreakCriticalEdgesPass)
+ FUNCTION_PASS(DSEPass)
+@@ -149,7 +158,9 @@
+ MODULE_PASS("module-inline", ModuleInlinerPass())
+ MODULE_PASS("tsan-module", ModuleThreadSanitizerPass())
+ MODULE_PASS("sancov-module", ModuleSanitizerCoveragePass())
++#ifdef LLVMLITE_HAS_MEMPROFILER_PASS
+ MODULE_PASS("memprof-module", ModuleMemProfilerPass())
++#endif
+ MODULE_PASS("poison-checking", PoisonCheckingPass())
+ MODULE_PASS("pseudo-probe-update", PseudoProbeUpdatePass())
+ 
+@@ -261,7 +272,9 @@
+ FUNCTION_PASS("tlshoist", TLSVariableHoistPass())
+ FUNCTION_PASS("transform-warning", WarnMissedTransformationsPass())
+ FUNCTION_PASS("tsan", ThreadSanitizerPass())
++#ifdef LLVMLITE_HAS_MEMPROFILER_PASS
+ FUNCTION_PASS("memprof", MemProfilerPass())
++#endif
+ 
+ LOOP_PASS("canon-freeze", CanonicalizeFreezeInLoopsPass())
+ LOOP_PASS("dot-ddg", DDGDotPrinterPass())
+diff '--color=auto' -uPNr a/ffi/targets.cpp b/ffi/targets.cpp
+--- a/ffi/targets.cpp	2025-12-08 18:10:30.000000000 +0100
++++ b/ffi/targets.cpp	2026-02-07 17:45:38.702180244 +0100
+@@ -202,8 +202,9 @@
+ 
+     bool jit = JIT;
+ 
+-    return wrap(unwrap(T)->createTargetMachine(Triple, CPU, Features, opt, rm,
+-                                               cm, cgol, jit));
++    llvm::Triple target_triple(Triple);
++    return wrap(unwrap(T)->createTargetMachine(target_triple, CPU, Features,
++                                               opt, rm, cm, cgol, jit));
+ }
+ 
+ API_EXPORT(void)
+diff '--color=auto' -uPNr a/README.rst b/README.rst
+--- a/README.rst	2025-12-08 18:10:30.000000000 +0100
++++ b/README.rst	2026-02-07 17:45:38.697161051 +0100
+@@ -57,14 +57,14 @@
+ llvmlite has been tested with Python 3.10 -- 3.13 and is likely to work with
+ greater versions.
+ 
+-As of version 0.45.0, llvmlite requires LLVM 20.x.x on all architectures
++As of version 0.45.0, llvmlite requires LLVM 21.x.x on all architectures
+ 
+ Historical compatibility table:
+ 
+ =================  ========================
+ llvmlite versions  compatible LLVM versions
+ =================  ========================
+-0.45.0 - ......    20.x.x
++0.45.0 - ......    21.x.x
+ 0.44.0             15.x.x and 16.x.x
+ 0.41.0 - 0.43.0    14.x.x
+ 0.40.0 - 0.40.1    11.x.x and 14.x.x (12.x.x and 13.x.x untested but may work)
