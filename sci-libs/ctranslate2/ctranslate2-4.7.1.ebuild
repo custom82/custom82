@@ -22,7 +22,7 @@ RESTRICT="!test? ( test )"
 
 DEPEND="
   dev-libs/cpuinfo
-  sci-libs/eigen
+  dev-cpp/eigen
 "
 RDEPEND="${DEPEND}"
 BDEPEND="
