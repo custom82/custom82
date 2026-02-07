@@ -15,7 +15,11 @@ LICENSE="BSD-3-Clause Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RDEPEND="app-text/pdfium"
+PATCHES="
+		${FILESDIR}/pypdfium2-5.3.0-fix-subprocess-stdout.patch
+"
+
+RDEPEND="dev-libs/libpdfium"
 
 RESTRICT="test"
 

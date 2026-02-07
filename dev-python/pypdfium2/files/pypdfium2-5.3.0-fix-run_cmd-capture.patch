@@ -1,0 +1,12 @@
+diff '--color=auto' -uPNr pypdfium2-5.3.0/setupsrc/system_pdfium.py pypdfium2-5.3.0-patched/setupsrc/system_pdfium.py
+--- pypdfium2-5.3.0/setupsrc/system_pdfium.py	2026-01-05 16:00:29.000000000 +0100
++++ pypdfium2-5.3.0-patched/setupsrc/system_pdfium.py	2026-02-07 11:43:15.419482875 +0100
+@@ -60,7 +60,7 @@
+         return _parse_version(libname_parts[2])
+     
+     if shutil.which("pkg-config"):
+-        proc = run_cmd(["pkg-config", "--modversion", "libpdfium"], cwd=None, check=False)
++        proc = run_cmd(["pkg-config", "--modversion", "libpdfium"], cwd=None, check=False, capture=True)
+         if proc.returncode == 0:
+             version = proc.stdout.decode().strip()
+             return _parse_version(version)
