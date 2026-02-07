@@ -22,7 +22,7 @@ PATCHES="${FILESDIR}/llvmlite-0.46.0-llvm21.patch"
 
 RDEPEND="
 	${PYTHON_DEPS}
-	sys-devel/llvm:=
+	llvm-core/llvm
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
