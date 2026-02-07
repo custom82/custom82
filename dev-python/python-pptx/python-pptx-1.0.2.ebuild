@@ -3,39 +3,37 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..13} )
+PYTHON_COMPAT=( python3_{11,12,13,14} )
 DISTUTILS_USE_PEP517=setuptools
 
-inherit distutils-r1 pypi
+inherit distutils-r1
 
-DESCRIPTION="Library to create, read and update PowerPoint .pptx files"
-HOMEPAGE="https://pypi.org/project/python-pptx/"
-SRC_URI="https://files.pythonhosted.org/packages/source/p/python-pptx/python_pptx-${PV}.tar.gz"
+DESCRIPTION="Create, read, and update PowerPoint 2007+ (.pptx) files"
+HOMEPAGE="
+	https://github.com/scanny/python-pptx
+	https://python-pptx.readthedocs.io/
+"
+SRC_URI="https://github.com/scanny/python-pptx/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE=""
+KEYWORDS="~amd64 ~arm64"
+IUSE="test"
+
+RESTRICT="!test? ( test )"
 
 RDEPEND="
-    dev-python/lxml
-    dev-python/Pillow
-    dev-python/typing-extensions
-    dev-python/XlsxWriter
+	dev-python/lxml[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
+	dev-python/typing-extensions[${PYTHON_USEDEP}]
+	dev-python/xlsxwriter[${PYTHON_USEDEP}]
+"
+BDEPEND="
+	test? (
+		dev-python/pytest[${PYTHON_USEDEP}]
+	)
 "
 
-DEPEND="
-    ${RDEPEND}
-    dev-python/setuptools
-"
+S="${WORKDIR}/python-pptx-${PV}"
 
-# Python packaging helpers ensure setup.py install is used
-PYDISTUTILS_BUILD_BLACKLISTED_ARCHES=""
-
-# Optional: if building docs/tests
-# HOMEPAGE_DOCS="https://python-pptx.readthedocs.io/"
-# DOCS_DEPEND="dev-python/Sphinx"
-
-src_install() {
-    distutils-r1_src_install
-}
+distutils_enable_tests pytest
