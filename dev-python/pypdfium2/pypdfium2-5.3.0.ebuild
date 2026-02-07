@@ -24,7 +24,7 @@ BDEPEND="
 
 # usa il tuo pdfium di sistema
 RDEPEND="
-	dev-libs/pdfium
+	dev-libs/libpdfium
 "
 DEPEND="${RDEPEND}"
 
