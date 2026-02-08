@@ -1,52 +1,35 @@
-# Copyright 1999-2026 Gentoo Authors
-# Distributed under the terms of the GNU General Public License v2
-
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13,14} )
+DISTUTILS_USE_PEP517=setuptools
 
-inherit python-single-r1
+inherit distutils-r1
 
 DESCRIPTION="Faster Whisper transcription with CTranslate2"
 HOMEPAGE="https://github.com/SYSTRAN/faster-whisper"
-SRC_URI="https://github.com/SYSTRAN/faster-whisper/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/SYSTRAN/faster-whisper/archive/refs/tags/v${PV}.tar.gz
+    -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RESTRICT="test"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+IUSE="test"
 
-S="${WORKDIR}/faster-whisper-${PV}"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
-	${PYTHON_DEPS}
-	dev-python/av[${PYTHON_SINGLE_USEDEP}]
-	sci-libs/ctranslate2[${PYTHON_SINGLE_USEDEP}]
-	sci-ml/huggingface_hub[${PYTHON_SINGLE_USEDEP}]
-	dev-python/onnxruntime[${PYTHON_SINGLE_USEDEP}]
-	dev-python/tokenizers[${PYTHON_SINGLE_USEDEP}]
-	dev-python/tqdm[${PYTHON_SINGLE_USEDEP}]
+    sci-libs/ctranslate2
+    $(python_gen_cond_dep '
+        >=dev-python/av-10.0.0[${PYTHON_USEDEP}]
+        >=dev-python/cffi-1.15.0[${PYTHON_USEDEP}]
+        >=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
+        >=dev-python/tokenizers-0.15.0[${PYTHON_USEDEP}]
+        >=dev-python/tqdm-4.65.0[${PYTHON_USEDEP}]
+        >=dev-python/onnxruntime-1.23.2[${PYTHON_USEDEP}]
+    ')
 "
 
-BDEPEND="
-	${PYTHON_DEPS}
-	dev-python/build[${PYTHON_SINGLE_USEDEP}]
-	dev-python/installer[${PYTHON_SINGLE_USEDEP}]
-	dev-python/setuptools[${PYTHON_SINGLE_USEDEP}]
-	dev-python/wheel[${PYTHON_SINGLE_USEDEP}]
-"
+DEPEND="${RDEPEND}"
 
-pkg_setup() {
-	python-single-r1_pkg_setup
-}
-
-src_compile() {
-	python -m build --wheel --no-isolation || die
-}
-
-src_install() {
-	python -m installer --destdir="${D}" dist/*.whl || die
-}
-
+distutils_enable_tests pytest
