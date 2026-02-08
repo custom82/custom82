@@ -65,7 +65,7 @@ DEPEND="${RDEPEND}"
 
 BDEPEND="
 	>=dev-python/setuptools-rust-1.7.0[${PYTHON_USEDEP}]
-	virtual/rust
+	|| ( dev-lang/rust dev-lang/rust-bin )
 "
 
 src_unpack() {
