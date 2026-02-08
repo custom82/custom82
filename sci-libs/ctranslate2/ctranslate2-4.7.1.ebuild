@@ -28,7 +28,10 @@ REQUIRED_USE="
 DEPEND="
 	dev-libs/cpuinfo
 	dev-cpp/eigen
+	dev-cpp/nlohmann_json
+	dev-cpp/half
 "
+
 RDEPEND="${DEPEND}"
 BDEPEND="
 	virtual/pkgconfig
@@ -44,6 +47,10 @@ BDEPEND="
 
 # evita problemi di maiuscole/minuscole (nel tuo log è ctranslate2-4.7.1)
 S="${WORKDIR}/CTranslate2-${PV}"
+
+pkg_setup() {
+	use python && python-single-r1_pkg_setup
+}
 
 src_prepare() {
 	rm -f .gitmodules || die
@@ -85,33 +92,40 @@ src_configure() {
 src_compile() {
 	cmake_src_compile
 
-	if use python; then
-		python-single-r1_python_setup
+if use python; then
+	python_setup
 
-		(
-			cd python || die
+	(
+		cd python || die
 
-			append-cppflags "-I${S}/include"
-			append-cxxflags "-I${S}/include"
-			append-ldflags "-L${BUILD_DIR}"
+		append-cppflags "-I${S}/include"
+		append-cxxflags "-I${S}/include"
+		append-ldflags "-L${BUILD_DIR}"
 
-			"${EPYTHON}" -m build --wheel --no-isolation || die
-		)
-	fi
+		"${EPYTHON}" -m build --wheel --no-isolation || die
+	)
+
+	CT2_WHL=$(echo "${S}/python/dist/"*.whl)
+	[[ -f ${CT2_WHL} ]] || die "Wheel not found after build (got: ${CT2_WHL})"
+fi
+
 }
-
-
 
 src_install() {
 	cmake_src_install
 
-	if use python; then
-		python-single-r1_python_setup
+	# evita collisioni con pacchetti di sistema
+	rm -rf "${ED}/usr/include/nlohmann" || die
+	rm -rf "${ED}/usr/include/half_float" || die
 
-		local whl
-		whl=$(echo "${S}/python/dist/"*.whl)
-		[[ -f ${whl} ]] || die "Wheel not found in ${S}/python/dist (got: ${whl})"
+	if use python; then
+		python_setup
+
+		# ricava la wheel (o usa quella salvata se presente)
+		local whl="${CT2_WHL:-${S}/python/dist/"*.whl"}"
+		[[ -f ${whl} ]] || die "Wheel not found (got: ${whl})"
 
 		"${EPYTHON}" -m installer --destdir="${D}" "${whl}" || die
 	fi
 }
+
