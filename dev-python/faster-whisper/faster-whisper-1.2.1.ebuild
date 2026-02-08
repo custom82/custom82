@@ -4,9 +4,8 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13,14} )
-DISTUTILS_USE_PEP517=setuptools
 
-inherit distutils-r1
+inherit python-single-r1
 
 DESCRIPTION="Faster Whisper transcription with CTranslate2"
 HOMEPAGE="https://github.com/SYSTRAN/faster-whisper"
@@ -17,24 +16,37 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RESTRICT="test"
-
-# Forziamo la scelta di un PYTHON_SINGLE_TARGET perché ctranslate2 è python-single.
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+S="${WORKDIR}/faster-whisper-${PV}"
 
 RDEPEND="
 	${PYTHON_DEPS}
-	dev-python/av[${PYTHON_USEDEP}]
-	sci-ml/huggingface_hub[${PYTHON_USEDEP}]
-	dev-python/onnxruntime[${PYTHON_USEDEP}]
-	dev-python/tokenizers[${PYTHON_USEDEP}]
-	dev-python/tqdm[${PYTHON_USEDEP}]
-	$(python_gen_cond_dep '
-		sci-libs/ctranslate2[${PYTHON_SINGLE_USEDEP}]
-	')
+	dev-python/av[${PYTHON_SINGLE_USEDEP}]
+	sci-libs/ctranslate2[${PYTHON_SINGLE_USEDEP}]
+	sci-ml/huggingface_hub[${PYTHON_SINGLE_USEDEP}]
+	dev-python/onnxruntime[${PYTHON_SINGLE_USEDEP}]
+	dev-python/tokenizers[${PYTHON_SINGLE_USEDEP}]
+	dev-python/tqdm[${PYTHON_SINGLE_USEDEP}]
 "
 
 BDEPEND="
 	${PYTHON_DEPS}
+	dev-python/build[${PYTHON_SINGLE_USEDEP}]
+	dev-python/installer[${PYTHON_SINGLE_USEDEP}]
+	dev-python/setuptools[${PYTHON_SINGLE_USEDEP}]
+	dev-python/wheel[${PYTHON_SINGLE_USEDEP}]
 "
 
-S="${WORKDIR}/faster-whisper-${PV}"
+pkg_setup() {
+	python-single-r1_pkg_setup
+}
+
+src_compile() {
+	python -m build --wheel --no-isolation || die
+}
+
+src_install() {
+	python -m installer --destdir="${D}" dist/*.whl || die
+}
+
