@@ -164,7 +164,7 @@ RDEPEND="
 			=dev-python/python-pptx-1.0.2[${PYTHON_USEDEP}]
 			>=dev-python/unstructured-0.18.27[${PYTHON_USEDEP}]
 			>=dev-python/msoffcrypto-tool-5.4.2[${PYTHON_USEDEP}]
-			=dev-python/nltk-3.9.2[${PYTHON_USEDEP}]
+			>=dev-python/nltk-3.9.2[${PYTHON_USEDEP}]
 			=dev-python/markdown-3.10[${PYTHON_USEDEP}]
 			=dev-python/pypandoc-1.16.2[${PYTHON_USEDEP}]
 			=dev-python/pandas-2.3.3[${PYTHON_USEDEP}]
@@ -184,8 +184,10 @@ RDEPEND="
 	)
 
 whisper? (
+	$(python_gen_cond_dep '
     >=sci-libs/onnxruntime-1.23.2[python]
     >=dev-python/faster-whisper-1.2.1[${PYTHON_SINGLE_USEDEP}]
+    ')
 )
 
 
