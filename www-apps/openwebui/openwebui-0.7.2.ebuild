@@ -74,7 +74,7 @@ RDEPEND="
 		=dev-python/loguru-0.7.3[${PYTHON_USEDEP}]
 		=dev-python/asgiref-3.11.0[${PYTHON_USEDEP}]
 
-		dev-python/tiktoken[${PYTHON_USEDEP}]
+		dev-python/tiktoken[${PYTHON_SINGLE_USEDEP}]
 		=dev-python/mcp-1.25.0[${PYTHON_USEDEP}]
 
 

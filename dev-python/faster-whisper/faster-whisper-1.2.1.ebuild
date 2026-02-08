@@ -20,11 +20,11 @@ RESTRICT="!test? ( test )"
 
 RDEPEND="
     sci-libs/ctranslate2
+    >=sci-ml/tokenizers-0.15.0[${PYTHON_USEDEP}]
     $(python_gen_cond_dep '
         >=dev-python/av-10.0.0[${PYTHON_USEDEP}]
         >=dev-python/cffi-1.15.0[${PYTHON_USEDEP}]
         >=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
-        >=dev-python/tokenizers-0.15.0[${PYTHON_USEDEP}]
         >=dev-python/tqdm-4.65.0[${PYTHON_USEDEP}]
         >=dev-python/onnxruntime-1.23.2[${PYTHON_USEDEP}]
     ')
