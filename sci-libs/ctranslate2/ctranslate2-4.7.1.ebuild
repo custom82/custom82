@@ -29,7 +29,7 @@ DEPEND="
 	dev-libs/cpuinfo
 	dev-cpp/eigen
 	dev-cpp/nlohmann_json
-	dev-cpp/half
+	dev-libs/half
 "
 
 RDEPEND="${DEPEND}"
