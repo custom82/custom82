@@ -33,6 +33,7 @@ BDEPEND="
 S="${WORKDIR}/CTranslate2-${PV}"
 
 src_prepare() {
+  rm -f .gitmodules
   cmake_src_prepare
 
   # Popola i submodule mancanti nel tarball release.
