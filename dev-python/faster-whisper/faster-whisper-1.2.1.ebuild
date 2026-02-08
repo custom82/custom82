@@ -1,6 +1,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13,14} )
+DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1
@@ -18,9 +19,14 @@ KEYWORDS="~amd64"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
 RDEPEND="
-	sci-libs/ctranslate2
-	>=sci-ml/tokenizers-0.15.0[${PYTHON_USEDEP}]
+	${PYTHON_DEPS}
+
+	sci-libs/ctranslate2[${PYTHON_SINGLE_USEDEP}]
+	>=sci-ml/tokenizers-0.15.0[${PYTHON_SINGLE_USEDEP}]
+
 	$(python_gen_cond_dep '
 		>=dev-python/av-10.0.0[${PYTHON_USEDEP}]
 		>=dev-python/cffi-1.15.0[${PYTHON_USEDEP}]
@@ -31,6 +37,4 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
-# tipicamente i test usano pytest; se upstream non li include davvero,
-# al massimo disabilitali o metti RESTRICT mirato.
 distutils_enable_tests pytest
