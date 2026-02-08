@@ -78,7 +78,7 @@ RDEPEND="
 		=dev-python/mcp-1.25.0[${PYTHON_USEDEP}]
 
 
-		dev-python/openai[${PYTHON_USEDEP}]
+		dev-python/openai-python[${PYTHON_USEDEP}]
 		dev-python/anthropic[${PYTHON_USEDEP}]
 		>=dev-python/google-genai-1.59.0[${PYTHON_USEDEP}]
 
