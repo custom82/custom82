@@ -184,7 +184,7 @@ RDEPEND="
 	)
 
 whisper? (
-    >=sci-libs/onnxruntime-1.23.2[${PYTHON_SINGLE_USEDEP}]
+    >=sci-libs/onnxruntime-1.23.2[python]
     >=dev-python/faster-whisper-1.2.1[${PYTHON_SINGLE_USEDEP}]
 )
 
