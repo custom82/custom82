@@ -2,6 +2,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13,14} )
 
+DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_PEP517=setuptools
 DISTUTILS_EXT=1
 
@@ -56,31 +57,34 @@ KEYWORDS="~amd64"
 
 S="${WORKDIR}/${PN}-${PV}"
 
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
+
+# >>> con single-impl: deps python con python_gen_cond_dep
 RDEPEND="
 	${PYTHON_DEPS}
-	dev-python/regex[${PYTHON_USEDEP}]
-	dev-python/requests[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-python/regex[${PYTHON_USEDEP}]
+		dev-python/requests[${PYTHON_USEDEP}]
+	')
 "
 DEPEND="${RDEPEND}"
 
 BDEPEND="
-	>=dev-python/setuptools-rust-1.7.0[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		>=dev-python/setuptools-rust-1.7.0[${PYTHON_USEDEP}]
+	')
 	|| ( dev-lang/rust dev-lang/rust-bin )
 "
 
 src_unpack() {
-	default
 	cargo_src_unpack
 }
 
 src_prepare() {
 	distutils-r1_src_prepare
-
-	# Genera .cargo/config.toml per usare i crate scaricati (vendoring) in offline
 	cargo_gen_config
 }
 
-# Helper: forza build rust offline usando la config di cargo.eclass
 python_compile() {
 	export CARGO_NET_OFFLINE=true
 	export CARGO_HOME="${ECARGO_HOME}"
