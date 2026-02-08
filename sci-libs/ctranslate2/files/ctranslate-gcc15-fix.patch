@@ -1,0 +1,327 @@
+diff '--color=auto' -uPNr a/cli/CMakeLists.txt b/cli/CMakeLists.txt
+--- a/cli/CMakeLists.txt	2026-02-04 04:04:22.000000000 +0100
++++ b/cli/CMakeLists.txt	2026-02-08 11:10:23.636160307 +0100
+@@ -1,14 +1,23 @@
+-if (NOT IS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../third_party/cxxopts/include")
+-  message(FATAL_ERROR "The client dependency repository (cxxopts) is missing! "
+-    "You probably didn't clone the project with --recursive. You can include it "
+-    "by calling \"git submodule update --init --recursive\"")
++set(CXXOPTS_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../third_party/cxxopts/include")
++
++if (NOT IS_DIRECTORY "${CXXOPTS_INCLUDE_DIR}")
++  find_path(CXXOPTS_INCLUDE_DIR
++    NAMES cxxopts.hpp
++    PATH_SUFFIXES cxxopts include
++  )
++endif()
++
++if (NOT CXXOPTS_INCLUDE_DIR)
++  message(FATAL_ERROR "The client dependency (cxxopts) is missing. "
++    "Either initialize the submodule with \"git submodule update --init --recursive\" "
++    "or install cxxopts and make sure CMake can find cxxopts.hpp.")
+ endif()
+ 
+ add_executable(translator
+   translator.cc
+   )
+ target_include_directories(translator
+-  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/cxxopts/include
++  PRIVATE ${CXXOPTS_INCLUDE_DIR}
+   )
+ target_link_libraries(translator
+   PRIVATE ${PROJECT_NAME}
+diff '--color=auto' -uPNr a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2026-02-04 04:04:22.000000000 +0100
++++ b/CMakeLists.txt	2026-02-08 11:10:23.635706567 +0100
+@@ -262,13 +262,16 @@
+   )
+ 
+ macro(ct2_compile_kernels_for_isa isa flag)
++  string(TOUPPER "${isa}" isa_upper)
+   configure_file(
+     src/cpu/kernels.cc
+     ${CMAKE_CURRENT_BINARY_DIR}/kernels_${isa}.cc
+     COPYONLY)
+   set_source_files_properties(
+     ${CMAKE_CURRENT_BINARY_DIR}/kernels_${isa}.cc
+-    PROPERTIES COMPILE_FLAGS ${flag})
++    PROPERTIES
++      COMPILE_FLAGS ${flag}
++      COMPILE_DEFINITIONS CT2_FORCE_TARGET_ISA_${isa_upper})
+   list(APPEND SOURCES ${CMAKE_CURRENT_BINARY_DIR}/kernels_${isa}.cc)
+ endmacro()
+ 
+@@ -295,6 +298,18 @@
+   message(STATUS "Compiling for multiple CPU ISA and enabling runtime dispatch")
+   add_definitions(-DCT2_WITH_CPU_DISPATCH)
+   if(CT2_BUILD_ARCH STREQUAL "x86_64")
++    # Keep the default kernels translation unit at a generic ISA so it does not
++    # duplicate symbols emitted by ISA-specific generated files when users set
++    # aggressive global flags (e.g. -march=native).
++    if(MSVC)
++      set_source_files_properties(src/cpu/kernels.cc PROPERTIES COMPILE_FLAGS "/arch:SSE2")
++    else()
++      set_source_files_properties(
++        src/cpu/kernels.cc
++        PROPERTIES COMPILE_FLAGS
++                   "-mno-avx -mno-avx2 -mno-avx512f -mno-avx512cd -mno-avx512vl -mno-avx512bw -mno-avx512dq -mno-fma")
++    endif()
++
+     if(MSVC)
+       ct2_compile_kernels_for_isa(avx "/arch:AVX")
+       ct2_compile_kernels_for_isa(avx2 "/arch:AVX2")
+diff '--color=auto' -uPNr a/include/ctranslate2/decoding_utils.h b/include/ctranslate2/decoding_utils.h
+--- a/include/ctranslate2/decoding_utils.h	2026-02-04 04:04:22.000000000 +0100
++++ b/include/ctranslate2/decoding_utils.h	2026-02-08 11:10:23.638538645 +0100
+@@ -2,6 +2,7 @@
+ 
+ #include <algorithm>
+ #include <limits>
++#include <stdexcept>
+ 
+ #include "ops/tile.h"
+ #include "storage_view.h"
+@@ -10,6 +11,14 @@
+ 
+   inline void split_batch_beam(StorageView& input, dim_t beam_size) {
+     Shape shape = input.shape();
++
++    if (shape.empty())
++      throw std::invalid_argument("Cannot split batch and beam dimensions on a scalar tensor");
++    if (beam_size <= 0)
++      throw std::invalid_argument("Beam size must be strictly greater than 0");
++    if (shape[0] % beam_size != 0)
++      throw std::invalid_argument("The first dimension is not divisible by the beam size");
++
+     shape.insert(shape.begin() + 1, beam_size);
+     shape[0] /= beam_size;
+     input.reshape(std::move(shape));
+diff '--color=auto' -uPNr a/src/cpu/backend.cc b/src/cpu/backend.cc
+--- a/src/cpu/backend.cc	2026-02-04 04:04:22.000000000 +0100
++++ b/src/cpu/backend.cc	2026-02-08 11:10:23.646865695 +0100
+@@ -48,10 +48,17 @@
+     }
+ 
+     GemmBackend get_gemm_backend(ComputeType compute_type) {
++#if !defined(CT2_WITH_MKL) && !defined(CT2_WITH_DNNL) && !defined(CT2_WITH_ACCELERATE) \
++  && !defined(CT2_WITH_OPENBLAS) && !defined(CT2_WITH_RUY)
++      (void)compute_type;
++#endif
++
++#if defined(CT2_WITH_MKL) || defined(CT2_WITH_DNNL) || defined(CT2_WITH_RUY)
+       const bool is_int8 = (compute_type == ComputeType::INT8
+                             || compute_type == ComputeType::INT8_FLOAT32
+                             || compute_type == ComputeType::INT8_FLOAT16
+                             || compute_type == ComputeType::INT8_BFLOAT16);
++#endif
+ 
+ #ifdef CT2_WITH_MKL
+       if (mayiuse_mkl()
+diff '--color=auto' -uPNr a/src/cpu/kernels.cc b/src/cpu/kernels.cc
+--- a/src/cpu/kernels.cc	2026-02-04 04:04:22.000000000 +0100
++++ b/src/cpu/kernels.cc	2026-02-08 11:10:23.646945714 +0100
+@@ -2,7 +2,19 @@
+ 
+ #include <limits>
+ 
+-#if defined(__AVX512F__)
++#if defined(CT2_FORCE_TARGET_ISA_AVX512)
++#  define TARGET_ISA CpuIsa::AVX512
++#  include "cpu/vec_avx512.h"
++#elif defined(CT2_FORCE_TARGET_ISA_AVX2)
++#  define TARGET_ISA CpuIsa::AVX2
++#  include "cpu/vec_avx.h"
++#elif defined(CT2_FORCE_TARGET_ISA_AVX)
++#  define TARGET_ISA CpuIsa::AVX
++#  include "cpu/vec_avx.h"
++#elif defined(CT2_FORCE_TARGET_ISA_NEON)
++#  define TARGET_ISA CpuIsa::NEON
++#  include "cpu/vec_neon.h"
++#elif defined(__AVX512F__)
+ #  define TARGET_ISA CpuIsa::AVX512
+ #  include "cpu/vec_avx512.h"
+ #elif defined(__AVX2__)
+diff '--color=auto' -uPNr a/src/cpu/primitives.cc b/src/cpu/primitives.cc
+--- a/src/cpu/primitives.cc	2026-02-04 04:04:22.000000000 +0100
++++ b/src/cpu/primitives.cc	2026-02-08 11:10:23.647105678 +0100
+@@ -652,9 +652,26 @@
+                                      float beta,
+                                      float* c, dim_t ldc,
+                                      const float*) {
+-#ifndef CT2_WITH_MKL
++#if !defined(CT2_WITH_MKL) \
++    && !defined(CT2_WITH_DNNL) \
++    && !defined(CT2_WITH_ACCELERATE) \
++    && !defined(CT2_WITH_OPENBLAS) \
++    && !defined(CT2_WITH_RUY)
+     (void)a_is_packed;
+     (void)b_is_packed;
++    (void)transpose_a;
++    (void)transpose_b;
++    (void)m;
++    (void)n;
++    (void)k;
++    (void)alpha;
++    (void)a;
++    (void)lda;
++    (void)b;
++    (void)ldb;
++    (void)beta;
++    (void)c;
++    (void)ldc;
+ #endif
+ 
+     switch (sgemm_backend) {
+@@ -909,9 +926,25 @@
+                                      float beta,
+                                      int32_t* c, dim_t ldc,
+                                      const int32_t* a_shift_compensation) {
+-#ifndef CT2_WITH_MKL
++#if !defined(CT2_WITH_MKL) \
++    && !defined(CT2_WITH_DNNL) \
++    && !defined(CT2_WITH_RUY)
+     (void)a_is_packed;
+     (void)b_is_packed;
++    (void)transpose_a;
++    (void)transpose_b;
++    (void)m;
++    (void)n;
++    (void)k;
++    (void)alpha;
++    (void)a;
++    (void)lda;
++    (void)b;
++    (void)ldb;
++    (void)beta;
++    (void)c;
++    (void)ldc;
++    (void)a_shift_compensation;
+ #endif
+ 
+     switch (gemm_s8_backend) {
+diff '--color=auto' -uPNr a/src/cpu/vec.h b/src/cpu/vec.h
+--- a/src/cpu/vec.h	2026-02-04 04:04:22.000000000 +0100
++++ b/src/cpu/vec.h	2026-02-08 11:10:23.647122570 +0100
+@@ -146,6 +146,7 @@
+ 
+       template<typename U>
+       static inline void convert_and_store(float v, U* a, dim_t count) {
++          static_cast<void>(count);
+           *a = v;
+       }
+     };
+diff '--color=auto' -uPNr a/src/layers/attention.cc b/src/layers/attention.cc
+--- a/src/layers/attention.cc	2026-02-04 04:04:22.000000000 +0100
++++ b/src/layers/attention.cc	2026-02-08 11:10:23.647857713 +0100
+@@ -365,6 +365,8 @@
+         const Padder* values_padder,
+         dim_t& beam_size) const {
+ 
++      (void)queries;
++
+       queries_proj = std::move(fused_proj);
+ 
+       if (cached_keys == nullptr || cached_keys->empty()) {
+diff '--color=auto' -uPNr a/src/models/model.cc b/src/models/model.cc
+--- a/src/models/model.cc	2026-02-04 04:04:22.000000000 +0100
++++ b/src/models/model.cc	2026-02-08 11:10:23.648252400 +0100
+@@ -483,11 +483,11 @@
+               return VARIABLE_TYPE::SELF_ATTN_LINEAR_0_BIAS;
+             if (parameterName == "weight")
+               return VARIABLE_TYPE::SELF_ATTN_LINEAR_0_WEIGHT;
+-            else
+-              return VARIABLE_TYPE::SELF_ATTN_LINEAR_0_WEIGHT_SCALE;
+-	        case 1:
++            return VARIABLE_TYPE::SELF_ATTN_LINEAR_0_WEIGHT_SCALE;
++          case 1:
+             if (parameterName == "weight")
+               return VARIABLE_TYPE::SELF_ATTN_LINEAR_1_WEIGHT;
++            return VARIABLE_TYPE::OTHERS;
+           default:
+             return VARIABLE_TYPE::OTHERS;
+         };
+@@ -512,6 +512,7 @@
+           case 2:
+             if (parameterName == "weight")
+               return VARIABLE_TYPE::ATTN_LINEAR_2_WEIGHT;
++            return VARIABLE_TYPE::OTHERS;
+           default:
+             return VARIABLE_TYPE::OTHERS;
+         };
+@@ -537,6 +538,7 @@
+           case 1:
+             if (parameterName == "weight")
+               return VARIABLE_TYPE::FFN_LINEAR_1_WEIGHT;
++            return VARIABLE_TYPE::OTHERS;
+           default:
+             return VARIABLE_TYPE::OTHERS;
+         };
+@@ -567,8 +569,8 @@
+         std::call_once(log_once, log_system_config);
+       }
+ 
+-      int world_size;
+-      int current_index;
++      int world_size = 1;
++      int current_index = 0;
+       if (tensor_parallel) {
+         ScopedMPISetter mpi_setter = ScopedMPISetter();
+         device_index = ScopedMPISetter::getLocalRank();
+diff '--color=auto' -uPNr a/src/ops/gemm.cc b/src/ops/gemm.cc
+--- a/src/ops/gemm.cc	2026-02-04 04:04:22.000000000 +0100
++++ b/src/ops/gemm.cc	2026-02-08 11:10:23.649616912 +0100
+@@ -32,13 +32,13 @@
+                bool a_is_packed,
+                bool b_is_packed,
+                const ActivationType* activation_type)
+-      : _alpha(alpha)
++      : _activation_type(activation_type)
++      , _alpha(alpha)
+       , _beta(beta)
+       , _trans_a(trans_a)
+       , _trans_b(trans_b)
+       , _a_is_packed(a_is_packed)
+       , _b_is_packed(b_is_packed)
+-      , _activation_type(activation_type)
+     {
+     }
+ 
+diff '--color=auto' -uPNr a/src/ops/gumbel_max.cc b/src/ops/gumbel_max.cc
+--- a/src/ops/gumbel_max.cc	2026-02-04 04:04:22.000000000 +0100
++++ b/src/ops/gumbel_max.cc	2026-02-08 11:10:23.649643569 +0100
+@@ -23,7 +23,10 @@
+       _topk_op(y, values, indices);
+ 
+       Shape output_shape = x.shape();
+-      output_shape.back() = _num_samples;
++      if (output_shape.empty())
++        output_shape = {_num_samples};
++      else
++        output_shape.back() = _num_samples;
+       values.reshape(output_shape);
+       indices.reshape(output_shape);
+     }
+diff '--color=auto' -uPNr a/src/ops/transpose.cc b/src/ops/transpose.cc
+--- a/src/ops/transpose.cc	2026-02-04 04:04:22.000000000 +0100
++++ b/src/ops/transpose.cc	2026-02-08 11:10:23.650485345 +0100
+@@ -24,7 +24,8 @@
+           perm[i] = x.rank() - i - 1;
+         identity = false;
+       } else {
+-        assert(_perm.size() == x.rank());
++        assert(x.rank() >= 0);
++        assert(_perm.size() == static_cast<size_t>(x.rank()));
+         perm = _perm;
+         for (dim_t i = 0; i < x.rank(); ++i) {
+           if (perm[i] != i) {
+diff '--color=auto' -uPNr a/third_party/cxxopts/include/cxxopts.hpp b/third_party/cxxopts/include/cxxopts.hpp
+--- a/third_party/cxxopts/include/cxxopts.hpp	2024-02-15 06:24:38.000000000 +0100
++++ b/third_party/cxxopts/include/cxxopts.hpp	2026-02-08 11:10:23.668963573 +0100
+@@ -28,6 +28,7 @@
+ #define CXXOPTS_HPP_INCLUDED
+ 
+ #include <cstdlib>
++#include <cstdint>
+ #include <cstring>
+ #include <exception>
+ #include <limits>
