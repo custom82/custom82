@@ -2,6 +2,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13,14} )
 DISTUTILS_USE_PEP517=setuptools
+DISTUTILS_SINGLE_IMPL=1
 
 inherit distutils-r1
 
@@ -17,14 +18,15 @@ IUSE="test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
-	sci-libs/ctranslate2
-	$(python_gen_cond_dep '
-		>=dev-python/av-10.0.0[${PYTHON_USEDEP}]
-		>=dev-python/cffi-1.15.0[${PYTHON_USEDEP}]
-		>=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
-		>=sci-ml/tokenizers-0.15.0[${PYTHON_USEDEP}]
-	')
+    sci-libs/ctranslate2
+    >=sci-ml/tokenizers-0.15.0[${PYTHON_SINGLE_USEDEP}]
+    $(python_gen_cond_dep '
+        >=dev-python/av-10.0.0[${PYTHON_USEDEP}]
+        >=dev-python/cffi-1.15.0[${PYTHON_USEDEP}]
+        >=dev-python/pyyaml-6.0[${PYTHON_USEDEP}]
+    ')
 "
+
 BDEPEND="
 	test? (
 		$(python_gen_cond_dep '
