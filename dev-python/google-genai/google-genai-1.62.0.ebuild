@@ -20,8 +20,8 @@ RDEPEND="
 	>=dev-python/anyio-4.8.0[${PYTHON_USEDEP}]
 	<dev-python/anyio-5.0.0[${PYTHON_USEDEP}]
 
-	>=dev-python/google-auth-2.47.0[requests,${PYTHON_USEDEP}]
-	<dev-python/google-auth-3.0.0[requests,${PYTHON_USEDEP}]
+	>=dev-python/google-auth-2.47.0[${PYTHON_USEDEP}]
+	<dev-python/google-auth-3.0.0[${PYTHON_USEDEP}]
 
 	>=dev-python/httpx-0.28.1[${PYTHON_USEDEP}]
 	<dev-python/httpx-1.0.0[${PYTHON_USEDEP}]
