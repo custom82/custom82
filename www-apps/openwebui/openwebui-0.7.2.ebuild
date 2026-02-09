@@ -183,12 +183,12 @@ RDEPEND="
 		')
 	)
 
-whisper? (
-	>=sci-libs/onnxruntime-1.23.2[python,${PYTHON_SINGLE_USEDEP}]
+	whisper? (
+	$(python_gen_cond_dep '
+		>=sci-libs/onnxruntime-1.23.2[python,${PYTHON_USEDEP}]
+	')
 	>=dev-python/faster-whisper-1.2.1[${PYTHON_SINGLE_USEDEP}]
 )
-
-
 
 
 	postgres? (
