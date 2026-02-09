@@ -2,7 +2,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{11,12,13,14} )
 
-inherit cmake python-single-r1
+inherit cmake python-r1 flag-o-matic
 
 DESCRIPTION="Fast inference engine for Transformer models (OpenNMT)"
 HOMEPAGE="https://github.com/OpenNMT/CTranslate2"
@@ -31,26 +31,28 @@ DEPEND="
 	dev-cpp/nlohmann_json
 	dev-libs/half
 "
-
-RDEPEND="${DEPEND}"
+RDEPEND="
+	${DEPEND}
+	python? (
+		$(python_gen_cond_dep '
+			dev-python/pybind11[${PYTHON_USEDEP}]
+		')
+	)
+"
 BDEPEND="
 	virtual/pkgconfig
 	python? (
 		${PYTHON_DEPS}
-		dev-python/build[${PYTHON_SINGLE_USEDEP}]
-		dev-python/installer[${PYTHON_SINGLE_USEDEP}]
-		dev-python/pybind11[${PYTHON_SINGLE_USEDEP}]
-		dev-python/setuptools[${PYTHON_SINGLE_USEDEP}]
-		dev-python/wheel[${PYTHON_SINGLE_USEDEP}]
+		$(python_gen_cond_dep '
+			dev-python/build[${PYTHON_USEDEP}]
+			dev-python/installer[${PYTHON_USEDEP}]
+			dev-python/setuptools[${PYTHON_USEDEP}]
+			dev-python/wheel[${PYTHON_USEDEP}]
+		')
 	)
 "
 
-# evita problemi di maiuscole/minuscole (nel tuo log è ctranslate2-4.7.1)
 S="${WORKDIR}/CTranslate2-${PV}"
-
-pkg_setup() {
-	use python && python-single-r1_pkg_setup
-}
 
 src_prepare() {
 	rm -f .gitmodules || die
@@ -67,7 +69,6 @@ src_prepare() {
 		cp -a "${WORKDIR}/cxxopts-3.2.0" third_party/cxxopts || die
 	fi
 
-	# Patch alla fine del prepare
 	eapply "${FILESDIR}/ctranslate-gcc15-fix.patch"
 	eapply "${FILESDIR}/ctranslate2-4.7.1-unpin-pybind11.patch"
 }
@@ -75,40 +76,55 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=ON
-		-DCMAKE_BUILD_TYPE=Release
 		-DCMAKE_POSITION_INDEPENDENT_CODE=ON
 		-DTHREADS_PREFER_PTHREAD_FLAG=ON
 
+		# OpenMP: per 4.7.1 runtime validi sono INTEL/COMP/NONE (GOMP non esiste)
 		-DWITH_OPENMP="$(usex openmp ON OFF)"
 		-DOPENMP_RUNTIME="$(usex openmp COMP NONE)"
-		-DWITH_MKL=OFF
 
+		-DWITH_MKL=OFF
 		-DBUILD_CLI="$(usex cli ON OFF)"
 		-DBUILD_TESTS="$(usex test ON OFF)"
 	)
 	cmake_src_configure
+
+	# build dir del core (dove viene generata libctranslate2.so*)
+	CT2_CORE_BUILD_DIR=${BUILD_DIR}
+}
+
+ctranslate2_python_compile() {
+	local outdir="dist-${EPYTHON}"
+
+	pushd "${S}/python" >/dev/null || die
+
+	append-cppflags "-I${S}/include"
+	append-cxxflags "-I${S}/include"
+
+	# link contro la lib del core appena compilata (in build dir)
+	append-ldflags "-L${CT2_CORE_BUILD_DIR}"
+	append-ldflags "-Wl,-rpath-link,${CT2_CORE_BUILD_DIR}"
+	# utile durante build/run di eventuali helper
+	append-ldflags "-Wl,-rpath,${CT2_CORE_BUILD_DIR}"
+
+	export LIBRARY_PATH="${CT2_CORE_BUILD_DIR}${LIBRARY_PATH:+:${LIBRARY_PATH}}"
+	export LD_LIBRARY_PATH="${CT2_CORE_BUILD_DIR}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}"
+
+	"${EPYTHON}" -m build --wheel --no-isolation --outdir "${outdir}" || die
+	popd >/dev/null || die
 }
 
 src_compile() {
 	cmake_src_compile
+	use python && python_foreach_impl ctranslate2_python_compile
+}
 
-if use python; then
-	python_setup
+ctranslate2_python_install() {
+	local whl_dir="${S}/python/dist-${EPYTHON}"
+	local whl=( "${whl_dir}"/*.whl )
+	[[ -f ${whl[0]} ]] || die "Wheel not found for ${EPYTHON} (looked in: ${whl_dir})"
 
-	(
-		cd python || die
-
-		append-cppflags "-I${S}/include"
-		append-cxxflags "-I${S}/include"
-		append-ldflags "-L${BUILD_DIR}"
-
-		"${EPYTHON}" -m build --wheel --no-isolation || die
-	)
-
-	CT2_WHL=$(echo "${S}/python/dist/"*.whl)
-	[[ -f ${CT2_WHL} ]] || die "Wheel not found after build (got: ${CT2_WHL})"
-fi
-
+	"${EPYTHON}" -m installer --destdir="${D}" "${whl[0]}" || die
 }
 
 src_install() {
@@ -118,14 +134,5 @@ src_install() {
 	rm -rf "${ED}/usr/include/nlohmann" || die
 	rm -rf "${ED}/usr/include/half_float" || die
 
-	if use python; then
-		python_setup
-
-		# ricava la wheel (o usa quella salvata se presente)
-		local whl="${CT2_WHL:-${S}/python/dist/"*.whl"}"
-		[[ -f ${whl} ]] || die "Wheel not found (got: ${whl})"
-
-		"${EPYTHON}" -m installer --destdir="${D}" "${whl}" || die
-	fi
+	use python && python_foreach_impl ctranslate2_python_install
 }
-
