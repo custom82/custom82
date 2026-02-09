@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-    >=dev-python/transformers-4.41.0[${PYTHON_USEDEP}]
+    >=sci-ml/transformers-4.41.0[${PYTHON_USEDEP}]
     >=dev-python/torch-2.2.0[${PYTHON_USEDEP}]
     >=dev-python/scikit-learn-1.4.0[${PYTHON_USEDEP}]
     >=dev-python/scipy-1.11.0[${PYTHON_USEDEP}]
