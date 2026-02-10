@@ -91,7 +91,7 @@ RDEPEND="
 "
 
 BDEPEND="
-	>=dev-python/maturin-1.8.2[${PYTHON_USEDEP}]
+	>=dev-util/maturin-1.8.2[${PYTHON_USEDEP}]
 	virtual/rust
 	virtual/cargo
 	test? (
