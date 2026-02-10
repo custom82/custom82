@@ -84,9 +84,9 @@ RDEPEND="
 
 
 		>=dev-python/langchain-1.2.4[${PYTHON_USEDEP}]
-		=dev-python/langchain-community-0.4.1[${PYTHON_USEDEP}]
-		=dev-python/langchain-classic-1.0.1[${PYTHON_USEDEP}]
-		=dev-python/langchain-text-splitters-1.1.0[${PYTHON_USEDEP}]
+		>=dev-python/langchain-community-0.4.1[${PYTHON_USEDEP}]
+		>=dev-python/langchain-classic-1.0.1[${PYTHON_USEDEP}]
+		>=dev-python/langchain-text-splitters-1.1.0[${PYTHON_USEDEP}]
 
 		=dev-python/fake-useragent-2.2.0[${PYTHON_USEDEP}]
 

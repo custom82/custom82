@@ -6,6 +6,6 @@
 		<name>Andrea Postiglione</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">ddgs</remote-id>
+		<remote-id type="github">konradhalas/dacite</remote-id>
 	</upstream>
 </pkgmetadata>
