@@ -119,7 +119,7 @@ RDEPEND="
 		=dev-python/ldap3-2.9.1[${PYTHON_USEDEP}]
 
 
-		=dev-python/pycrdt-0.12.44[${PYTHON_USEDEP}]
+		>=dev-python/pycrdt-0.12.44[${PYTHON_USEDEP}]
 	')
 
 	redis? (
