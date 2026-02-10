@@ -9,7 +9,7 @@ inherit distutils-r1
 DESCRIPTION="Building applications with LLMs through composability"
 HOMEPAGE="https://github.com/langchain-ai/langchain"
 
-SRC_URI="https://github.com/langchain-ai/langchain/archive/refs/tags/langchain-core==${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/langchain-ai/langchain/archive/refs/tags/langchain==${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
