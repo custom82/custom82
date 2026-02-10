@@ -24,7 +24,7 @@ RESTRICT="!test? ( test )"
 
 RDEPEND="
 	>=dev-python/requests-2.0.0[${PYTHON_USEDEP}]
-	>=dev-python/pyjwt-1.0.0[cryptography,${PYTHON_USEDEP}]
+	>=dev-python/pyjwt-1.0.0[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-0.6[${PYTHON_USEDEP}]
 "
 BDEPEND="
