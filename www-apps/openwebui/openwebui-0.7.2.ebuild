@@ -75,7 +75,7 @@ RDEPEND="
 		=dev-python/asgiref-3.11.0[${PYTHON_USEDEP}]
 
 		dev-python/tiktoken[${PYTHON_SINGLE_USEDEP}]
-		=dev-python/mcp-1.25.0[${PYTHON_USEDEP}]
+		>=dev-python/mcp-1.25.0[${PYTHON_USEDEP}]
 
 
 		dev-python/openai-python[${PYTHON_USEDEP}]
