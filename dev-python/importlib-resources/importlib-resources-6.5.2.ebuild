@@ -25,7 +25,7 @@ RESTRICT="!test? ( test )"
 
 BDEPEND="
 	>=dev-python/setuptools-77[${PYTHON_USEDEP}]
-	>=dev-python/setuptools-scm-3.4.1[toml,${PYTHON_USEDEP}]
+	>=dev-python/setuptools-scm-3.4.1[${PYTHON_USEDEP}]
 	>=dev-python/wheel-0.40[${PYTHON_USEDEP}]
 	test? (
 		>=dev-python/pytest-6[${PYTHON_USEDEP}]
