@@ -112,7 +112,7 @@ RDEPEND="
 
 
 		=dev-python/azure-identity-1.25.1[${PYTHON_USEDEP}]
-		=dev-python/azure-storage-blob-12.28.0[${PYTHON_USEDEP}]
+		>=dev-python/azure-storage-blob-12.28.0[${PYTHON_USEDEP}]
 		>=dev-python/azure-ai-documentintelligence-1.0.2[${PYTHON_USEDEP}]
 
 
