@@ -46,7 +46,7 @@ RDEPEND="
 		=dev-python/python-multipart-0.0.21[${PYTHON_USEDEP}]
 		=dev-python/itsdangerous-2.2.0[${PYTHON_USEDEP}]
 
-		=dev-python/python-socketio-5.16.0[${PYTHON_USEDEP}]
+		>=dev-python/python-socketio-5.16.0[${PYTHON_USEDEP}]
 		=dev-python/python-jose-3.5.0[${PYTHON_USEDEP}]
 		dev-python/cryptography[${PYTHON_USEDEP}]
 		=dev-python/bcrypt-5.0.0[${PYTHON_USEDEP}]
