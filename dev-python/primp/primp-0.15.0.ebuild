@@ -347,7 +347,7 @@ RDEPEND="
 
 BDEPEND="
 	virtual/rust
-	dev-python/maturin[${PYTHON_USEDEP}]
+	dev-util/maturin[${PYTHON_USEDEP}]
 	test? (
 		dev-python/certifi[${PYTHON_USEDEP}]
 		dev-python/pytest[${PYTHON_USEDEP}]
