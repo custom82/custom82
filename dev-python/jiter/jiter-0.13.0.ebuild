@@ -149,7 +149,7 @@ IUSE="test"
 RESTRICT="!test? ( test )"
 
 BDEPEND="
-	virtual/rust
+	 || ( dev-lang/rust dev-lang/rust-bin )
 	dev-util/maturin[${PYTHON_USEDEP}]
 	test? ( dev-python/pytest[${PYTHON_USEDEP}] )
 "
