@@ -19,7 +19,6 @@ KEYWORDS="~amd64 ~arm64 ~x86"
 
 S="${WORKDIR}/httpx-sse-${PV}"
 
-
 RDEPEND="
 	>=dev-python/httpx-0.23.0[${PYTHON_USEDEP}]
 "
