@@ -85,7 +85,7 @@ KEYWORDS="~amd64"
 IUSE="test"
 
 BDEPEND="
-	>=dev-python/maturin-1[${PYTHON_USEDEP}]
+	dev-util/maturin[${PYTHON_USEDEP}]
 	virtual/rust
 	test? ( dev-python/pytest[${PYTHON_USEDEP}] )
 "
