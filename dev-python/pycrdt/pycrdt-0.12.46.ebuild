@@ -92,8 +92,7 @@ RDEPEND="
 
 BDEPEND="
 	>=dev-util/maturin-1.8.2[${PYTHON_USEDEP}]
-	virtual/rust
-	virtual/cargo
+	|| ( dev-lang/rust dev-lang/rust-bin )
 	test? (
 		>=dev-python/pytest-8.3.5[${PYTHON_USEDEP}]
 		>=dev-python/trio-0.25.1[${PYTHON_USEDEP}]
