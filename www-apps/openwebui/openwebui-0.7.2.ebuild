@@ -40,39 +40,39 @@ RDEPEND="
 	${PYTHON_DEPS}
 
 	$(python_gen_cond_dep '
-		=dev-python/fastapi-0.128.0[${PYTHON_USEDEP}]
-		=dev-python/uvicorn-0.40.0[${PYTHON_USEDEP}]
-		=dev-python/pydantic-2.12.5[${PYTHON_USEDEP}]
-		=dev-python/python-multipart-0.0.21[${PYTHON_USEDEP}]
-		=dev-python/itsdangerous-2.2.0[${PYTHON_USEDEP}]
+		>=dev-python/fastapi-0.128.0[${PYTHON_USEDEP}]
+		>=dev-python/uvicorn-0.40.0[${PYTHON_USEDEP}]
+		>=dev-python/pydantic-2.12.5[${PYTHON_USEDEP}]
+		>=dev-python/python-multipart-0.0.21[${PYTHON_USEDEP}]
+		>=dev-python/itsdangerous-2.2.0[${PYTHON_USEDEP}]
 
 		>=dev-python/python-socketio-5.16.0[${PYTHON_USEDEP}]
 		=dev-python/python-jose-3.5.0[${PYTHON_USEDEP}]
 		dev-python/cryptography[${PYTHON_USEDEP}]
-		=dev-python/bcrypt-5.0.0[${PYTHON_USEDEP}]
-		=dev-python/argon2-cffi-25.1.0[${PYTHON_USEDEP}]
+		>=dev-python/bcrypt-5.0.0[${PYTHON_USEDEP}]
+		>=dev-python/argon2-cffi-25.1.0[${PYTHON_USEDEP}]
 		>=dev-python/pyjwt-2.10.1[${PYTHON_USEDEP}]
-		=dev-python/authlib-1.6.6[${PYTHON_USEDEP}]
+		>=dev-python/authlib-1.6.6[${PYTHON_USEDEP}]
 
-		=dev-python/requests-2.32.5[${PYTHON_USEDEP}]
-		=dev-python/aiohttp-3.13.2[${PYTHON_USEDEP}]
+		>=dev-python/requests-2.32.5[${PYTHON_USEDEP}]
+		>=dev-python/aiohttp-3.13.2[${PYTHON_USEDEP}]
 		dev-python/async-timeout[${PYTHON_USEDEP}]
 		dev-python/aiocache[${PYTHON_USEDEP}]
 		dev-python/aiofiles[${PYTHON_USEDEP}]
 
-		=dev-python/starlette-compress-1.6.1[${PYTHON_USEDEP}]
-		=dev-python/python-mimeparse-2.0.0[${PYTHON_USEDEP}]
+		>=dev-python/starlette-compress-1.6.1[${PYTHON_USEDEP}]
+		>=dev-python/python-mimeparse-2.0.0[${PYTHON_USEDEP}]
 
-		=dev-python/sqlalchemy-2.0.45[${PYTHON_USEDEP}]
-		=dev-python/alembic-1.18.1[${PYTHON_USEDEP}]
-		=dev-python/peewee-3.19.0[${PYTHON_USEDEP}]
+		>=dev-python/sqlalchemy-2.0.45[${PYTHON_USEDEP}]
+		>=dev-python/alembic-1.18.1[${PYTHON_USEDEP}]
+		>=dev-python/peewee-3.19.0[${PYTHON_USEDEP}]
 		>=dev-python/peewee-migrate-1.14.0[${PYTHON_USEDEP}]
 
-		=dev-python/apscheduler-3.11.2[${PYTHON_USEDEP}]
-		=dev-python/restrictedpython-8.1[${PYTHON_USEDEP}]
+		>=dev-python/apscheduler-3.11.2[${PYTHON_USEDEP}]
+		>=dev-python/restrictedpython-8.1[${PYTHON_USEDEP}]
 
-		=dev-python/loguru-0.7.3[${PYTHON_USEDEP}]
-		=dev-python/asgiref-3.11.0[${PYTHON_USEDEP}]
+		>=dev-python/loguru-0.7.3[${PYTHON_USEDEP}]
+		>=dev-python/asgiref-3.11.0[${PYTHON_USEDEP}]
 
 		dev-python/tiktoken[${PYTHON_SINGLE_USEDEP}]
 		>=dev-python/mcp-1.25.0[${PYTHON_USEDEP}]
@@ -88,10 +88,10 @@ RDEPEND="
 		>=dev-python/langchain-classic-1.0.1[${PYTHON_USEDEP}]
 		>=dev-python/langchain-text-splitters-1.1.0[${PYTHON_USEDEP}]
 
-		=dev-python/fake-useragent-2.2.0[${PYTHON_USEDEP}]
+		>=dev-python/fake-useragent-2.2.0[${PYTHON_USEDEP}]
 
 
-		=dev-python/pymysql-1.1.2[${PYTHON_USEDEP}]
+		>=dev-python/pymysql-1.1.2[${PYTHON_USEDEP}]
 		>=dev-python/boto3-1.42.29[${PYTHON_USEDEP}]
 
 		dev-python/validators[${PYTHON_USEDEP}]
@@ -99,24 +99,24 @@ RDEPEND="
 
 
 		dev-python/pydub[${PYTHON_USEDEP}]
-		=dev-python/ddgs-9.10.0[${PYTHON_USEDEP}]
+		>=dev-python/ddgs-9.10.0[${PYTHON_USEDEP}]
 		>=dev-python/youtube-transcript-api-1.2.3[${PYTHON_USEDEP}]
-		=dev-python/pytube-15.0.0[${PYTHON_USEDEP}]
+		>=dev-python/pytube-15.0.0[${PYTHON_USEDEP}]
 
 
 		dev-python/google-api-python-client[${PYTHON_USEDEP}]
 		dev-python/google-auth-httplib2[${PYTHON_USEDEP}]
 		dev-python/google-auth-oauthlib[${PYTHON_USEDEP}]
-		=dev-python/googleapis-common-protos-1.72.0[${PYTHON_USEDEP}]
-		=dev-python/google-cloud-storage-3.8.0[${PYTHON_USEDEP}]
+		>=dev-python/googleapis-common-protos-1.72.0[${PYTHON_USEDEP}]
+		>=dev-python/google-cloud-storage-3.8.0[${PYTHON_USEDEP}]
 
 
-		=dev-python/azure-identity-1.25.1[${PYTHON_USEDEP}]
+		>=dev-python/azure-identity-1.25.1[${PYTHON_USEDEP}]
 		>=dev-python/azure-storage-blob-12.28.0[${PYTHON_USEDEP}]
 		>=dev-python/azure-ai-documentintelligence-1.0.2[${PYTHON_USEDEP}]
 
 
-		=dev-python/ldap3-2.9.1[${PYTHON_USEDEP}]
+		>=dev-python/ldap3-2.9.1[${PYTHON_USEDEP}]
 
 
 		>=dev-python/pycrdt-0.12.44[${PYTHON_USEDEP}]
@@ -131,13 +131,13 @@ RDEPEND="
 
 	chroma? (
 		$(python_gen_cond_dep '
-			=dev-python/chromadb-1.4.1[${PYTHON_USEDEP}]
+			>=dev-python/chromadb-1.4.1[${PYTHON_USEDEP}]
 		')
 	)
 
 	opensearch? (
 		$(python_gen_cond_dep '
-			=dev-python/opensearch-py-3.1.0[${PYTHON_USEDEP}]
+			>=dev-python/opensearch-py-3.1.0[${PYTHON_USEDEP}]
 		')
 	)
 
@@ -148,7 +148,7 @@ transformers? (
 	>=dev-python/sentence-transformers-5.2.0[${PYTHON_SINGLE_USEDEP}]
 
 	$(python_gen_cond_dep '
-		=dev-python/pyarrow-20.0.0[${PYTHON_USEDEP}]
+		>=dev-python/pyarrow-20.0.0[${PYTHON_USEDEP}]
 		>=dev-python/einops-0.8.1[${PYTHON_USEDEP}]
 		sci-ml/sentencepiece[${PYTHON_USEDEP}]
 	')
@@ -157,31 +157,31 @@ transformers? (
 
 	rag? (
 		$(python_gen_cond_dep '
-			=dev-python/ftfy-6.3.1[${PYTHON_USEDEP}]
-			=dev-python/chardet-5.2.0[${PYTHON_USEDEP}]
-			=dev-python/pypdf-6.6.0[${PYTHON_USEDEP}]
+			>=dev-python/ftfy-6.3.1[${PYTHON_USEDEP}]
+			>=dev-python/chardet-5.2.0[${PYTHON_USEDEP}]
+			>=dev-python/pypdf-6.6.0[${PYTHON_USEDEP}]
 			>=dev-python/fpdf2-2.8.5[${PYTHON_USEDEP}]
-			=dev-python/pymdown-extensions-10.20[${PYTHON_USEDEP}]
+			>=dev-python/pymdown-extensions-10.20[${PYTHON_USEDEP}]
 			>=dev-python/docx2txt-0.9[${PYTHON_USEDEP}]
-			=dev-python/python-pptx-1.0.2[${PYTHON_USEDEP}]
+			>=dev-python/python-pptx-1.0.2[${PYTHON_USEDEP}]
 			>=dev-python/unstructured-0.18.27[${PYTHON_USEDEP}]
 			>=dev-python/msoffcrypto-tool-5.4.2[${PYTHON_USEDEP}]
 			>=dev-python/nltk-3.9.2[${PYTHON_USEDEP}]
-			=dev-python/markdown-3.10[${PYTHON_USEDEP}]
-			=dev-python/pypandoc-1.16.2[${PYTHON_USEDEP}]
-			=dev-python/pandas-2.3.3[${PYTHON_USEDEP}]
-			=dev-python/openpyxl-3.1.5[${PYTHON_USEDEP}]
-			=dev-python/pyxlsb-1.0.10[${PYTHON_USEDEP}]
-			=dev-python/xlrd-2.0.2[${PYTHON_USEDEP}]
-			=dev-python/rank-bm25-0.2.2[${PYTHON_USEDEP}]
+			>=dev-python/markdown-3.10[${PYTHON_USEDEP}]
+			>=dev-python/pypandoc-1.16.2[${PYTHON_USEDEP}]
+			>=dev-python/pandas-2.3.3[${PYTHON_USEDEP}]
+			>=dev-python/openpyxl-3.1.5[${PYTHON_USEDEP}]
+			>=dev-python/pyxlsb-1.0.10[${PYTHON_USEDEP}]
+			>=dev-python/xlrd-2.0.2[${PYTHON_USEDEP}]
+			>=dev-python/rank-bm25-0.2.2[${PYTHON_USEDEP}]
 		')
 	)
 
 	ocr? (
 		$(python_gen_cond_dep '
-			=dev-python/pillow-12.1.0[${PYTHON_USEDEP}]
+			>=dev-python/pillow-12.1.0[${PYTHON_USEDEP}]
 			>=media-libs/opencv-4.12.0[python,${PYTHON_USEDEP}]
-			=dev-python/rapidocr-onnxruntime-1.4.4[${PYTHON_USEDEP}]
+			>=dev-python/rapidocr-onnxruntime-1.4.4[${PYTHON_USEDEP}]
 		')
 	)
 
@@ -210,7 +210,6 @@ BDEPEND="
 	')
 
 	frontend? (
-		>=net-libs/nodejs-18
 		>=net-libs/nodejs-20
 
 
