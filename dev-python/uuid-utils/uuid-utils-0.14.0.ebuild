@@ -86,7 +86,7 @@ IUSE="test"
 
 BDEPEND="
 	dev-util/maturin[${PYTHON_USEDEP}]
-	virtual/rust
+	|| ( dev-lang/rust dev-lang/rust-bin )
 	test? ( dev-python/pytest[${PYTHON_USEDEP}] )
 "
 
