@@ -150,7 +150,7 @@ RESTRICT="!test? ( test )"
 
 BDEPEND="
 	virtual/rust
-	dev-python/maturin[${PYTHON_USEDEP}]
+	dev-util/maturin[${PYTHON_USEDEP}]
 	test? ( dev-python/pytest[${PYTHON_USEDEP}] )
 "
 
