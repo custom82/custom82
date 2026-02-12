@@ -1,4 +1,4 @@
-# Copyright 2025 Gentoo Authors
+# C  a a opyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v3
 
 EAPI=8
@@ -44,7 +44,7 @@ src_install() {
 	doman "${S}"/man/facial_test.1
 	doman "${S}"/man/pam_facial_auth.8
 
-	dopamsecurity "${S}/etc/pam_facial.conf" 
+	dopamsecurity "${S}/etc/pam_facial.conf" "pam_facial.conf"
 
 	dodoc "${S}/README.md"
 	dodoc "${S}/LICENSE"
