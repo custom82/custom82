@@ -44,7 +44,7 @@ src_install() {
 	doman "${S}"/man/facial_test.1
 	doman "${S}"/man/pam_facial_auth.8
 
-	dopamsecurity pam_facial_auth "${S}/etc/pam_facial.conf" pam_facial.conf
+	dopamsecurity pam_facial_auth "${S}/etc/pam_facial_auth.conf" pam_facial.conf
 
 	dodoc "${S}/README.md"
 	dodoc "${S}/LICENSE"
