@@ -16,5 +16,5 @@ KEYWORDS="~amd64 ~x86"
 
 RDEPEND="
         dev-nodejs/types-d3-array
-        dev-nodejs/types-d3-geojson
+        dev-nodejs/types-geojson
 "
