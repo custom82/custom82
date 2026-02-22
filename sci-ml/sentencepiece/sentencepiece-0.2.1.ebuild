@@ -45,9 +45,6 @@ src_prepare() {
 		src/unigram_model.h \
 		src/builder.cc \
 		|| die
-	eapply "${FILESDIR}"/${P}-gcc15.patch \
-		"${FILESDIR}"/${P}-cmake.patch \
-		"${FILESDIR}"/${P}-nostrip.patch
 	cmake_src_prepare
 	distutils-r1_src_prepare
 	sed \
