@@ -30,7 +30,7 @@ PATCHES=( "${FILESDIR}/llvmlite-0.46.0-llvm21.patch"
 
 RDEPEND="
 	${PYTHON_DEPS}
-	$(llvm_gen_dep 'sys-devel/llvm:${LLVM_SLOT}')
+	$(llvm_gen_dep 'llvm-core/llvm:${LLVM_SLOT}')
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
