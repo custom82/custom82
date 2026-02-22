@@ -4,11 +4,11 @@
 
 EAPI=8
 
-NPM_MODULE="immediate"
+NPM_MODULE="lie"
 inherit npm
 
-DESCRIPTION="immediate is a microtask library, descended from NobleJS's setImmediate, but including ideas from Cujo's When and RSVP"
-HOMEPAGE="https://github.com/calvinmetcalf/immediate"
+DESCRIPTION="lie is a small, performant promise library implementing the Promises/A+ spec"
+HOMEPAGE="https://github.com/calvinmetcalf/lie"
 
 LICENSE="MIT"
 SLOT="0"
