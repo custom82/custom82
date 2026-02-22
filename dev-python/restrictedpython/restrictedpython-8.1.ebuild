@@ -12,7 +12,7 @@ MY_PV=${MY_PV1/_alpha/a}
 DESCRIPTION="subset of Python which allows program input into a trusted environment."
 HOMEPAGE="https://github.com/zopefoundation/RestrictedPython https://pypi.python.org/pypi/RestrictedPython https://pypi.org/project/RestrictedPython/"
 SRC_URI="https://github.com/zopefoundation/${PN}/archive/refs/tags/${MY_PV}.tar.gz -> ${P}.gh.tar.gz"
-S=${WORKDIR}/${PN}-${MY_PV}
+S=${WORKDIR}/RestrictedPython-${PV}
 
 LICENSE="ZPL"
 SLOT="0"
