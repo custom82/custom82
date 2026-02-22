@@ -13,7 +13,7 @@ DESCRIPTION="Microsoft Authentication Library (MSAL) for Python"
 HOMEPAGE="https://github.com/AzureAD/microsoft-authentication-library-for-python"
 SRC_URI="https://github.com/AzureAD/microsoft-authentication-library-for-python/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
-S="${WORKDIR}/msal-${PV}"
+S="${WORKDIR}/microsoft-authentication-library-for-python-${PV}"
 
 LICENSE="MIT"
 SLOT="0"
