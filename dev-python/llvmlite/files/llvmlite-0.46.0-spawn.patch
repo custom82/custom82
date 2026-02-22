@@ -1,0 +1,33 @@
+diff '--color=auto' -uPNr llvmlite-0.46.0/setup.py llvmlite-0.46.0-patched/setup.py
+--- llvmlite-0.46.0/setup.py	2025-12-08 18:10:30.000000000 +0100
++++ llvmlite-0.46.0-patched/setup.py	2026-02-22 15:30:21.381187394 +0100
+@@ -58,13 +58,28 @@
+ build_ext = cmdclass.get('build_ext', build_ext)
+ 
+ 
++def _spawn_compat(cmd, dry_run=False):
++    """
++    distutils.spawn.spawn() signature differs depending on provider.
++    With setuptools._distutils (common with Python 3.13 toolchains), spawn() may not
++    accept 'dry_run' as a keyword argument.
++    Keep behavior: in dry-run mode, do nothing; otherwise execute the command.
++    """
++    if dry_run:
++        return
++    try:
++        return spawn(cmd, dry_run=dry_run)
++    except TypeError:
++        return spawn(cmd)
++
++
+ def build_library_files(dry_run):
+     cmd = [sys.executable, os.path.join(here_dir, 'ffi', 'build.py')]
+     # Turn on -fPIC for building on Linux, BSD, OS X, and GNU platforms
+     plt = sys.platform
+     if 'linux' in plt or 'bsd' in plt or 'darwin' in plt or 'gnu' in plt:
+         os.environ['CXXFLAGS'] = os.environ.get('CXXFLAGS', '') + ' -fPIC'
+-    spawn(cmd, dry_run=dry_run)
++    _spawn_compat(cmd, dry_run=dry_run)
+ 
+ 
+ class LlvmliteBuild(build):
